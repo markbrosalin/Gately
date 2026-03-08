@@ -47,6 +47,7 @@ const _normalizeItemModule = (module: Model.CatalogItemModule): Model.CatalogIte
         ...module,
         config: {
             ...module.config,
+            contentJson: module.config.contentJson ?? "",
             boundary: {
                 inputs: module.config.boundary?.inputs ?? [],
                 outputs: module.config.boundary?.outputs ?? [],

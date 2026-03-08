@@ -1,116 +1,181 @@
 # UI Engine Project Context
 
-## 1) Project Goal
+## 1. Goal
 
-The project is moving to a component-based UI Engine architecture with clear ownership:
+The UI Engine is being reorganized into isolated components with explicit boundaries:
 
-- shared services for cross-cutting runtime infrastructure
-- isolated components with local services
-- strict domain model for catalog/workspace data
-- component APIs focused on use-cases (not raw internal primitives)
+- shared engine infrastructure for cross-cutting concerns
+- local component services for internal state and reads
+- component APIs centered around use-cases
+- strict model ownership per domain
 
-Primary current target is the `catalog` component (model + services + import/export + next use-case layer).
+This is no longer a `catalog`-only refactor. `catalog` and `workspace` already follow the new direction. The next architectural target is `graph-document`.
 
-## 2) Architecture Rules (Important)
+## 2. Current Structure
 
-### Shared placement rule
-
-- `apps/web/src/shared/**` (root shared) is for app-wide reusable things.
-- `apps/web/src/shared/infrastructure/ui-engine/shared/**` (inside engine) is only for engine-local shared pieces.
-- Do not mix them.
-
-### Engine communication
-
-- Components should not depend directly on each other.
-- Preferred communication:
-    - shared services (event bus, protocol hubs)
-    - explicit component-level APIs / use-case methods
-- Avoid hidden coupling through direct runtime internals.
-
-### Code quality constraints
-
-- Follow SOLID and DRY.
-- Prefer small composable helpers/services over large monolithic functions.
-- Avoid dead code and temporary adapters for legacy unless explicitly required.
-
-## 3) Current UI Engine State
-
-### Shared services
-
-- Event Bus exists and is actively used for engine-level events.
-- Snapshot hub/protocol concept exists.
-
-### Components
-
-- `workspace-session` is already migrated to internal local services.
-- `catalog` is the active refactor area.
-- `graph-runtime` still contains legacy patterns and is planned for deeper refactor later.
-
-### Catalog domain model
+### Model
 
 Model lives under:
 
-- `apps/web/src/shared/infrastructure/ui-engine/model/catalog`
+- `apps/web/src/shared/infrastructure/ui-engine/model`
 
-Main entities:
+Current major model areas:
 
-- Catalog document (root payload)
-- Libraries
-- Items
-- Item modules (logic, ports, interaction, timing, composition)
-- Bundle document (root refs + sliced libraries)
+- `core`
+    - generic `Result` / `Issue` / `UseCase` types
+    - entity timestamps
+    - component/shared service context types
+- `catalog`
+    - catalog document
+    - libraries
+    - items
+    - item modules
+    - refs / validation
+    - bundle export/import model
+- `workspace`
+    - `Workspace`
+    - `WorkspaceTabSession`
+    - `WorkspaceTabDocument`
+- `graph-document`
+    - `GraphDocument`
+    - `GraphDocumentSnapshot`
+    - snapshot payload: `contentJson`, `viewport`, `extensions`
+- `events`, `visual`, `nodes-spec`, `node-kind`
+    - shared engine-level supporting model
 
-Composition boundary is modeled explicitly (`inputs` / `outputs`), enabling linked/isolated view scenarios.
+### Components
 
-## 4) Catalog Services (Current)
+Components live under:
 
-Local services:
+- `apps/web/src/shared/infrastructure/ui-engine/components`
 
-- `state`: in-memory CRUD over catalog document
-- `query`: semantic read operations and dependency closure
-- `factory`: normalized entity creation
-- `validation`: entity/document/module validation
-- `io`: import/export orchestration (`import` + `export`)
+Current component state:
 
-### Import/export status
+- `catalog`
+    - migrated to local services + component use-cases
+- `workspace`
+    - migrated to local services + component use-cases
+- `graph-runtime`
+    - still a legacy integration area around the runtime/graph layer
+    - not yet split into a dedicated `graph-document` component
 
-- `exportBundle` is already domain-complete for current model.
-- `importBundle` now validates:
-    - format/header
-    - root refs presence
-    - duplicate library ids
-    - duplicate item refs
-    - missing dependency refs through root closure traversal
-- Import still returns validated payload; apply/use-case layer is the next stage.
+## 3. Component Status
 
-## 5) Next Implementation Plan (Confirmed)
+### Catalog
 
-Before use-cases:
+Structure:
 
-1. Move issue creation pattern to reusable shared helper in engine model/shared.
-2. Deduplicate dependency BFS traversal used in both `query` and `io/import`.
-3. Add shared `getCompositionDependencies(item)` helper and reuse it.
-4. Simplify `createCatalogExportService` (remove redundant duplicate checks where closure already dedups).
-5. Simplify `createCatalogStateService.upsertItem` (remove double library search).
-6. Simplify `CatalogStateApi` typing in `components/catalog/types.ts` (single source of truth after `Pick`).
+- `services`
+    - `state`
+    - `query`
+    - `factory`
+    - `validation`
+    - `io`
+- `use-cases`
+    - `initCatalog`
+    - `createLibrary`
+    - `createItem`
+    - `updateItem`
+    - `deleteItem`
+    - `deleteLibrary`
+    - `importLibrary`
+    - `importBundle`
+    - `exportLibrary`
+    - `exportBundle`
+    - `exportCatalog`
 
-Then:
+`createCatalog()` builds the service graph first, then builds use-cases on top of it.
 
-7. Add component-level use-case API:
-    - `applyImportLibrary`
-    - `applyImportBundle`
-    - `applyImportDocument` with explicit strategy (`merge | replace`) and normalized results.
+### Workspace
 
-## 6) Working Commands
+Structure:
+
+- `services`
+    - `state`
+    - `query`
+    - `factory`
+- `helpers`
+    - shared tree traversal helpers used by both state and use-cases
+- `use-cases`
+    - `createTab`
+    - `open`
+    - `closeTab`
+    - `exportTab`
+    - `importTab`
+    - `updateTitle`
+
+Important boundary:
+
+- `workspace` does not own graph snapshot data anymore
+- `WorkspaceTabDocument` contains only:
+    - `session`
+    - `workspaces`
+- graph snapshot payload belongs to `graph-document`, not to `workspace`
+
+`createWorkspace()` follows the same pattern as `catalog`: build local services, then build use-cases on top.
+
+### Graph Document
+
+Current state:
+
+- model exists
+- component does not exist yet
+
+Expected ownership:
+
+- one graph document per `workspaceId`
+- graph snapshot persistence/import/export
+- patch/update operations for `contentJson` / `viewport` / `extensions`
+
+## 4. Architectural Rules
+
+### Boundaries
+
+- components should not directly mutate each other
+- cross-component coordination must happen through:
+    - public component APIs
+    - shared services
+    - higher-level orchestration use-cases
+
+### Public API shape
+
+- `query` is public read access
+- writes and user actions should go through use-cases
+- local services are implementation details of the component
+
+### Ownership split
+
+- `catalog` owns catalog documents and item/library semantics
+- `workspace` owns tab tree and tab session semantics
+- `graph-document` owns graph snapshot semantics
+
+### Import / export rule
+
+- `workspace.exportTab/importTab` are component-local operations
+- full tab import/export across `workspace` + `graph-document` belongs to a higher-level use-case layer, not to `workspace` alone
+
+## 5. Current Priority
+
+The next correct step is:
+
+1. build a dedicated `graph-document` component
+2. give it the same shape:
+    - `state`
+    - `query`
+    - `factory`
+    - `use-cases`
+3. only after that add higher-level tab bundle import/export that orchestrates multiple components
+
+## 6. Working Commands
 
 From repo root:
 
 - `pnpm --filter web test`
 - `pnpm --filter web build`
 
-## 7) Notes For New Chat
+## 7. Notes
 
-- Start from `catalog` component and this plan.
-- Do not re-introduce direct component-to-component coupling.
-- Do not add legacy adapters “for build only”.
-- Keep diffs minimal and delete obsolete code when moving logic.
+- Do not reintroduce snapshot fields into `workspace`.
+- Do not bypass component boundaries by reading internal stores from another component.
+- Keep `catalog` and `workspace` structurally aligned where the domains are analogous.
+- Prefer deleting obsolete legacy paths instead of carrying temporary adapters.

@@ -1,16 +1,27 @@
-1. После соединения, нужно обновлять цвет target порта на цвет edge
+# TODO
 
-2. добавить исключительное выделение для проводов и удаление их на delete
+## Now
 
-// будущее
+1. After connecting, update the target port color to match the edge color.
+2. Add exclusive wire selection and remove selected wires on `Delete`.
 
-1. копирование / вставка схемы в другой проект
-2. undo / redo history
-3. Изменение названия вкладки
-4. Добавить изменяемые в размере блок-контейнер в который можно складывать ноды, копировать, удалять вместе и тд.
+## Architecture
 
-// Баги
+1. Build the `graph-document` component in the new format:
+   - `state`
+   - `query`
+   - `factory`
+   - `use-cases`
+2. After that, build top-level tab import/export as a bundle between `workspace` and `graph-document`.
+3. Then move `graph-runtime` to the new component layer instead of legacy snapshot/document ownership.
 
-1. При включенной виртуализации если выделить элементы и быстро вынести за экран то часть пропадет и не вернется. Нужно перерисовывать элементы и связи
+## Future
 
-2. Во время смены вкладки оставшиеся tool vertices остаются навсегда, а не удаляются. (нужно создавать шину событий и очищать все тулзы до создания снапшота )
+1. Copy / paste a scheme into another project.
+2. Undo / redo history.
+3. Add resizable block containers that can group nodes, be copied, and be removed as a group.
+
+## Bugs
+
+1. With virtualization enabled, if selected elements are moved off-screen too quickly, some of them disappear and do not come back. Elements and links need a correct redraw path.
+2. During tab switch, leftover `tool vertices` stay forever instead of being cleaned up. We need centralized tool cleanup before switching graph/runtime context.

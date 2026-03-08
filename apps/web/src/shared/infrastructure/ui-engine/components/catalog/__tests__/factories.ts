@@ -75,6 +75,7 @@ export const createTestCompositionItem = ({
         {
             type: "composition",
             config: {
+                contentJson: "",
                 items: dependencyRefs.map((dependencyRef, index) => ({
                     id: `inner-${index}`,
                     ref: dependencyRef,

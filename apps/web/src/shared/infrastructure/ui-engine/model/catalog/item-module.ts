@@ -93,6 +93,7 @@ export type CatalogCompositionOutputBinding = {
 export type CatalogCompositionModule = CatalogModuleBase<
     "composition",
     {
+        contentJson: string;
         items: CatalogCompositionInnerItem[];
         connections: CatalogCompositionConnection[];
         boundary: CatalogCompositionBoundary;

@@ -74,6 +74,7 @@ describe("validateModuleValue", () => {
             {
                 type: "composition",
                 config: {
+                    contentJson: "",
                     items: [
                         {
                             id: "inner-0",

@@ -84,6 +84,7 @@ describe("createCatalogFactoryService", () => {
                 {
                     type: "composition",
                     config: {
+                        contentJson: "",
                         items: [],
                         connections: [],
                         inputBindings: [],

@@ -48,6 +48,7 @@ describe("validateItemValue", () => {
                 {
                     type: "composition",
                     config: {
+                        contentJson: "",
                         items: [],
                         connections: [],
                         boundary: {
