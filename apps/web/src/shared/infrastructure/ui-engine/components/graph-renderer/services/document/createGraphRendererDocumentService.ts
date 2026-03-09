@@ -4,7 +4,7 @@ import {
     GRAPH_DOCUMENT_FORMAT_VERSION,
     Result,
     type GraphDocument,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 import type { GraphRendererInstanceService } from "../instance";
 import type { GraphRendererDocumentLoadInput, GraphRendererDocumentService } from "./types";
 

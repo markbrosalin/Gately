@@ -1,4 +1,4 @@
-import { CatalogBundleDocument } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import { CatalogBundleDocument } from "engine-model/catalog";
 import type { CatalogQueryService } from "../../query";
 import type {
     CatalogExportBundleResult,

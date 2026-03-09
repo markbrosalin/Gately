@@ -1,8 +1,8 @@
 import type {
     CatalogItem,
     CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import { createCatalogItemRefKey } from "../../helpers/createItemRefKey";
+} from "engine-model/catalog";
+import { createCatalogItemRefKey } from "engine-model/catalog/lib";
 
 const mergeLibraryItems = (currentItems: CatalogItem[], importedItems: CatalogItem[]): CatalogItem[] => {
     const itemsByRefKey = new Map<string, CatalogItem>();

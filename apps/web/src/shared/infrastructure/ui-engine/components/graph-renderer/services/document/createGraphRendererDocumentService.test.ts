@@ -2,7 +2,7 @@ import {
     DEFAULT_GRAPH_DOCUMENT_VIEWPORT,
     GRAPH_DOCUMENT_FORMAT_VERSION,
     type GraphDocument,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { GraphRendererInstanceService } from "../instance";
 import {

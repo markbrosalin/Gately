@@ -3,7 +3,7 @@ import {
     DEFAULT_GRAPH_DOCUMENT_VIEWPORT,
     GRAPH_DOCUMENT_FORMAT_VERSION,
     type GraphDocument,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 import type { GraphDocumentCreateInput, GraphDocumentFactoryService } from "./types";
 
 export const createGraphDocumentFactoryService = (): GraphDocumentFactoryService => {

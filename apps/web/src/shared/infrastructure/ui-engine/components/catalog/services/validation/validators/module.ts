@@ -2,7 +2,7 @@ import type {
     CatalogItemKind,
     CatalogItemModule,
     CatalogCompositionPinRef,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import {
     isFiniteNumber,
@@ -11,11 +11,11 @@ import {
     prefixIssues,
     pushIssues,
 } from "../helpers";
-import type { CatalogValidationResult } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogValidationResult } from "engine-model/catalog";
 import { validateRefValue } from "./ref";
 
 const ALLOWED_MODULE_TYPES_BY_KIND: Record<CatalogItemKind, CatalogItemModule["type"][]> = {
-    logic: ["logic", "composition", "ports", "interaction", "timing"],
+    logic: ["logic", "composition", "ports", "interaction", "timing", "visual"],
     annotation: ["interaction"],
     debug: ["interaction"],
     layout: ["interaction"],
@@ -191,7 +191,10 @@ const _validateCompositionBoundaryPorts = (
         const portPath = [...path, "config", "boundary", side, index];
 
         if (!port || typeof port !== "object") {
-            pushIssues(result, catalogValidationIssues.itemCompositionOuterPortIdRequired(portPath));
+            pushIssues(
+                result,
+                catalogValidationIssues.itemCompositionOuterPortIdRequired(portPath),
+            );
             return;
         }
 
@@ -204,15 +207,24 @@ const _validateCompositionBoundaryPorts = (
         };
 
         if (!isNonEmptyString(boundaryPort.outerPortId)) {
-            pushIssues(result, catalogValidationIssues.itemCompositionOuterPortIdRequired(portPath));
+            pushIssues(
+                result,
+                catalogValidationIssues.itemCompositionOuterPortIdRequired(portPath),
+            );
         }
 
         if (!isFiniteNumber(boundaryPort.position?.x)) {
-            pushIssues(result, catalogValidationIssues.itemCompositionBoundaryPositionXInvalid(portPath));
+            pushIssues(
+                result,
+                catalogValidationIssues.itemCompositionBoundaryPositionXInvalid(portPath),
+            );
         }
 
         if (!isFiniteNumber(boundaryPort.position?.y)) {
-            pushIssues(result, catalogValidationIssues.itemCompositionBoundaryPositionYInvalid(portPath));
+            pushIssues(
+                result,
+                catalogValidationIssues.itemCompositionBoundaryPositionYInvalid(portPath),
+            );
         }
     });
 };
@@ -300,6 +312,9 @@ export const validateModuleValue = (
         }
         case "composition": {
             _validateCompositionModule(module, result, path);
+            return;
+        }
+        case "visual": {
             return;
         }
         default: {

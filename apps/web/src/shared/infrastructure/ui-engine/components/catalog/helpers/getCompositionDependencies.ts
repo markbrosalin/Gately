@@ -1,8 +1,8 @@
 import type {
     CatalogItem,
     CatalogItemRef,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import { createCatalogItemRefKey } from "./createItemRefKey";
+} from "engine-model/catalog";
+import { createCatalogItemRefKey } from "engine-model/catalog/lib";
 
 const getCompositionModule = (modules: CatalogItem["modules"]) => {
     for (const module of modules) {

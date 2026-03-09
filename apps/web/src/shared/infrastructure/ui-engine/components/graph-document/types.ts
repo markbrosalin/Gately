@@ -1,4 +1,4 @@
-import { ComponentDeps } from "../../model";
+import { ComponentDeps } from "engine-model";
 import type { GraphDocumentQueryService } from "./services/query";
 import type { GraphDocumentEnsureDocumentUseCase } from "./use-cases/ensureDocument";
 import type { GraphDocumentExportDocumentUseCase } from "./use-cases/exportDocument";

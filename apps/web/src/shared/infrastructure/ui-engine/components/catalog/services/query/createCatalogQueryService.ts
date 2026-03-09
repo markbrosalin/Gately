@@ -8,8 +8,8 @@ import type {
     CatalogItemRef,
     CatalogLibraryDocument,
     CatalogLibrarySummary,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import { createCatalogItemRefKey } from "../../helpers/createItemRefKey";
+} from "engine-model/catalog";
+import { createCatalogItemRefKey } from "engine-model/catalog/lib";
 import { isSameItemRef } from "../../helpers/isSameItemRef";
 import { getCompositionDependencies } from "../../helpers/getCompositionDependencies";
 import { collectDependenciesFromRoots } from "../../helpers/collectDependenciesFromRoots";

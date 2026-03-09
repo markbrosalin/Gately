@@ -1,6 +1,6 @@
 import { catalogValidationIssues } from "../issues";
 import { isPositiveFiniteNumber, pushIssues } from "../helpers";
-import type { CatalogValidationResult } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogValidationResult } from "engine-model/catalog";
 
 export const validateRequiredTimestamps = (
     createdAt: unknown,

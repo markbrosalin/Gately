@@ -2,7 +2,7 @@ import type {
     Workspace,
     WorkspaceTabCloseConditions,
     WorkspaceTabSession,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 import type { WorkspaceStateService } from "../state/types";
 import type { WorkspaceServiceContext } from "../types";
 import type { WorkspaceQueryService, WorkspaceQueryTab } from "./types";

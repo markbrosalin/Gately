@@ -1,8 +1,8 @@
-import { createOkResult } from "@gately/shared/infrastructure/ui-engine/model";
+import { createOkResult } from "engine-model";
 import type {
     CatalogValidationResult,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { Issue } from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model/catalog";
+import type { Issue } from "engine-model";
 
 export const createValidationResult = <TSubject extends string>(
     subject: TSubject,

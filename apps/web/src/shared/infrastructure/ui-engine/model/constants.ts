@@ -5,6 +5,7 @@ import type { EdgeRouterMode, LogicValueClass } from "./types";
 export const NODE_PORT_LAYOUTS = {
     left: "logic-left",
     right: "logic-right",
+    top: "logic-top",
     bottom: "logic-bottom",
 } as const;
 

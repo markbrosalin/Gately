@@ -1,4 +1,4 @@
-import type { CatalogItemRef } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogItemRef } from "engine-model/catalog";
 
 /** Compares catalog item references as stable library-scoped identifiers. */
 export const isSameItemRef = (left: CatalogItemRef, right: CatalogItemRef): boolean => {

@@ -16,6 +16,10 @@
         "types": ["vite/client"],
         "paths": {
             "@gately/*": ["./src/*"],
+            "engine-components": ["./src/shared/infrastructure/ui-engine/components"],
+            "engine-components/*": ["./src/shared/infrastructure/ui-engine/components/*"],
+            "engine-model": ["./src/shared/infrastructure/ui-engine/model"],
+            "engine-model/*": ["./src/shared/infrastructure/ui-engine/model/*"],
             "index.css": ["./src/index.css"]
         },
         "experimentalDecorators": true,

@@ -1,4 +1,4 @@
-import { createIssue } from "@gately/shared/infrastructure/ui-engine/model/core/issue";
+import { createIssue } from "engine-model/core/issue";
 
 export const graphRendererUseCaseIssueDefs = {
     rendererNotOpen: {
@@ -20,6 +20,11 @@ export const graphRendererUseCaseIssueDefs = {
         code: "graph-renderer.use-case.document.content-json.invalid",
         message: () => "Graph document contentJson is invalid.",
     },
+    nodeBuildInvalid: {
+        code: "graph-renderer.use-case.node.build.invalid",
+        message: ({ refKey, reason }: { refKey: string; reason: string }) =>
+            `Graph node for catalog item "${refKey}" could not be built: ${reason}`,
+    },
 } as const;
 
 export const graphRendererUseCaseIssues = {
@@ -36,4 +41,9 @@ export const graphRendererUseCaseIssues = {
         }),
     documentContentJsonInvalid: (path: Array<string | number>) =>
         createIssue(graphRendererUseCaseIssueDefs.documentContentJsonInvalid, path),
+    nodeBuildInvalid: (path: Array<string | number>, refKey: string, reason: string) =>
+        createIssue(graphRendererUseCaseIssueDefs.nodeBuildInvalid, path, {
+            refKey,
+            reason,
+        }),
 } as const;

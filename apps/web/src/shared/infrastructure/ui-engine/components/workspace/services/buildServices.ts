@@ -3,7 +3,7 @@ import { createWorkspaceFactoryService } from "./factory";
 import { createWorkspaceQueryService } from "./query";
 import { createWorkspaceStateService } from "./state";
 import type { WorkspaceServiceContext, WorkspaceServiceName, WorkspaceServices } from "./types";
-import { ServiceDefinitionMap } from "../../../model/core/context";
+import { ServiceDefinitionMap } from "engine-model/core/context";
 
 type WorkspaceServiceDefinitions = ServiceDefinitionMap<WorkspaceServiceName, WorkspaceServices>;
 

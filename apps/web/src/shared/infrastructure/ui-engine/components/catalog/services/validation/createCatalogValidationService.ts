@@ -3,7 +3,7 @@ import type {
     CatalogItem,
     CatalogItemRef,
     CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 import { validateDocumentValue, validateItemValue, validateLibraryValue, validateRefValue } from "./validators";
 import type { CatalogValidationService } from "./types";
 

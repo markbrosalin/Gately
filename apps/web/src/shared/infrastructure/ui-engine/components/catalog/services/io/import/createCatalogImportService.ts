@@ -1,15 +1,15 @@
-import { cloneCatalogValue, createCatalogIOResult, prefixCatalogIOIssues } from "../helpers";
+import { cloneCatalogValue, prefixCatalogIOIssues } from "../helpers";
 import {
     CATALOG_FORMAT_VERSION,
     CatalogBundleLibrary,
     type CatalogBundleDocument,
     type CatalogItem,
     type CatalogItemRef,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { Issue } from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model/catalog";
+import { createErrResult, createOkResult, type Issue } from "engine-model";
 import { catalogImportIssues } from "./issues";
 import type { CatalogImportService, CatalogImportServiceDeps } from "./types";
-import { createCatalogItemRefKey } from "../../../helpers/createItemRefKey";
+import { createCatalogItemRefKey } from "engine-model/catalog/lib";
 import { collectDependenciesFromRoots } from "../../../helpers/collectDependenciesFromRoots";
 import { getCompositionDependencies } from "../../../helpers/getCompositionDependencies";
 
@@ -133,18 +133,18 @@ export const createCatalogImportService = ({
         importLibrary: (library) => {
             const result = validation.validateLibrary(library);
             if (!result.ok) {
-                return createCatalogIOResult("library", undefined, result.issues);
+                return createErrResult(result.issues);
             }
 
-            return createCatalogIOResult("library", cloneCatalogValue(library));
+            return createOkResult(cloneCatalogValue(library));
         },
         importDocument: (document) => {
             const result = validation.validateDocument(document);
             if (!result.ok) {
-                return createCatalogIOResult("document", undefined, result.issues);
+                return createErrResult(result.issues);
             }
 
-            return createCatalogIOResult("document", cloneCatalogValue(document));
+            return createOkResult(cloneCatalogValue(document));
         },
         importBundle: (bundle) => {
             const issues: Issue[] = [];
@@ -159,10 +159,10 @@ export const createCatalogImportService = ({
             _pushMissingDependencyIssues(bundle.rootRefs, itemsByRefKey, issues);
 
             if (issues.length > 0) {
-                return createCatalogIOResult("bundle", undefined, issues);
+                return createErrResult(issues);
             }
 
-            return createCatalogIOResult("bundle", cloneCatalogValue(bundle));
+            return createOkResult(cloneCatalogValue(bundle));
         },
     };
 };

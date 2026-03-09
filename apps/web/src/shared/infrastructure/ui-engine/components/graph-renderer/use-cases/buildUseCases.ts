@@ -1,4 +1,5 @@
 import { createCloseUseCase } from "./close";
+import { createCreateNodeUseCase } from "./createNode";
 import { createExportDocumentUseCase } from "./exportDocument";
 import { createLoadDocumentUseCase } from "./loadDocument";
 import { createOpenUseCase } from "./open";
@@ -10,6 +11,7 @@ export const buildGraphRendererUseCases = (
     return {
         open: createOpenUseCase(deps),
         close: createCloseUseCase(deps),
+        createNode: createCreateNodeUseCase(deps),
         loadDocument: createLoadDocumentUseCase(deps),
         exportDocument: createExportDocumentUseCase(deps),
     };

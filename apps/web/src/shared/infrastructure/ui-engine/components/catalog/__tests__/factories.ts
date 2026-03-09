@@ -1,4 +1,4 @@
-import { CATALOG_FORMAT_VERSION } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import { CATALOG_FORMAT_VERSION } from "engine-model/catalog";
 import type {
     CatalogBundleDocument,
     CatalogCompositionBoundary,
@@ -6,7 +6,7 @@ import type {
     CatalogItem,
     CatalogItemRef,
     CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 
 export const createTestRef = (overrides: Partial<CatalogItemRef> = {}): CatalogItemRef => ({
     libraryId: overrides.libraryId ?? "std",

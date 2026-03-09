@@ -3,7 +3,7 @@ import type {
     CatalogDocument,
     CatalogItem,
     CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 import { createCatalogDocument } from "../../helpers/createCatalogDocument";
 import { isSameItemRef } from "../../helpers/isSameItemRef";
 import type { CatalogStateService } from "./types";

@@ -1,6 +1,6 @@
 import type { GraphManual } from "@antv/x6";
 import { createConnectingConfig } from "../../../graph-options";
-import { GRID_SIZE } from "../../../model";
+import { GRID_SIZE } from "engine-model";
 
 export const createGraphRendererOptions = (
     container: HTMLDivElement,

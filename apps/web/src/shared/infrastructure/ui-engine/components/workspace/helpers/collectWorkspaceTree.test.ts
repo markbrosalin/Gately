@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Workspace } from "@gately/shared/infrastructure/ui-engine/model";
+import type { Workspace } from "engine-model";
 import {
     collectWorkspaceTree,
     collectWorkspaceTreeByQuery,

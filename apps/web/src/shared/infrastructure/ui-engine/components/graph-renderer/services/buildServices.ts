@@ -1,13 +1,15 @@
 import { buildContextServiceRegistry } from "@gately/shared/infrastructure/ui-engine/lib/registry";
+import { createGraphRendererBuilderService } from "./builder";
 import { createGraphRendererDocumentService } from "./document";
 import { createGraphRendererInstanceService } from "./instance";
+import { createGraphRendererNodesService } from "./nodes";
 import { createGraphRendererQueryService } from "./query";
 import type {
     GraphRendererServiceContext,
     GraphRendererServiceName,
     GraphRendererServices,
 } from "./types";
-import type { ServiceDefinitionMap } from "../../../model/core/context";
+import type { ServiceDefinitionMap } from "engine-model/core/context";
 
 type GraphRendererServiceDefinitions = ServiceDefinitionMap<
     GraphRendererServiceName,
@@ -22,6 +24,13 @@ const createServiceDefinitions = (
     },
     document: {
         create: () => createGraphRendererDocumentService(ctx.getService("instance")),
+        createDeps: ["instance"],
+    },
+    builder: {
+        create: () => createGraphRendererBuilderService(),
+    },
+    nodes: {
+        create: () => createGraphRendererNodesService(ctx.getService("instance")),
         createDeps: ["instance"],
     },
     query: {

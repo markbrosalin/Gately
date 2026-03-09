@@ -1,6 +1,8 @@
 import type { Node, NodeProperties } from "@antv/x6";
 import { Hash, HierarchyPath, KindKey, LogicValue } from "@cnbn/schema";
 import { LOGIC_VALUE_CLASSES } from "../constants";
+import type { CatalogItemKind } from "../catalog/item";
+import type { CatalogItemRef } from "../catalog/ref";
 
 export type LogicValueClass = (typeof LOGIC_VALUE_CLASSES)[number];
 
@@ -27,9 +29,11 @@ export type PinUpdate = {
 };
 
 export type UIEngineNodeData = {
-    hash: Hash;
-    path: HierarchyPath;
-    kind: KindKey;
+    kind: KindKey | CatalogItemKind;
+    hash?: Hash;
+    path?: HierarchyPath;
+    ref?: CatalogItemRef;
+    refKey?: string;
 };
 
 export type UIEngineNodeProps = Omit<NodeProperties, "data"> & {

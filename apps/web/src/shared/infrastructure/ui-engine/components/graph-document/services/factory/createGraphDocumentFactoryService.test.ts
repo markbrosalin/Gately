@@ -3,7 +3,7 @@ import {
     DEFAULT_GRAPH_DOCUMENT_CONTENT_JSON,
     DEFAULT_GRAPH_DOCUMENT_VIEWPORT,
     GRAPH_DOCUMENT_FORMAT_VERSION,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 import { createGraphDocumentFactoryService } from "./createGraphDocumentFactoryService";
 
 describe("createGraphDocumentFactoryService", () => {

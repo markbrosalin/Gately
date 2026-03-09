@@ -2,7 +2,7 @@ import type {
     Workspace,
     WorkspaceTabCloseConditions,
     WorkspaceTabSession,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 
 export type WorkspaceQueryTab = Pick<Workspace, "id" | "title">;
 

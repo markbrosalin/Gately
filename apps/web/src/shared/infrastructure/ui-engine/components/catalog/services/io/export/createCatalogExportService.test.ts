@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type {
     CatalogItemRef,
     CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 import {
     createTestCompositionItem,
     createTestDocument,
@@ -108,7 +108,6 @@ describe("createCatalogExportService", () => {
 
         expect(bundleResult).toMatchObject({
             ok: true,
-            subject: "bundle",
             value: {
                 formatVersion: 1,
                 rootRefs: [halfAdder.ref],
@@ -140,22 +139,18 @@ describe("createCatalogExportService", () => {
 
         expect(service.exportLibrary({ libraryId: "" })).toMatchObject({
             ok: false,
-            subject: "library",
             issues: [{ code: catalogExportIssueDefs.libraryIdRequired.code }],
         });
         expect(service.exportLibrary({ libraryId: "missing" })).toMatchObject({
             ok: false,
-            subject: "library",
             issues: [{ code: catalogExportIssueDefs.libraryNotFound.code }],
         });
         expect(service.exportBundle({ rootRefs: [] })).toMatchObject({
             ok: false,
-            subject: "bundle",
             issues: [{ code: catalogExportIssueDefs.bundleRootRefsRequired.code }],
         });
         expect(service.exportBundle({ rootRefs: [rootRef] })).toMatchObject({
             ok: false,
-            subject: "bundle",
             issues: [{ code: catalogExportIssueDefs.bundleRootNotFound.code }],
         });
 
@@ -182,7 +177,6 @@ describe("createCatalogExportService", () => {
         const dependencyResult = dependencyService.exportBundle({ rootRefs: [rootRef] });
         expect(dependencyResult).toMatchObject({
             ok: false,
-            subject: "bundle",
             issues: [{ code: catalogExportIssueDefs.bundleDependencyNotFound.code }],
         });
         expect(dependencyResult.issues[0]?.message).toContain("std::gates::AND");

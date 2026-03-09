@@ -6,7 +6,8 @@ import type {
     CatalogLogicModule,
     CatalogPortsModule,
     CatalogTimingModule,
-} from "./item-module";
+    CatalogVisualModule,
+} from "./item-modules.ts";
 import type { CatalogItemRef } from "./ref";
 
 export type CatalogExtensions = Record<string, unknown>;
@@ -44,13 +45,23 @@ export type CatalogLogicItem = CatalogItemBase<
     | CatalogPortsModule
     | CatalogInteractionModule
     | CatalogTimingModule
+    | CatalogVisualModule
 >;
 
-export type CatalogAnnotationItem = CatalogItemBase<"annotation", CatalogInteractionModule>;
+export type CatalogAnnotationItem = CatalogItemBase<
+    "annotation",
+    CatalogInteractionModule | CatalogVisualModule
+>;
 
-export type CatalogDebugItem = CatalogItemBase<"debug", CatalogInteractionModule>;
+export type CatalogDebugItem = CatalogItemBase<
+    "debug",
+    CatalogInteractionModule | CatalogVisualModule
+>;
 
-export type CatalogLayoutItem = CatalogItemBase<"layout", CatalogInteractionModule>;
+export type CatalogLayoutItem = CatalogItemBase<
+    "layout",
+    CatalogInteractionModule | CatalogVisualModule
+>;
 
 export type CatalogItem =
     | CatalogLogicItem

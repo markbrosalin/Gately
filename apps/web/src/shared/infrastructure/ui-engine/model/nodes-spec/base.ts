@@ -52,6 +52,15 @@ export const baseNodePorts: Metadata = {
                 },
             },
         },
+        top: {
+            position: { name: NODE_PORT_LAYOUTS.top },
+            attrs: {
+                circle: {
+                    magnet: true,
+                    class: "port port-input",
+                },
+            },
+        },
         bottom: {
             position: { name: NODE_PORT_LAYOUTS.bottom },
             attrs: {

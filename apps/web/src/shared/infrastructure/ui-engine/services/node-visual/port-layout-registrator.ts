@@ -48,12 +48,33 @@ const buildBottomLayout = (
     });
 };
 
+const buildTopLayout = (
+    portsPositionArgs: Partial<XYOffset>[],
+    elemBBox: { x: number; y: number; width: number; height: number },
+    groupPositionArgs: Partial<XYOffset> = {},
+) => {
+    const gap = GRID_SIZE;
+    const centerX = elemBBox.x + elemBBox.width / 2;
+    const baseY = elemBBox.y + NODE_INSET;
+    const count = portsPositionArgs.length;
+    const startX = centerX - (Math.max(0, count - 1) * gap) / 2;
+
+    return portsPositionArgs.map((args, index) => {
+        const dx = (groupPositionArgs.dx ?? 0) + (args.dx ?? 0);
+        const dy = (groupPositionArgs.dy ?? 0) + (args.dy ?? 0);
+        const x = Math.round(startX + index * gap + dx);
+        const y = Math.round(baseY + dy);
+        return { position: { x, y }, angle: 0, ...args };
+    });
+};
+
 export const useVisualPortLayoutRegistrator = (): VisualPortLayoutRegistratorContract => {
     const registerNodePortLayouts = (): void => {
         if (registered) return;
 
         Graph.registerPortLayout(NODE_PORT_LAYOUTS.left, buildSideLayout("left"), true);
         Graph.registerPortLayout(NODE_PORT_LAYOUTS.right, buildSideLayout("right"), true);
+        Graph.registerPortLayout(NODE_PORT_LAYOUTS.top, buildTopLayout, true);
         Graph.registerPortLayout(NODE_PORT_LAYOUTS.bottom, buildBottomLayout, true);
 
         registered = true;

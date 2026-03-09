@@ -13,4 +13,4 @@ export type { WorkspaceImportTabUseCase } from "./importTab";
 export type { WorkspaceOpenUseCase } from "./open";
 export type { WorkspaceUpdateTitleUseCase } from "./updateTitle";
 export type { WorkspaceUseCaseDeps, WorkspaceUseCases } from "./types";
-export type { WorkspaceTabDocument } from "../../../model";
+export type { WorkspaceTabDocument } from "engine-model";

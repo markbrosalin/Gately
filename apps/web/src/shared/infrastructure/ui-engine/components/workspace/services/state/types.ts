@@ -1,4 +1,4 @@
-import type { Workspace, WorkspaceTabSession } from "@gately/shared/infrastructure/ui-engine/model";
+import type { Workspace, WorkspaceTabSession } from "engine-model";
 
 export type WorkspaceStateService = {
     orderedTabIds: () => string[];

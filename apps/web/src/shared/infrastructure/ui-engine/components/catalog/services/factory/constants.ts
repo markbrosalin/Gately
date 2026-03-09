@@ -1,4 +1,4 @@
-import type { CatalogItemLayout } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogItemLayout } from "engine-model/catalog";
 
 export const DEFAULT_LIBRARY_VERSION = "1.0.0";
 

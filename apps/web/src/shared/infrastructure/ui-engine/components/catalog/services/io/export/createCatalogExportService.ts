@@ -2,9 +2,10 @@ import {
     CATALOG_FORMAT_VERSION,
     type CatalogItem,
     type CatalogBundleLibrary,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import { cloneCatalogValue, createCatalogIOResult } from "../helpers";
-import { createCatalogItemRefKey } from "../../../helpers/createItemRefKey";
+} from "engine-model/catalog";
+import { createErrResult, createOkResult } from "engine-model";
+import { cloneCatalogValue } from "../helpers";
+import { createCatalogItemRefKey } from "engine-model/catalog/lib";
 import { catalogExportIssues } from "./issues";
 import type { CatalogExportService, CatalogExportServiceDeps } from "./types";
 
@@ -44,31 +45,25 @@ export const createCatalogExportService = ({
     return {
         exportLibrary: ({ libraryId }) => {
             if (!libraryId) {
-                return createCatalogIOResult("library", undefined, [
-                    catalogExportIssues.libraryIdRequired(),
-                ]);
+                return createErrResult([catalogExportIssues.libraryIdRequired()]);
             }
 
             const library = query.getLibrary(libraryId);
             if (!library) {
-                return createCatalogIOResult("library", undefined, [
-                    catalogExportIssues.libraryNotFound(libraryId),
-                ]);
+                return createErrResult([catalogExportIssues.libraryNotFound(libraryId)]);
             }
 
-            return createCatalogIOResult("library", cloneCatalogValue(library));
+            return createOkResult(cloneCatalogValue(library));
         },
         exportBundle: ({ rootRefs }) => {
             if (rootRefs.length === 0) {
-                return createCatalogIOResult("bundle", undefined, [
-                    catalogExportIssues.bundleRootRefsRequired(),
-                ]);
+                return createErrResult([catalogExportIssues.bundleRootRefsRequired()]);
             }
 
             const missingRootIndex = rootRefs.findIndex((ref) => !query.getItem(ref));
             if (missingRootIndex !== -1) {
                 const missingRootRef = rootRefs[missingRootIndex]!;
-                return createCatalogIOResult("bundle", undefined, [
+                return createErrResult([
                     catalogExportIssues.bundleRootNotFound(
                         missingRootIndex,
                         createCatalogItemRefKey(missingRootRef),
@@ -84,13 +79,12 @@ export const createCatalogExportService = ({
                 ),
             );
             if (issues.length > 0) {
-                return createCatalogIOResult("bundle", undefined, issues);
+                return createErrResult(issues);
             }
 
             const libraries = _collectBundleLibraries(dependencies.items);
 
-            return createCatalogIOResult(
-                "bundle",
+            return createOkResult(
                 cloneCatalogValue({
                     formatVersion: CATALOG_FORMAT_VERSION,
                     rootRefs,
@@ -98,7 +92,6 @@ export const createCatalogExportService = ({
                 }),
             );
         },
-        exportDocument: () =>
-            createCatalogIOResult("document", cloneCatalogValue(query.document())),
+        exportDocument: () => createOkResult(cloneCatalogValue(query.document())),
     };
 };

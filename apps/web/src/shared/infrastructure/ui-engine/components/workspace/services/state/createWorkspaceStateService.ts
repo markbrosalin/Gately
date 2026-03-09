@@ -3,7 +3,7 @@ import {
     getParentWorkspaceId,
     type Workspace,
     type WorkspaceTabSession,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 import { collectWorkspaceTreeIds } from "../../helpers";
 import type { WorkspaceStateService } from "./types";
 

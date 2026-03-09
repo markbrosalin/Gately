@@ -1,7 +1,7 @@
 import {
     type Workspace,
     type WorkspaceTabSession,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 import {
     WorkspaceCircuitFactoryInput,
     WorkspaceFactoryService,

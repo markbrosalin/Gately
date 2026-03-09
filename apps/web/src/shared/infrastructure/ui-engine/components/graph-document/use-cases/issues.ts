@@ -1,4 +1,4 @@
-import { createIssue } from "@gately/shared/infrastructure/ui-engine/model/core/issue";
+import { createIssue } from "engine-model/core/issue";
 
 export const graphDocumentUseCaseIssueDefs = {
     documentNotFound: {

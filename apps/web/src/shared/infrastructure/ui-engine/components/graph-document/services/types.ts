@@ -1,4 +1,4 @@
-import type { ComponentServiceContext } from "@gately/shared/infrastructure/ui-engine/model";
+import type { ComponentServiceContext } from "engine-model";
 import type { GraphDocumentFactoryService } from "./factory/types";
 import type { GraphDocumentQueryService } from "./query/types";
 import type { GraphDocumentStateService } from "./state/types";

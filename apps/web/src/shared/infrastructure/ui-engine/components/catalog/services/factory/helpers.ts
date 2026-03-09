@@ -1,5 +1,5 @@
-import type { CatalogItem } from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import * as Model from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogItem } from "engine-model/catalog";
+import * as Model from "engine-model/catalog";
 import { DEFAULT_ITEM_LAYOUT } from "./constants";
 import type { CatalogCreateItemInput } from "./types";
 

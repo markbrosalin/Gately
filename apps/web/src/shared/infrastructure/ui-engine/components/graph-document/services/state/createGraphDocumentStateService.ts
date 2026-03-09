@@ -1,5 +1,5 @@
 import { createStore, produce } from "solid-js/store";
-import type { GraphDocument } from "@gately/shared/infrastructure/ui-engine/model";
+import type { GraphDocument } from "engine-model";
 import type { GraphDocumentStateService } from "./types";
 
 type GraphDocumentStateStore = {

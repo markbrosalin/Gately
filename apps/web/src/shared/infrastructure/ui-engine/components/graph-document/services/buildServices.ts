@@ -7,7 +7,7 @@ import type {
     GraphDocumentServiceName,
     GraphDocumentServices,
 } from "./types";
-import type { ServiceDefinitionMap } from "../../../model/core/context";
+import type { ServiceDefinitionMap } from "engine-model/core/context";
 
 type GraphDocumentServiceDefinitions = ServiceDefinitionMap<
     GraphDocumentServiceName,

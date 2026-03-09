@@ -1,9 +1,8 @@
 import type {
     WorkspaceTabCloseConditions,
     WorkspaceTabSession,
-} from "@gately/shared/infrastructure/ui-engine/model";
-import type { UseCase, Result } from "../../../model";
-import { createErrResult, createOkResult } from "../../../model";
+} from "engine-model";
+import { createErrResult, createOkResult, type Result, type UseCase } from "engine-model";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";
 

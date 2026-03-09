@@ -1,10 +1,10 @@
 import type {
     CatalogItem,
     CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { Result, UseCase } from "../../../model";
-import { createErrResult, createOkResult } from "../../../model";
-import { createCatalogItemRefKey } from "../helpers/createItemRefKey";
+} from "engine-model/catalog";
+import type { Result, UseCase } from "engine-model";
+import { createErrResult, createOkResult } from "engine-model";
+import { createCatalogItemRefKey } from "engine-model/catalog/lib";
 import { catalogUseCaseIssues } from "./issues";
 import type { CatalogUseCaseDeps } from "./types";
 

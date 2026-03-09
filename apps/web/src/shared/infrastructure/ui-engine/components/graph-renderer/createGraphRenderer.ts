@@ -14,6 +14,7 @@ export const createGraphRenderer = (deps: GraphRendererDeps) => {
         query: services.query,
         open: useCases.open,
         close: useCases.close,
+        createNode: useCases.createNode,
         loadDocument: useCases.loadDocument,
         exportDocument: useCases.exportDocument,
     } satisfies GraphRendererApi;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CATALOG_FORMAT_VERSION } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import { CATALOG_FORMAT_VERSION } from "engine-model/catalog";
 import { createCatalogValidationService } from "./createCatalogValidationService";
 import { catalogValidationIssueDefs } from "./issues";
 

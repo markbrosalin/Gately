@@ -1,4 +1,4 @@
-import type { Workspace } from "@gately/shared/infrastructure/ui-engine/model";
+import type { Workspace } from "engine-model";
 
 type WorkspaceGetter = (workspaceId: string) => Workspace | undefined;
 type WorkspaceChildrenGetter = (workspaceId: string) => Workspace[];

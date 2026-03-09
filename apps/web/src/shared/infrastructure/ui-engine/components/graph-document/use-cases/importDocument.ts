@@ -1,9 +1,8 @@
-import type { UseCase, Result } from "../../../model";
-import { createErrResult, createOkResult } from "../../../model";
+import { createErrResult, createOkResult, type Result, type UseCase } from "engine-model";
 import {
     GRAPH_DOCUMENT_FORMAT_VERSION,
     type GraphDocument,
-} from "@gately/shared/infrastructure/ui-engine/model";
+} from "engine-model";
 import { graphDocumentUseCaseIssues } from "./issues";
 import type { GraphDocumentUseCaseDeps } from "./types";
 

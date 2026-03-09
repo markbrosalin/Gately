@@ -2,7 +2,7 @@ import type {
     CatalogDocument,
     CatalogItem,
     CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 
 export type CatalogStateService = {
     document: () => CatalogDocument;

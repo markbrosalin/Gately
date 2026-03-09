@@ -1,13 +1,13 @@
 import {
     CATALOG_FORMAT_VERSION,
     type CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import { createValidationResult, isNonEmptyString, prefixIssues, pushIssues } from "../helpers";
-import type { CatalogValidationResult } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogValidationResult } from "engine-model/catalog";
 import { validateItemValue } from "./item";
 import { validateRequiredTimestamps } from "./timestamps";
-import { createCatalogItemRefKey } from "../../../helpers/createItemRefKey";
+import { createCatalogItemRefKey } from "engine-model/catalog/lib";
 
 export const validateLibraryValue = (
     library: CatalogLibraryDocument,

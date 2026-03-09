@@ -1,5 +1,4 @@
-import { UseCase, Result, createOkResult } from "../../../model";
-import type { GraphDocument } from "@gately/shared/infrastructure/ui-engine/model";
+import { createOkResult, type GraphDocument, type Result, type UseCase } from "engine-model";
 import type { GraphDocumentUseCaseDeps } from "./types";
 
 type GraphDocumentSaveDocumentInput = Pick<

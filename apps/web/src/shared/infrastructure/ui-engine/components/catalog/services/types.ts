@@ -1,4 +1,4 @@
-import { ComponentServiceContext, ServiceDefinitionMap } from "../../../model";
+import { ComponentServiceContext, ServiceDefinitionMap } from "engine-model";
 import type { CatalogExternal } from "../types";
 import type { CatalogFactoryService } from "./factory";
 import type { CatalogIOService } from "./io";

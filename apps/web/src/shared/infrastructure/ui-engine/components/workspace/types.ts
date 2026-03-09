@@ -1,4 +1,4 @@
-import { ComponentDeps } from "../../model/core/context";
+import { ComponentDeps } from "engine-model/core/context";
 import type { WorkspaceQueryService } from "./services";
 import type { WorkspaceCloseTabUseCase } from "./use-cases/closeTab";
 import type { WorkspaceCreateTabUseCase } from "./use-cases/createTab";

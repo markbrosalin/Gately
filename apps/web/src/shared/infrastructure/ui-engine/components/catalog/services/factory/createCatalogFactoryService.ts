@@ -1,10 +1,10 @@
 import type {
     CatalogLibraryDocument,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 import {
     CATALOG_FORMAT_VERSION,
     CatalogItem,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 import { DEFAULT_LIBRARY_VERSION } from "./constants";
 import { createItemByKind, createTimestamps } from "./helpers";
 import type {

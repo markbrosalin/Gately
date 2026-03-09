@@ -4,7 +4,7 @@ import type {
     CatalogLibraryDocument,
     CatalogDocument,
     CatalogValidationResult,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 
 export type CatalogValidationService = {
     validateRef: (ref: CatalogItemRef) => CatalogValidationResult<"ref">;

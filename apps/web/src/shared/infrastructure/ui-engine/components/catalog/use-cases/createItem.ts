@@ -1,7 +1,7 @@
-import type { CatalogItem } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogItem } from "engine-model/catalog";
 import type { CatalogCreateItemInput } from "../services";
-import type { Result, UseCase } from "../../../model";
-import { createErrResult, createOkResult } from "../../../model";
+import type { Result, UseCase } from "engine-model";
+import { createErrResult, createOkResult } from "engine-model";
 import { catalogUseCaseIssues } from "./issues";
 import type { CatalogUseCaseDeps } from "./types";
 

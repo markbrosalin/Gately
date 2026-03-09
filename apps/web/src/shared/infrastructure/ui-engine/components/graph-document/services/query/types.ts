@@ -1,4 +1,4 @@
-import type { GraphDocument } from "@gately/shared/infrastructure/ui-engine/model";
+import type { GraphDocument } from "engine-model";
 
 export type GraphDocumentQueryService = {
     documentsByWorkspaceId: () => Record<string, GraphDocument>;

@@ -1,7 +1,7 @@
-import type { CatalogLibraryDocument } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogLibraryDocument } from "engine-model/catalog";
 import type { CatalogExportLibraryOptions } from "../services";
-import type { UseCase, Result } from "../../../model";
-import { createErrResult, createOkResult } from "../../../model";
+import type { UseCase, Result } from "engine-model";
+import { createErrResult, createOkResult } from "engine-model";
 import type { CatalogUseCaseDeps } from "./types";
 
 type CatalogExportLibraryResult = Result<CatalogLibraryDocument>;

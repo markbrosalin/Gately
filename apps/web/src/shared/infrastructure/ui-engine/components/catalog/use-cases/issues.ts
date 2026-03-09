@@ -1,6 +1,6 @@
-import type { CatalogItemRef } from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import { createIssue } from "@gately/shared/infrastructure/ui-engine/model/core/issue";
-import { createCatalogItemRefKey } from "../helpers/createItemRefKey";
+import type { CatalogItemRef } from "engine-model/catalog";
+import { createIssue } from "engine-model/core/issue";
+import { createCatalogItemRefKey } from "engine-model/catalog/lib";
 
 export const catalogUseCaseIssueDefs = {
     libraryAlreadyExists: {

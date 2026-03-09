@@ -3,7 +3,7 @@ import type {
     CatalogBundleDocument,
     CatalogDocument,
     CatalogValidationResult,
-} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+} from "engine-model/catalog";
 import {
     createTestBundle,
     createTestCompositionItem,
@@ -113,12 +113,10 @@ describe("createCatalogImportService", () => {
 
         expect(service.importDocument(createTestDocument())).toMatchObject({
             ok: false,
-            subject: "document",
             issues: [{ code: "document.invalid" }],
         });
         expect(service.importLibrary(createTestLibrary())).toMatchObject({
             ok: false,
-            subject: "library",
             issues: [{ code: "library.invalid" }],
         });
 
@@ -130,7 +128,6 @@ describe("createCatalogImportService", () => {
             rootRefs: [],
         });
         expect(bundleHeaderResult.ok).toBe(false);
-        expect(bundleHeaderResult.subject).toBe("bundle");
         expect(bundleHeaderResult.issues.map((issue) => issue.code)).toContain(
             catalogImportIssueDefs.bundleRootRefsRequired.code,
         );
@@ -176,7 +173,6 @@ describe("createCatalogImportService", () => {
         );
         expect(missingDependencyResult).toMatchObject({
             ok: false,
-            subject: "bundle",
             issues: [{ code: catalogImportIssueDefs.bundleDependencyMissing.code }],
         });
 

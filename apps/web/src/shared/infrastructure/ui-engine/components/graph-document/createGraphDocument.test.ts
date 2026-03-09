@@ -4,7 +4,7 @@ import {
     DEFAULT_GRAPH_DOCUMENT_VIEWPORT,
     GRAPH_DOCUMENT_FORMAT_VERSION,
     type GraphDocument,
-} from "../../model";
+} from "engine-model";
 import { buildSharedServices } from "../../shared-services";
 import { createGraphDocument } from "./createGraphDocument";
 

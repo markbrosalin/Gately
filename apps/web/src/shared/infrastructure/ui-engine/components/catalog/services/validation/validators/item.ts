@@ -1,4 +1,4 @@
-import type { CatalogItem } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogItem } from "engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import {
     createValidationResult,
@@ -7,7 +7,7 @@ import {
     prefixIssues,
     pushIssues,
 } from "../helpers";
-import type { CatalogValidationResult } from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { CatalogValidationResult } from "engine-model/catalog";
 import { validateModuleValue } from "./module";
 import { validateRefValue } from "./ref";
 import { validateRequiredTimestamps } from "./timestamps";
