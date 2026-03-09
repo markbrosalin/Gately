@@ -1,11 +1,5 @@
-import type {
-    CatalogLibraryDocument,
-} from "engine-model/catalog";
-import {
-    CATALOG_FORMAT_VERSION,
-    CatalogItem,
-} from "engine-model/catalog";
-import { DEFAULT_LIBRARY_VERSION } from "./constants";
+import type { CatalogLibraryDocument } from "engine-model/catalog";
+import { CATALOG_FORMAT_VERSION, CatalogItem, DEFAULT_LIBRARY_VERSION } from "engine-model/catalog";
 import { createItemByKind, createTimestamps } from "./helpers";
 import type {
     CatalogFactoryService,

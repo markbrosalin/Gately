@@ -1,10 +1,10 @@
 import { createBaseNodeMarkup, STROKE_WIDTH } from "engine-model";
 import type { CatalogLogicItem } from "engine-model/catalog";
-import { describe, expect, it, vi } from "vitest";
 import {
     BUFFER_LOGIC_ICON_PATH,
     BUFFER_LOGIC_ITEM,
-} from "../../../catalog/specs/libraries/std/logic/buffer";
+} from "engine-components/catalog/specs/std-library/logic/logic/buffer";
+import { describe, expect, it, vi } from "vitest";
 import { createGraphRendererBuilderApi } from "./createGraphRendererBuilderService";
 
 vi.mock("../../../../services/node-visual/port-layout-registrator", () => ({
@@ -74,8 +74,22 @@ describe("createGraphRendererBuilderService", () => {
                     type: "ports",
                     config: {
                         items: [
-                            { id: "port-b", direction: "input", anchor: "bottom", order: 1, offset: 4, title: "B" },
-                            { id: "port-a", direction: "input", anchor: "top", order: 0, offset: -4, title: "A" },
+                            {
+                                id: "port-b",
+                                direction: "input",
+                                anchor: "bottom",
+                                order: 1,
+                                offset: 4,
+                                title: "B",
+                            },
+                            {
+                                id: "port-a",
+                                direction: "input",
+                                anchor: "top",
+                                order: 0,
+                                offset: -4,
+                                title: "A",
+                            },
                         ],
                     },
                 },
@@ -96,7 +110,9 @@ describe("createGraphRendererBuilderService", () => {
         });
 
         const props = builder.buildNodeProps({ item });
-        const ports = (props.ports as { items: Array<{ id: string; group: string; args?: { dx?: number } }> }).items;
+        const ports = (
+            props.ports as { items: Array<{ id: string; group: string; args?: { dx?: number } }> }
+        ).items;
 
         expect(props.markup).toEqual([{ tagName: "rect", selector: "custom-body" }]);
         expect(props.attrs?.body?.fill).toBe("red");

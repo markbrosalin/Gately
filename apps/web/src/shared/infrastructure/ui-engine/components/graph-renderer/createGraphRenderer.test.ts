@@ -2,11 +2,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { buildSharedServices } from "../../shared-services";
 import { createGraphRenderer } from "./createGraphRenderer";
-import {
-    GRAPH_DOCUMENT_FORMAT_VERSION,
-    type GraphDocument,
-} from "engine-model";
-import { BUFFER_LOGIC_ITEM } from "../catalog/specs/libraries/std/logic/buffer";
+import { GRAPH_DOCUMENT_FORMAT_VERSION, type GraphDocument } from "engine-model";
+import { BUFFER_LOGIC_ITEM } from "../catalog/specs/std-library/logic/logic/buffer";
 
 const graphInstances: Array<{
     options: unknown;
@@ -46,7 +43,8 @@ vi.mock("@antv/x6", () => ({
             const instance = {
                 options,
                 addNode: vi.fn((props: Record<string, unknown>) => {
-                    const nodeId = (props.id as string | undefined) ?? `node-${runtime.nodes.size + 1}`;
+                    const nodeId =
+                        (props.id as string | undefined) ?? `node-${runtime.nodes.size + 1}`;
                     const node = {
                         id: nodeId,
                         isNode: () => true,

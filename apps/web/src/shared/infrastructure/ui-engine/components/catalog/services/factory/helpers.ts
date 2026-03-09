@@ -1,6 +1,5 @@
-import type { CatalogItem } from "engine-model/catalog";
+import { DEFAULT_ITEM_LAYOUT, type CatalogItem } from "engine-model/catalog";
 import * as Model from "engine-model/catalog";
-import { DEFAULT_ITEM_LAYOUT } from "./constants";
 import type { CatalogCreateItemInput } from "./types";
 
 export const createTimestamps = (

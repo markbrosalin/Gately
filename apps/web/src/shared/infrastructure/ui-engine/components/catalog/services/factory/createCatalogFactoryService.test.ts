@@ -55,8 +55,8 @@ describe("createCatalogFactoryService", () => {
                 createdAt: expect.any(Number),
             },
             layout: {
-                width: 120,
-                height: 80,
+                width: 64,
+                height: 32,
             },
             modules: [
                 {
