@@ -1,6 +1,6 @@
 import type { CatalogLibraryDocument } from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { mergeLibraryDocuments } from "./helpers/mergeLibraryDocuments";
 import type { CatalogImportStrategy, CatalogUseCaseDeps } from "./types";
 
@@ -9,7 +9,7 @@ type CatalogImportLibraryInput = {
     strategy?: CatalogImportStrategy;
 };
 
-type CatalogImportLibraryResult = UseCaseResult<CatalogLibraryDocument>;
+type CatalogImportLibraryResult = Result<CatalogLibraryDocument>;
 
 export type CatalogImportLibraryUseCase = UseCase<
     CatalogImportLibraryInput,
@@ -26,7 +26,7 @@ export const createImportLibraryUseCase = ({
     return ({ library, strategy = DEFAULT_APPLY_STRATEGY }) => {
         const importResult = io.importLibrary(library);
         if (!importResult.ok || !importResult.value) {
-            return createUseCaseErrResult(importResult.issues);
+            return createErrResult(importResult.issues);
         }
 
         const importedLibrary = importResult.value;
@@ -36,6 +36,6 @@ export const createImportLibraryUseCase = ({
                 ? importedLibrary
                 : mergeLibraryDocuments(currentLibrary, importedLibrary);
 
-        return createUseCaseOkResult(state.upsertLibrary(nextLibrary));
+        return createOkResult(state.upsertLibrary(nextLibrary));
     };
 };

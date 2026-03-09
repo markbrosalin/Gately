@@ -1,6 +1,9 @@
-import type { CatalogLibraryDocument } from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type {
+    CatalogItem,
+    CatalogLibraryDocument,
+} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { Result, UseCase } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { createCatalogItemRefKey } from "../helpers/createItemRefKey";
 import { catalogUseCaseIssues } from "./issues";
 import type { CatalogUseCaseDeps } from "./types";
@@ -9,7 +12,7 @@ type CatalogDeleteLibraryInput = {
     libraryId: string;
 };
 
-type CatalogDeleteLibraryResult = UseCaseResult<CatalogLibraryDocument>;
+type CatalogDeleteLibraryResult = Result<CatalogLibraryDocument>;
 
 export type CatalogDeleteLibraryUseCase = UseCase<
     CatalogDeleteLibraryInput,
@@ -23,12 +26,10 @@ export const createDeleteLibraryUseCase = ({
     return ({ libraryId }) => {
         const library = query.getLibrary(libraryId);
         if (!library) {
-            return createUseCaseErrResult(
-                catalogUseCaseIssues.libraryNotFound(["libraryId"], libraryId),
-            );
+            return createErrResult(catalogUseCaseIssues.libraryNotFound(["libraryId"], libraryId));
         }
 
-        const externalDependentItems = new Map<string, typeof library.items[number]>();
+        const externalDependentItems = new Map<string, CatalogItem>();
 
         library.items.forEach((item) => {
             query.getDependentItems(item.ref).forEach((dependentItem) => {
@@ -45,7 +46,7 @@ export const createDeleteLibraryUseCase = ({
 
         const externalDependentItem = [...externalDependentItems.values()][0];
         if (externalDependentItem) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 catalogUseCaseIssues.libraryHasDependents(
                     ["libraryId"],
                     libraryId,
@@ -57,11 +58,9 @@ export const createDeleteLibraryUseCase = ({
         const removedLibrary = state.removeLibrary(libraryId);
 
         if (!removedLibrary) {
-            return createUseCaseErrResult(
-                catalogUseCaseIssues.libraryNotFound(["libraryId"], libraryId),
-            );
+            return createErrResult(catalogUseCaseIssues.libraryNotFound(["libraryId"], libraryId));
         }
 
-        return createUseCaseOkResult(removedLibrary);
+        return createOkResult(removedLibrary);
     };
 };

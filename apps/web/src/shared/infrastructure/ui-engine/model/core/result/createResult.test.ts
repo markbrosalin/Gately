@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { Issue } from "../core/issue";
 import { createErrResult, createOkResult } from "./createResult";
+import { Issue } from "../issue";
 
 describe("createResult helpers", () => {
     it("creates a success result with no value", () => {

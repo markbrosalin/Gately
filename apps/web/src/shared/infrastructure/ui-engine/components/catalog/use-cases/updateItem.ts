@@ -1,6 +1,6 @@
 import type { CatalogItem } from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { catalogUseCaseIssues } from "./issues";
 import type { CatalogUseCaseDeps } from "./types";
 
@@ -8,7 +8,7 @@ type CatalogUpdateItemInput = {
     item: CatalogItem;
 };
 
-type CatalogUpdateItemResult = UseCaseResult<CatalogItem>;
+type CatalogUpdateItemResult = Result<CatalogItem>;
 
 export type CatalogUpdateItemUseCase = UseCase<CatalogUpdateItemInput, CatalogUpdateItemResult>;
 
@@ -21,13 +21,13 @@ export const createUpdateItemUseCase = ({
         const validationResult = validation.validateItem(item);
 
         if (!validationResult.ok) {
-            return createUseCaseErrResult(validationResult.issues);
+            return createErrResult(validationResult.issues);
         }
 
         if (!query.hasItem(item.ref)) {
-            return createUseCaseErrResult(catalogUseCaseIssues.itemNotFound(["ref"], item.ref));
+            return createErrResult(catalogUseCaseIssues.itemNotFound(["ref"], item.ref));
         }
 
-        return createUseCaseOkResult(state.upsertItem(item));
+        return createOkResult(state.upsertItem(item));
     };
 };

@@ -1,5 +1,5 @@
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import type { GraphDocument } from "@gately/shared/infrastructure/ui-engine/model";
 import { graphDocumentUseCaseIssues } from "./issues";
 import type { GraphDocumentUseCaseDeps } from "./types";
@@ -8,7 +8,7 @@ type GraphDocumentExportDocumentInput = {
     workspaceId: string;
 };
 
-type GraphDocumentExportDocumentResult = UseCaseResult<GraphDocument>;
+type GraphDocumentExportDocumentResult = Result<GraphDocument>;
 
 export type GraphDocumentExportDocumentUseCase = UseCase<
     GraphDocumentExportDocumentInput,
@@ -21,11 +21,11 @@ export const createExportDocumentUseCase = ({
     return ({ workspaceId }) => {
         const document = query.getDocument(workspaceId);
         if (!document) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 graphDocumentUseCaseIssues.documentNotFound(["workspaceId"], workspaceId),
             );
         }
 
-        return createUseCaseOkResult(document);
+        return createOkResult(document);
     };
 };

@@ -1,4 +1,4 @@
-import { UseCase, UseCaseResult, createUseCaseOkResult } from "../../../model";
+import { UseCase, Result, createOkResult } from "../../../model";
 import type { GraphDocument } from "@gately/shared/infrastructure/ui-engine/model";
 import type { GraphDocumentUseCaseDeps } from "./types";
 
@@ -8,7 +8,7 @@ type GraphDocumentSaveDocumentInput = Pick<
 > &
     Partial<Pick<GraphDocument, "extensions">>;
 
-type GraphDocumentSaveDocumentResult = UseCaseResult<GraphDocument>;
+type GraphDocumentSaveDocumentResult = Result<GraphDocument>;
 
 export type GraphDocumentSaveDocumentUseCase = UseCase<
     GraphDocumentSaveDocumentInput,
@@ -42,6 +42,6 @@ export const createSaveDocumentUseCase = ({
 
         state.upsertDocument(document);
 
-        return createUseCaseOkResult(state.getDocument(workspaceId) ?? document);
+        return createOkResult(state.getDocument(workspaceId) ?? document);
     };
 };

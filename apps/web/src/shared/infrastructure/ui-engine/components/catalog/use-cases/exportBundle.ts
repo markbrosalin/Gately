@@ -1,10 +1,10 @@
 import type { CatalogBundleDocument } from "@gately/shared/infrastructure/ui-engine/model/catalog";
 import type { CatalogExportBundleOptions } from "../services";
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import type { CatalogUseCaseDeps } from "./types";
 
-type CatalogExportBundleResult = UseCaseResult<CatalogBundleDocument>;
+type CatalogExportBundleResult = Result<CatalogBundleDocument>;
 
 export type CatalogExportBundleUseCase = UseCase<
     CatalogExportBundleOptions,
@@ -18,9 +18,9 @@ export const createExportBundleUseCase = ({
         const exportResult = io.exportBundle(input);
 
         if (!exportResult.ok || !exportResult.value) {
-            return createUseCaseErrResult(exportResult.issues);
+            return createErrResult(exportResult.issues);
         }
 
-        return createUseCaseOkResult(exportResult.value);
+        return createOkResult(exportResult.value);
     };
 };

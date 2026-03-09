@@ -1,5 +1,5 @@
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import type { Workspace } from "@gately/shared/infrastructure/ui-engine/model";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";
@@ -8,7 +8,7 @@ type WorkspaceOpenInput = {
     workspaceId: string;
 };
 
-type WorkspaceOpenResult = UseCaseResult<Workspace>;
+type WorkspaceOpenResult = Result<Workspace>;
 
 export type WorkspaceOpenUseCase = UseCase<WorkspaceOpenInput, WorkspaceOpenResult>;
 
@@ -19,21 +19,21 @@ export const createOpenUseCase = ({
     return ({ workspaceId }) => {
         const workspace = query.getWorkspace(workspaceId);
         if (!workspace) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 workspaceUseCaseIssues.workspaceNotFound(["workspaceId"], workspaceId),
             );
         }
 
         const rootWorkspaceId = query.getWorkspaceRootId(workspaceId);
         if (!rootWorkspaceId) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 workspaceUseCaseIssues.workspaceNotFound(["workspaceId"], workspaceId),
             );
         }
 
         const session = query.getTabSession(rootWorkspaceId);
         if (!session) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 workspaceUseCaseIssues.tabSessionNotFound(["workspaceId"], rootWorkspaceId),
             );
         }
@@ -44,6 +44,6 @@ export const createOpenUseCase = ({
         state.setNavigationPath(rootWorkspaceId, navigationPath);
         state.setActiveWorkspace(workspace.id);
 
-        return createUseCaseOkResult(workspace);
+        return createOkResult(workspace);
     };
 };

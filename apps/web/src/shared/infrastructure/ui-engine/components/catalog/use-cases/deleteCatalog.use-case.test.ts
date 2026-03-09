@@ -30,7 +30,6 @@ describe("catalog delete use-cases", () => {
                     path: ["gates"],
                     itemName: "AND",
                 },
-                kind: "logic",
                 name: "AND",
                 modules: [
                     {
@@ -78,7 +77,6 @@ describe("catalog delete use-cases", () => {
                     path: ["gates"],
                     itemName: "AND",
                 },
-                kind: "logic",
                 name: "AND",
                 modules: [
                     {

@@ -16,7 +16,6 @@ export const createTestRef = (overrides: Partial<CatalogItemRef> = {}): CatalogI
 
 export const createTestLogicItem = ({
     ref = createTestRef(),
-    kind = "logic",
     name = ref.itemName,
     layout = {
         width: 120,
@@ -32,13 +31,12 @@ export const createTestLogicItem = ({
     ],
 }: {
     ref?: CatalogItemRef;
-    kind?: CatalogItem["kind"];
     name?: string;
     layout?: CatalogItem["layout"];
     modules?: CatalogItem["modules"];
 } = {}): CatalogItem => ({
     ref,
-    kind,
+    kind: "logic",
     meta: {
         name,
         createdAt: 1,

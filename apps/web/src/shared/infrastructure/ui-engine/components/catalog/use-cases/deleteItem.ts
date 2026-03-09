@@ -1,6 +1,9 @@
-import type { CatalogItem, CatalogItemRef } from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type {
+    CatalogItem,
+    CatalogItemRef,
+} from "@gately/shared/infrastructure/ui-engine/model/catalog";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { catalogUseCaseIssues } from "./issues";
 import type { CatalogUseCaseDeps } from "./types";
 
@@ -8,7 +11,7 @@ type CatalogDeleteItemInput = {
     ref: CatalogItemRef;
 };
 
-type CatalogDeleteItemResult = UseCaseResult<CatalogItem>;
+type CatalogDeleteItemResult = Result<CatalogItem>;
 
 export type CatalogDeleteItemUseCase = UseCase<CatalogDeleteItemInput, CatalogDeleteItemResult>;
 
@@ -20,12 +23,12 @@ export const createDeleteItemUseCase = ({
         const existingItem = query.getItem(ref);
 
         if (!existingItem) {
-            return createUseCaseErrResult(catalogUseCaseIssues.itemNotFound(["ref"], ref));
+            return createErrResult(catalogUseCaseIssues.itemNotFound(["ref"], ref));
         }
 
         const dependentItem = query.getDependentItems(ref)[0];
         if (dependentItem) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 catalogUseCaseIssues.itemHasDependents(["ref"], ref, dependentItem.ref),
             );
         }
@@ -33,9 +36,9 @@ export const createDeleteItemUseCase = ({
         const removedItem = state.removeItem(existingItem);
 
         if (!removedItem) {
-            return createUseCaseErrResult(catalogUseCaseIssues.itemNotFound(["ref"], ref));
+            return createErrResult(catalogUseCaseIssues.itemNotFound(["ref"], ref));
         }
 
-        return createUseCaseOkResult(removedItem);
+        return createOkResult(removedItem);
     };
 };

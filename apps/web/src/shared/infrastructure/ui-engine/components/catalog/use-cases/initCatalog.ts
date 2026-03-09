@@ -1,6 +1,6 @@
 import type { CatalogDocument } from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { createCatalogDocument } from "../helpers/createCatalogDocument";
 import type { CatalogUseCaseDeps } from "./types";
 
@@ -8,9 +8,11 @@ type CatalogInitCatalogInput = {
     document?: CatalogDocument;
 };
 
-type CatalogInitCatalogResult = UseCaseResult<CatalogDocument>;
+type CatalogInitCatalogResult = Result<CatalogDocument>;
 
-export type CatalogInitCatalogUseCase = (input?: CatalogInitCatalogInput) => CatalogInitCatalogResult;
+export type CatalogInitCatalogUseCase = (
+    input?: CatalogInitCatalogInput,
+) => CatalogInitCatalogResult;
 
 export const createInitCatalogUseCase = ({
     io,
@@ -21,11 +23,11 @@ export const createInitCatalogUseCase = ({
         const importResult = io.importDocument(nextDocument);
 
         if (!importResult.ok || !importResult.value) {
-            return createUseCaseErrResult(importResult.issues);
+            return createErrResult(importResult.issues);
         }
 
         state.replaceDocument(importResult.value);
 
-        return createUseCaseOkResult(importResult.value);
+        return createOkResult(importResult.value);
     };
 };

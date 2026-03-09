@@ -1,5 +1,5 @@
-import type { UseCase, UseCaseResult, WorkspaceTabDocument } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result, WorkspaceTabDocument } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";
 
@@ -7,7 +7,7 @@ type WorkspaceImportTabInput = {
     document: WorkspaceTabDocument;
 };
 
-type WorkspaceImportTabResult = UseCaseResult<WorkspaceTabDocument>;
+type WorkspaceImportTabResult = Result<WorkspaceTabDocument>;
 
 export type WorkspaceImportTabUseCase = UseCase<WorkspaceImportTabInput, WorkspaceImportTabResult>;
 
@@ -20,7 +20,7 @@ export const createImportTabUseCase = ({
         const rootWorkspace = query.findWorkspace(document.workspaces, rootWorkspaceId);
 
         if (!rootWorkspace) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 workspaceUseCaseIssues.importRootWorkspaceMissing(
                     ["document", "session", "rootWorkspaceId"],
                     rootWorkspaceId,
@@ -29,7 +29,7 @@ export const createImportTabUseCase = ({
         }
 
         if (rootWorkspace.kind !== "tab") {
-            return createUseCaseErrResult(
+            return createErrResult(
                 workspaceUseCaseIssues.importRootWorkspaceInvalid(
                     ["document", "session", "rootWorkspaceId"],
                     rootWorkspaceId,
@@ -40,7 +40,7 @@ export const createImportTabUseCase = ({
         const ids = new Set<string>();
         for (const workspace of document.workspaces) {
             if (ids.has(workspace.id)) {
-                return createUseCaseErrResult(
+                return createErrResult(
                     workspaceUseCaseIssues.importWorkspaceDuplicate(
                         ["document", "workspaces"],
                         workspace.id,
@@ -52,7 +52,7 @@ export const createImportTabUseCase = ({
         }
 
         if (query.hasWorkspace(rootWorkspaceId) || query.hasTabSession(rootWorkspaceId)) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 workspaceUseCaseIssues.tabAlreadyExists(
                     ["document", "session", "rootWorkspaceId"],
                     rootWorkspaceId,
@@ -68,6 +68,6 @@ export const createImportTabUseCase = ({
                 state.upsertWorkspace(workspace);
             });
 
-        return createUseCaseOkResult(document);
+        return createOkResult(document);
     };
 };

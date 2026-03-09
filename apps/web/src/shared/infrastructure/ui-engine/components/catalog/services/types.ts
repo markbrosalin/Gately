@@ -1,7 +1,4 @@
-import type {
-    ComponentServiceContext,
-    ServiceDefinitionMap,
-} from "@gately/shared/infrastructure/ui-engine/model/types";
+import { ComponentServiceContext, ServiceDefinitionMap } from "../../../model";
 import type { CatalogExternal } from "../types";
 import type { CatalogFactoryService } from "./factory";
 import type { CatalogIOService } from "./io";

@@ -1,11 +1,11 @@
 import type { CatalogLibraryDocument } from "@gately/shared/infrastructure/ui-engine/model/catalog";
 import type { CatalogCreateLibraryInput } from "../services";
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { Result, UseCase } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { catalogUseCaseIssues } from "./issues";
 import type { CatalogUseCaseDeps } from "./types";
 
-type CatalogCreateLibraryResult = UseCaseResult<CatalogLibraryDocument>;
+type CatalogCreateLibraryResult = Result<CatalogLibraryDocument>;
 
 export type CatalogCreateLibraryUseCase = UseCase<
     CatalogCreateLibraryInput,
@@ -17,21 +17,24 @@ export const createLibraryUseCase = ({
     query,
     state,
     validation,
-}: Pick<CatalogUseCaseDeps, "factory" | "query" | "state" | "validation">): CatalogCreateLibraryUseCase => {
+}: Pick<
+    CatalogUseCaseDeps,
+    "factory" | "query" | "state" | "validation"
+>): CatalogCreateLibraryUseCase => {
     return (input) => {
         const library = factory.createLibrary(input);
         const validationResult = validation.validateLibrary(library);
 
         if (!validationResult.ok) {
-            return createUseCaseErrResult(validationResult.issues);
+            return createErrResult(validationResult.issues);
         }
 
         if (query.hasLibrary(library.manifest.id)) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 catalogUseCaseIssues.libraryAlreadyExists(["manifest", "id"], library.manifest.id),
             );
         }
 
-        return createUseCaseOkResult(state.upsertLibrary(library));
+        return createOkResult(state.upsertLibrary(library));
     };
 };

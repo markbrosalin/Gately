@@ -1,5 +1,5 @@
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import type { GraphDocument } from "@gately/shared/infrastructure/ui-engine/model";
 import { graphDocumentUseCaseIssues } from "./issues";
 import type { GraphDocumentUseCaseDeps } from "./types";
@@ -8,7 +8,7 @@ type GraphDocumentRemoveDocumentInput = {
     workspaceId: string;
 };
 
-type GraphDocumentRemoveDocumentResult = UseCaseResult<GraphDocument>;
+type GraphDocumentRemoveDocumentResult = Result<GraphDocument>;
 
 export type GraphDocumentRemoveDocumentUseCase = UseCase<
     GraphDocumentRemoveDocumentInput,
@@ -21,11 +21,11 @@ export const createRemoveDocumentUseCase = ({
     return ({ workspaceId }) => {
         const removedDocument = state.removeDocument(workspaceId);
         if (!removedDocument) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 graphDocumentUseCaseIssues.documentNotFound(["workspaceId"], workspaceId),
             );
         }
 
-        return createUseCaseOkResult(removedDocument);
+        return createOkResult(removedDocument);
     };
 };

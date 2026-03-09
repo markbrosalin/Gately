@@ -1,10 +1,10 @@
-import type { AsyncUseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { AsyncUseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { WorkspaceTabFactoryInput } from "../services";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";
 
-type WorkspaceCreateTabResult = UseCaseResult<{ tabId: string }>;
+type WorkspaceCreateTabResult = Result<{ tabId: string }>;
 
 export type WorkspaceCreateTabUseCase = AsyncUseCase<
     WorkspaceCreateTabUseCaseInput,
@@ -23,14 +23,14 @@ export const createCreateTabUseCase = ({
     return async (input) => {
         const logicEngine = external.logicEngine;
         if (!logicEngine) {
-            return createUseCaseErrResult(workspaceUseCaseIssues.logicEngineNotConfigured());
+            return createErrResult(workspaceUseCaseIssues.logicEngineNotConfigured());
         }
 
         const result = (await logicEngine.call("/tab/create", {})) as { tabId?: string };
         const tabId = result.tabId;
 
         if (!tabId) {
-            return createUseCaseErrResult(workspaceUseCaseIssues.logicEngineNotConfigured());
+            return createErrResult(workspaceUseCaseIssues.logicEngineNotConfigured());
         }
 
         const rootWorkspace = factory.createTabWorkspace({
@@ -50,6 +50,6 @@ export const createCreateTabUseCase = ({
             state.setActiveWorkspace(tabId);
         }
 
-        return createUseCaseOkResult({ tabId });
+        return createOkResult({ tabId });
     };
 };

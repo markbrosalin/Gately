@@ -2,8 +2,8 @@ import type {
     CatalogBundleDocument,
     CatalogLibraryDocument,
 } from "@gately/shared/infrastructure/ui-engine/model/catalog";
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { createImportLibraryUseCase } from "./importLibrary";
 import type { CatalogImportStrategy, CatalogUseCaseDeps } from "./types";
 
@@ -12,7 +12,7 @@ type CatalogImportBundleInput = {
     strategy?: CatalogImportStrategy;
 };
 
-type CatalogImportBundleResult = UseCaseResult<CatalogLibraryDocument[]>;
+type CatalogImportBundleResult = Result<CatalogLibraryDocument[]>;
 
 export type CatalogImportBundleUseCase = UseCase<
     CatalogImportBundleInput,
@@ -30,7 +30,7 @@ export const createImportBundleUseCase = ({
         const importResult = io.importBundle(bundle);
 
         if (!importResult.ok || !importResult.value) {
-            return createUseCaseErrResult(importResult.issues);
+            return createErrResult(importResult.issues);
         }
 
         const importedLibraries: CatalogLibraryDocument[] = [];
@@ -47,12 +47,12 @@ export const createImportBundleUseCase = ({
             });
 
             if (!result.ok || !result.value) {
-                return createUseCaseErrResult(result.issues);
+                return createErrResult(result.issues);
             }
 
             importedLibraries.push(result.value);
         }
 
-        return createUseCaseOkResult(importedLibraries);
+        return createOkResult(importedLibraries);
     };
 };

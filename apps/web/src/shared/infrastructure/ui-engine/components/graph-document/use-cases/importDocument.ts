@@ -1,5 +1,5 @@
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import {
     GRAPH_DOCUMENT_FORMAT_VERSION,
     type GraphDocument,
@@ -11,7 +11,7 @@ type GraphDocumentImportDocumentInput = {
     document: GraphDocument;
 };
 
-type GraphDocumentImportDocumentResult = UseCaseResult<GraphDocument>;
+type GraphDocumentImportDocumentResult = Result<GraphDocument>;
 
 export type GraphDocumentImportDocumentUseCase = UseCase<
     GraphDocumentImportDocumentInput,
@@ -23,7 +23,7 @@ export const createImportDocumentUseCase = ({
 }: Pick<GraphDocumentUseCaseDeps, "state">): GraphDocumentImportDocumentUseCase => {
     return ({ document }) => {
         if (document.formatVersion !== GRAPH_DOCUMENT_FORMAT_VERSION) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 graphDocumentUseCaseIssues.importFormatVersionInvalid(
                     ["document", "formatVersion"],
                     document.formatVersion,
@@ -33,6 +33,6 @@ export const createImportDocumentUseCase = ({
 
         state.upsertDocument(document);
 
-        return createUseCaseOkResult(state.getDocument(document.workspaceId) ?? document);
+        return createOkResult(state.getDocument(document.workspaceId) ?? document);
     };
 };

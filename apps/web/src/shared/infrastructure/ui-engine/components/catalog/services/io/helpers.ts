@@ -1,8 +1,8 @@
-import type { Issue } from "@gately/shared/infrastructure/ui-engine/model";
 import type {
+    Issue,
     SubjectIssuesResult,
     SubjectValueIssuesResult,
-} from "@gately/shared/infrastructure/ui-engine/model/result";
+} from "@gately/shared/infrastructure/ui-engine/model";
 import { createErrResult, createOkResult } from "@gately/shared/infrastructure/ui-engine/model";
 
 /** Clones serializable catalog payloads before crossing the IO boundary. */

@@ -1,6 +1,6 @@
 import type { Workspace } from "@gately/shared/infrastructure/ui-engine/model";
-import type { UseCase, UseCaseResult } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import type { UseCase, Result } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";
 
@@ -9,7 +9,7 @@ type WorkspaceUpdateTitleInput = {
     title: string;
 };
 
-type WorkspaceUpdateTitleResult = UseCaseResult<Workspace>;
+type WorkspaceUpdateTitleResult = Result<Workspace>;
 
 export type WorkspaceUpdateTitleUseCase = UseCase<
     WorkspaceUpdateTitleInput,
@@ -23,21 +23,19 @@ export const createUpdateTitleUseCase = ({
     return ({ workspaceId, title }) => {
         const trimmedTitle = title.trim();
         if (trimmedTitle.length === 0) {
-            return createUseCaseErrResult(
-                workspaceUseCaseIssues.workspaceTitleRequired(["title"]),
-            );
+            return createErrResult(workspaceUseCaseIssues.workspaceTitleRequired(["title"]));
         }
 
         const workspace = query.getWorkspace(workspaceId);
         if (!workspace) {
-            return createUseCaseErrResult(
+            return createErrResult(
                 workspaceUseCaseIssues.workspaceNotFound(["workspaceId"], workspaceId),
             );
         }
 
         state.setWorkspaceTitle(workspaceId, trimmedTitle);
 
-        return createUseCaseOkResult(
+        return createOkResult(
             query.getWorkspace(workspaceId) ?? {
                 ...workspace,
                 title: trimmedTitle,

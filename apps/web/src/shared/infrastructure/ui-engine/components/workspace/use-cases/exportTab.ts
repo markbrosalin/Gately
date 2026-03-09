@@ -1,5 +1,5 @@
 import type { Result, WorkspaceTabDocument } from "../../../model";
-import { createUseCaseErrResult, createUseCaseOkResult } from "../../../model";
+import { createErrResult, createOkResult } from "../../../model";
 import { WORKSPACE_TAB_DOCUMENT_FORMAT_VERSION } from "../../../model/workspace/constants";
 import { collectWorkspaceTreeByQuery } from "../helpers";
 import { workspaceUseCaseIssues } from "./issues";
@@ -21,9 +21,7 @@ export const createExportTabUseCase = ({
     return ({ tabId }) => {
         const session = query.getTabSession(tabId);
         if (!session) {
-            return createUseCaseErrResult(
-                workspaceUseCaseIssues.tabSessionNotFound(["tabId"], tabId),
-            );
+            return createErrResult(workspaceUseCaseIssues.tabSessionNotFound(["tabId"], tabId));
         }
 
         const workspaces = collectWorkspaceTreeByQuery(
@@ -32,12 +30,10 @@ export const createExportTabUseCase = ({
             query.getWorkspaceChildren,
         );
         if (workspaces.length === 0) {
-            return createUseCaseErrResult(
-                workspaceUseCaseIssues.workspaceNotFound(["tabId"], tabId),
-            );
+            return createErrResult(workspaceUseCaseIssues.workspaceNotFound(["tabId"], tabId));
         }
 
-        return createUseCaseOkResult({
+        return createOkResult({
             formatVersion: WORKSPACE_TAB_DOCUMENT_FORMAT_VERSION,
             session,
             workspaces,
