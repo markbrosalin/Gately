@@ -1,4 +1,5 @@
 import { createIssue } from "engine-model/core/issue";
+import type { CatalogPortsSide } from "engine-model/catalog";
 
 export const catalogValidationIssueDefs = {
     createdAtInvalid: {
@@ -193,18 +194,23 @@ export const catalogValidationIssues = {
             "config",
             "executor",
         ]),
-    itemPortIdRequired: (path: Array<string | number>, index: number) =>
+    itemPortIdRequired: (path: Array<string | number>, side: CatalogPortsSide, index: number) =>
         createIssue(catalogValidationIssueDefs.itemPortIdRequired, [
             ...path,
             "config",
-            "items",
+            side,
             index,
             "id",
         ]),
-    itemPortIdDuplicate: (path: Array<string | number>, index: number, portId: string) =>
+    itemPortIdDuplicate: (
+        path: Array<string | number>,
+        side: CatalogPortsSide,
+        index: number,
+        portId: string,
+    ) =>
         createIssue(
             catalogValidationIssueDefs.itemPortIdDuplicate,
-            [...path, "config", "items", index, "id"],
+            [...path, "config", side, index, "id"],
             {
                 portId,
             },

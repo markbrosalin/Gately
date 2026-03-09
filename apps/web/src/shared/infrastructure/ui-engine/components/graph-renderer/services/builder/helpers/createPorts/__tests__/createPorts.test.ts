@@ -28,29 +28,27 @@ describe("createPorts", () => {
         expect(result.items).toEqual([]);
     });
 
-    it("sorts ports by order and maps anchor-specific args", () => {
+    it("keeps input and output order and maps anchor-specific args", () => {
         const result = createPorts(
             createLogicItem({
                 modules: [
                     {
                         type: "ports",
                         config: {
-                            items: [
-                                {
-                                    id: "port-b",
-                                    direction: "output",
-                                    anchor: "bottom",
-                                    order: 1,
-                                    offset: 6,
-                                    title: "B",
-                                },
+                            inputs: [
                                 {
                                     id: "port-a",
-                                    direction: "input",
                                     anchor: "top",
-                                    order: 0,
                                     offset: -4,
                                     title: "A",
+                                },
+                            ],
+                            outputs: [
+                                {
+                                    id: "port-b",
+                                    anchor: "bottom",
+                                    offset: 6,
+                                    title: "B",
                                 },
                             ],
                         },
@@ -63,12 +61,12 @@ describe("createPorts", () => {
             {
                 id: "port-a",
                 group: "top",
-                args: { dx: -4 },
+                args: { dy: 4 },
             },
             {
                 id: "port-b",
                 group: "bottom",
-                args: { dx: 6 },
+                args: { dy: 6 },
             },
         ]);
     });

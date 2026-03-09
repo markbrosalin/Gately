@@ -1,8 +1,11 @@
 import type { CatalogItem } from "engine-model/catalog";
-import { createBaseNodeAttrs, createBaseNodeMarkup } from "engine-model";
 import { mergeAttrs } from "../../../../../../services/node-visual/lib/attrs";
 import { getVisualModule } from "../getCatalogModules";
 import { applyStaticClassPatch } from "./applyStaticClassPatch";
+import {
+    buildStdLogicItemAttrs,
+    buildStdLogicItemMarkup,
+} from "@gately/shared/infrastructure/ui-engine/components/catalog/specs/std-library";
 
 export const createNodeVisual = (
     item: CatalogItem,
@@ -11,7 +14,7 @@ export const createNodeVisual = (
     const visualModule = getVisualModule(item);
     const attrs = applyStaticClassPatch(
         mergeAttrs(
-            createBaseNodeAttrs({
+            buildStdLogicItemAttrs({
                 minWidth: dimensions.minWidth,
                 minHeight: dimensions.minHeight,
             }),
@@ -19,7 +22,7 @@ export const createNodeVisual = (
         ),
         visualModule?.config.base?.class,
     );
-    const markup = visualModule?.config.base?.markup ?? createBaseNodeMarkup();
+    const markup = visualModule?.config.base?.markup ?? buildStdLogicItemMarkup();
 
     return {
         attrs,

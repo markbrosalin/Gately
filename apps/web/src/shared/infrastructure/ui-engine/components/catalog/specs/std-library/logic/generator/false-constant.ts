@@ -11,7 +11,9 @@ export const FALSE_CONSTANT_GENERATOR_ITEM = buildStdLogicItem({
     width: 32,
     height: 32,
     tags: ["generator", "constant"],
-    ports: buildStdPorts([{ id: "out-0", direction: "output", anchor: "right" }]),
+    ports: buildStdPorts({
+        outputs: [{ id: "out-0", anchor: "right" }],
+    }),
     visual: {
         base: {
             attrs: {

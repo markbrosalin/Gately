@@ -3,11 +3,13 @@ import { createPortMetadata } from "../portMetadata";
 
 describe("createPortMetadata", () => {
     it("builds metadata with default anchor, label and signal class", () => {
-        const result = createPortMetadata({
-            id: "in-0",
-            direction: "input",
-            title: "A",
-        });
+        const result = createPortMetadata(
+            {
+                id: "in-0",
+                title: "A",
+            },
+            "input",
+        );
 
         expect(result).toMatchObject({
             id: "in-0",
@@ -25,16 +27,18 @@ describe("createPortMetadata", () => {
 
     it("maps vertical offsets for top and bottom anchors", () => {
         expect(
-            createPortMetadata({
-                id: "top-0",
-                direction: "input",
-                anchor: "top",
-                offset: -4,
-            }),
+            createPortMetadata(
+                {
+                    id: "top-0",
+                    anchor: "top",
+                    offset: -4,
+                },
+                "input",
+            ),
         ).toMatchObject({
             group: "top",
             args: {
-                dx: -4,
+                dy: 4,
             },
         });
     });

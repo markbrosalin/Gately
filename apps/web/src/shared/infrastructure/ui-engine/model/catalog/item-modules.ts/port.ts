@@ -1,16 +1,14 @@
 import { CatalogModuleBase } from ".";
 import { CatalogExtensions } from "../item";
 
-export type CatalogPortDirection = "input" | "output";
 export type CatalogPortAnchor = "left" | "right" | "top" | "bottom";
+export type CatalogPortsSide = "inputs" | "outputs";
 
 export type CatalogPortSpec = {
     id: string;
-    direction: CatalogPortDirection;
     title?: string;
     description?: string;
     anchor?: CatalogPortAnchor;
-    order?: number;
     offset?: number;
     extensions?: CatalogExtensions;
 };
@@ -18,6 +16,7 @@ export type CatalogPortSpec = {
 export type CatalogPortsModule = CatalogModuleBase<
     "ports",
     {
-        items: CatalogPortSpec[];
+        inputs?: CatalogPortSpec[];
+        outputs?: CatalogPortSpec[];
     }
 >;

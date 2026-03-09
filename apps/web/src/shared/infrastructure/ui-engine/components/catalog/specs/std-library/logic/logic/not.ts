@@ -10,9 +10,9 @@ export const NOT_LOGIC_ITEM = buildStdLogicItem({
     width: 64,
     height: 32,
     tags: ["logic", "combinational"],
-    ports: buildStdPorts([
-        { id: "in-0", direction: "input", anchor: "left", title: "A" },
-        { id: "out-0", direction: "output", anchor: "right", title: "X" },
-    ]),
+    ports: buildStdPorts({
+        inputs: [{ id: "in-0", anchor: "left", title: "A" }],
+        outputs: [{ id: "out-0", anchor: "right", title: "X" }],
+    }),
     visual: buildStdIconVisual(NOT_LOGIC_ICON_PATH),
 });

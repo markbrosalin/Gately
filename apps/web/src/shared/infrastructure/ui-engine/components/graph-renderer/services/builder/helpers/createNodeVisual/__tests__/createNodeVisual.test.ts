@@ -1,7 +1,7 @@
-import { createBaseNodeMarkup } from "engine-model";
 import type { CatalogLogicItem } from "engine-model/catalog";
 import { describe, expect, it } from "vitest";
 import { createNodeVisual } from "../createNodeVisual";
+import { buildStdLogicItemMarkup } from "engine-components/catalog/specs/std-library";
 
 const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogicItem => ({
     ref: {
@@ -26,7 +26,7 @@ describe("createNodeVisual", () => {
     it("falls back to base node visual when visual module is absent", () => {
         const result = createNodeVisual(createLogicItem(), { minWidth: 64, minHeight: 32 });
 
-        expect(result.markup).toEqual(createBaseNodeMarkup());
+        expect(result.markup).toEqual(buildStdLogicItemMarkup());
         expect(result.attrs?.body?.width).toBe(64);
         expect(result.attrs?.body?.height).toBe(32);
     });

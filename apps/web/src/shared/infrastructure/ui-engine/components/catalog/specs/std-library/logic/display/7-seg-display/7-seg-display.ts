@@ -12,16 +12,18 @@ export const SEVEN_SEG_DISPLAY_ITEM = buildStdLogicItem({
     width: 96,
     height: 144,
     tags: ["display"],
-    ports: buildStdPorts([
-        { id: "in-0", direction: "input", anchor: "left", title: "a" },
-        { id: "in-1", direction: "input", anchor: "left", title: "b" },
-        { id: "in-2", direction: "input", anchor: "left", title: "c" },
-        { id: "in-3", direction: "input", anchor: "left", title: "d" },
-        { id: "in-4", direction: "input", anchor: "left", title: "e" },
-        { id: "in-5", direction: "input", anchor: "left", title: "f" },
-        { id: "in-6", direction: "input", anchor: "left", title: "g" },
-        { id: "in-7", direction: "input", anchor: "left", title: "dp" },
-    ]),
+    ports: buildStdPorts({
+        inputs: [
+            { id: "in-0", anchor: "left", title: "a" },
+            { id: "in-1", anchor: "left", title: "b" },
+            { id: "in-2", anchor: "left", title: "c" },
+            { id: "in-3", anchor: "left", title: "d" },
+            { id: "in-4", anchor: "left", title: "e" },
+            { id: "in-5", anchor: "left", title: "f" },
+            { id: "in-6", anchor: "left", title: "g" },
+            { id: "in-7", anchor: "left", title: "dp" },
+        ],
+    }),
     visual: {
         base: {
             markup: [

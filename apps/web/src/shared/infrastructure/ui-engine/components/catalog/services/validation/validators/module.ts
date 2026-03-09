@@ -2,6 +2,7 @@ import type {
     CatalogItemKind,
     CatalogItemModule,
     CatalogCompositionPinRef,
+    CatalogPortsSide,
 } from "engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import {
@@ -27,23 +28,33 @@ const _validatePortsModule = (
     path: Array<string | number>,
 ): void => {
     const seenIds = new Set<string>();
+    const validatePorts = (
+        ports: (typeof module.config)[CatalogPortsSide],
+        side: CatalogPortsSide,
+    ) => {
+        (ports ?? []).forEach((port, portIndex) => {
+            if (!isNonEmptyString(port.id)) {
+                pushIssues(
+                    result,
+                    catalogValidationIssues.itemPortIdRequired(path, side, portIndex),
+                );
+                return;
+            }
 
-    module.config.items.forEach((port, portIndex) => {
-        if (!isNonEmptyString(port.id)) {
-            pushIssues(result, catalogValidationIssues.itemPortIdRequired(path, portIndex));
-            return;
-        }
+            if (seenIds.has(port.id)) {
+                pushIssues(
+                    result,
+                    catalogValidationIssues.itemPortIdDuplicate(path, side, portIndex, port.id),
+                );
+                return;
+            }
 
-        if (seenIds.has(port.id)) {
-            pushIssues(
-                result,
-                catalogValidationIssues.itemPortIdDuplicate(path, portIndex, port.id),
-            );
-            return;
-        }
+            seenIds.add(port.id);
+        });
+    };
 
-        seenIds.add(port.id);
-    });
+    validatePorts(module.config.inputs, "inputs");
+    validatePorts(module.config.outputs, "outputs");
 };
 
 const _validateTimingModule = (

@@ -15,7 +15,9 @@ export const TOGGLE_GENERATOR_ITEM = buildStdLogicItem({
     width: 32,
     height: 32,
     tags: ["generator"],
-    ports: buildStdPorts([{ id: "out-0", direction: "output", anchor: "right" }]),
+    ports: buildStdPorts({
+        outputs: [{ id: "out-0", anchor: "right" }],
+    }),
     visual: {
         base: {
             markup: [

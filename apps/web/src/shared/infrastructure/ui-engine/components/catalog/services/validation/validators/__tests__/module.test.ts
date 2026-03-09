@@ -31,10 +31,8 @@ describe("validateModuleValue", () => {
             {
                 type: "ports",
                 config: {
-                    items: [
-                        { id: "in-1", direction: "input" },
-                        { id: "in-1", direction: "input" },
-                    ],
+                    inputs: [{ id: "in-1" }],
+                    outputs: [{ id: "in-1" }],
                 },
             },
             "logic",

@@ -1,11 +1,16 @@
 import type { CatalogPortAnchor, CatalogPortSpec } from "engine-model/catalog";
 import { DEFAULT_VALUE_CLASS } from "engine-model";
-import type { PortMetadata } from "@antv/x6/lib/model/port";
+import type { LabelMetadata, PortMetadata } from "@antv/x6/lib/model/port";
 import { buildPortClass } from "../../../../../../lib/ports/buildPortClass";
 import { PORT_LABEL_MARKUP } from "../../constants";
 
-const resolvePortAnchor = (port: CatalogPortSpec): CatalogPortAnchor => {
-    return port.anchor ?? (port.direction === "input" ? "left" : "right");
+type PortDirection = "input" | "output";
+
+const resolvePortAnchor = (
+    port: CatalogPortSpec,
+    direction: PortDirection,
+): CatalogPortAnchor => {
+    return port.anchor ?? (direction === "input" ? "left" : "right");
 };
 
 const createPortArgs = (anchor: CatalogPortAnchor, offset?: number) => {
@@ -15,17 +20,19 @@ const createPortArgs = (anchor: CatalogPortAnchor, offset?: number) => {
 
     switch (anchor) {
         case "left":
+            return { dx: -offset };
         case "right":
-            return { dy: offset };
-        case "top":
-        case "bottom":
             return { dx: offset };
+        case "top":
+            return { dy: -offset };
+        case "bottom":
+            return { dy: offset };
         default:
             return undefined;
     }
 };
 
-const createPortLabel = (anchor: CatalogPortAnchor, title?: string) => {
+const createPortLabel = (anchor: CatalogPortAnchor, title?: string): LabelMetadata | undefined => {
     if (!title) {
         return undefined;
     }
@@ -36,19 +43,26 @@ const createPortLabel = (anchor: CatalogPortAnchor, title?: string) => {
     };
 };
 
-export const createPortMetadata = (port: CatalogPortSpec): PortMetadata => {
-    const anchor = resolvePortAnchor(port);
-    const baseClass = buildPortClass(port.direction, DEFAULT_VALUE_CLASS);
+export const createPortMetadata = (
+    port: CatalogPortSpec,
+    direction: PortDirection,
+): PortMetadata => {
+    const anchor = resolvePortAnchor(port, direction);
+    const baseClass = buildPortClass(direction, DEFAULT_VALUE_CLASS);
 
     return {
         id: port.id,
         group: anchor,
+        //label
         ...(port.title ? { label: createPortLabel(anchor, port.title) } : {}),
+
         ...(createPortArgs(anchor, port.offset)
             ? { args: createPortArgs(anchor, port.offset) }
             : {}),
+
         attrs: {
             circle: { class: baseClass },
+
             ...(port.title ? { text: { text: port.title } } : {}),
         },
     };

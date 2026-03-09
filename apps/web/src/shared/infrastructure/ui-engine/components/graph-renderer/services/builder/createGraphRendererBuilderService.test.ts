@@ -73,22 +73,18 @@ describe("createGraphRendererBuilderService", () => {
                 {
                     type: "ports",
                     config: {
-                        items: [
-                            {
-                                id: "port-b",
-                                direction: "input",
-                                anchor: "bottom",
-                                order: 1,
-                                offset: 4,
-                                title: "B",
-                            },
+                        inputs: [
                             {
                                 id: "port-a",
-                                direction: "input",
                                 anchor: "top",
-                                order: 0,
                                 offset: -4,
                                 title: "A",
+                            },
+                            {
+                                id: "port-b",
+                                anchor: "bottom",
+                                offset: 4,
+                                title: "B",
                             },
                         ],
                     },
@@ -117,8 +113,8 @@ describe("createGraphRendererBuilderService", () => {
         expect(props.markup).toEqual([{ tagName: "rect", selector: "custom-body" }]);
         expect(props.attrs?.body?.fill).toBe("red");
         expect(ports).toMatchObject([
-            { id: "port-a", group: "top", args: { dx: -4 } },
-            { id: "port-b", group: "bottom", args: { dx: 4 } },
+            { id: "port-a", group: "top", args: { dy: 4 } },
+            { id: "port-b", group: "bottom", args: { dy: 4 } },
         ]);
     });
 

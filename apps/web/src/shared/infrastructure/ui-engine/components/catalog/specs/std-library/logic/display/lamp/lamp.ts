@@ -11,7 +11,9 @@ export const LAMP_DISPLAY_ITEM = buildStdLogicItem({
     width: 32,
     height: 48,
     tags: ["display"],
-    ports: buildStdPorts([{ id: "in-0", direction: "input", anchor: "bottom" }]),
+    ports: buildStdPorts({
+        inputs: [{ id: "in-0", anchor: "bottom" }],
+    }),
     visual: {
         base: {
             markup: [

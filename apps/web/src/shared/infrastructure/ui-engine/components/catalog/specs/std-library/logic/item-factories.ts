@@ -2,8 +2,8 @@ import {
     CatalogItemRef,
     CatalogLogicItem,
     CatalogPortAnchor,
-    CatalogPortDirection,
     CatalogPortSpec,
+    CatalogPortsModule,
     CatalogVisualModule,
 } from "@gately/shared/infrastructure/ui-engine/model/catalog";
 
@@ -17,13 +17,12 @@ type CreateStdLogicItemInput = {
     width: number;
     height: number;
     tags?: string[];
-    ports?: CatalogPortSpec[];
+    ports?: CatalogPortsModule["config"];
     visual?: CatalogVisualModule["config"];
 };
 
 type CreateStdPortInput = {
     id: string;
-    direction: CatalogPortDirection;
     title?: string;
     anchor?: CatalogPortAnchor;
 };
@@ -47,14 +46,26 @@ export const buikdStdLayout = (width: number, height: number) => ({
 
 const buildStdPort = (input: CreateStdPortInput, index: number): CatalogPortSpec => ({
     id: input.id,
-    direction: input.direction,
     ...(input.title !== undefined ? { title: input.title } : {}),
     ...(input.anchor !== undefined ? { anchor: input.anchor } : {}),
-    order: index,
 });
 
-export const buildStdPorts = (ports: CreateStdPortInput[]): CatalogPortSpec[] => {
-    return ports.map((port, index) => buildStdPort(port, index));
+export const buildStdPorts = (ports: {
+    inputs?: CreateStdPortInput[];
+    outputs?: CreateStdPortInput[];
+}): CatalogPortsModule["config"] => {
+    return {
+        ...(ports.inputs?.length
+            ? {
+                  inputs: ports.inputs.map((port, index) => buildStdPort(port, index)),
+              }
+            : {}),
+        ...(ports.outputs?.length
+            ? {
+                  outputs: ports.outputs.map((port, index) => buildStdPort(port, index)),
+              }
+            : {}),
+    };
 };
 
 export const buildStdIconVisual = (iconPath: string): CatalogVisualModule["config"] => ({
@@ -84,13 +95,11 @@ export const buildStdLogicItem = (input: CreateStdLogicItemInput): CatalogLogicI
         },
         layout: buikdStdLayout(input.width, input.height),
         modules: [
-            ...(input.ports && input.ports.length > 0
+            ...((input.ports?.inputs?.length || input.ports?.outputs?.length)
                 ? [
                       {
                           type: "ports" as const,
-                          config: {
-                              items: input.ports,
-                          },
+                          config: input.ports,
                       },
                   ]
                 : []),
