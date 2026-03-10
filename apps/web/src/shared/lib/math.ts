@@ -28,3 +28,4 @@ export const scaleXYCoords = (coords: XYCoords, factor: number) => {
         y: coords.y * factor,
     };
 };
+

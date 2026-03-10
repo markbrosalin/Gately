@@ -32,3 +32,4 @@ export const InnerWorkspace: Component = () => {
 export const Workspace: Component = () => {
     return <InnerWorkspace />;
 };
+

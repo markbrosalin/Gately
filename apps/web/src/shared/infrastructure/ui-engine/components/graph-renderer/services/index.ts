@@ -5,3 +5,4 @@ export * from "./document";
 export * from "./instance";
 export * from "./nodes";
 export * from "./query";
+

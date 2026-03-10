@@ -24,3 +24,4 @@ export const isMouseButton = (e: MouseEvent | PointerEvent, button: MouseButton)
             return false;
     }
 };
+

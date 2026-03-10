@@ -17,3 +17,4 @@ export const PlusIcon: Component<PlusIconProps> = (props) => {
         </svg>
     );
 };
+

@@ -11,3 +11,4 @@ export function getItemById<T extends { id: string }>(array: T[], id: string): T
 export function getIndexById<T extends { id: string }>(array: T[], id: string): number {
     return array.findIndex((item) => item.id === id);
 }
+

@@ -16,9 +16,12 @@
         "types": ["vite/client"],
         "paths": {
             "@gately/*": ["./src/*"],
+            "@engine-components": ["./src/shared/infrastructure/ui-engine/components/index.ts"],
             "@engine-components/*": ["./src/shared/infrastructure/ui-engine/components/*"],
+            "@engine-model": ["./src/shared/infrastructure/ui-engine/model/index.ts"],
             "@engine-model/*": ["./src/shared/infrastructure/ui-engine/model/*"],
-            "engine-presets/*": ["./src/shared/infrastructure/ui-engine/presets/*"],
+            "@engine-presets": ["./src/shared/infrastructure/ui-engine/presets/index.ts"],
+            "@engine-presets/*": ["./src/shared/infrastructure/ui-engine/presets/*"],
             "index.css": ["./src/index.css"]
         },
         "experimentalDecorators": true,

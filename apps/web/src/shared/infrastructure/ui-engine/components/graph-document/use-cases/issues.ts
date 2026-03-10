@@ -23,3 +23,5 @@ export const graphDocumentUseCaseIssues = {
             formatVersion,
         }),
 } as const;
+
+

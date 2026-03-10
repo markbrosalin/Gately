@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { buildServiceRegistry } from "./buildServiceRegistry";
-import type { ServiceDefinition, ServiceGetter } from "../../model/types";
+import type { ServiceDefinition, ServiceGetter } from "../../model";
 
 type TestServiceName = "alpha" | "beta" | "gamma" | "late";
 type TestServices = {
@@ -152,3 +152,4 @@ describe("buildServiceRegistry", () => {
         });
     });
 });
+

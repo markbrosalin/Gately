@@ -82,3 +82,4 @@ export const buildLinkFromEdge = (edge: Edge): ItemLink | undefined => {
     if (!endpoints) return;
     return buildLinkFromEndpoints(endpoints);
 };
+

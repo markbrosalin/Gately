@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Edge } from "@antv/x6";
-import type { UIEnginePlugin } from "../../model/types";
+import type { UIEnginePlugin } from "../../model";
 import { pickLogicValueClass } from "../../lib/logic-values";
 
 const VERTICES_TOOL = "vertices" as const;
@@ -203,3 +203,4 @@ export const edgeEditToolsPlugin: UIEnginePlugin = {
         };
     },
 };
+

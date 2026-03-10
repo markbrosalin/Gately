@@ -122,3 +122,4 @@ export const TOGGLE_VISUAL = createVisualBinding<BinaryVisualState>({
     },
     resolveState: resolveSingleBinaryOutputState,
 });
+

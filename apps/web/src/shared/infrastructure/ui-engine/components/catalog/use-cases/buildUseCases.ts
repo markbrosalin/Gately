@@ -26,3 +26,4 @@ export const buildCatalogUseCases = (deps: CatalogUseCaseDeps): CatalogUseCases 
         exportCatalog: createExportCatalogUseCase(deps),
     };
 };
+

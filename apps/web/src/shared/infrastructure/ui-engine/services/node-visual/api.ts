@@ -1,6 +1,6 @@
 import type { Graph, Node } from "@antv/x6";
 import type { AnyVisualBinding, VisualBinding, VisualResolvedState } from "../../model/visual";
-import type { UIEngineContext } from "../../model/types";
+import type { UIEngineContext } from "../../model";
 import { defaultVisualPresets } from "./default-nodes";
 import { createVisualExecutor } from "./executor";
 import { useVisualNodeRegistrator } from "./node-registrator";
@@ -119,3 +119,4 @@ export const useVisualService = (_graph: Graph, ctx: UIEngineContext): VisualSer
         updateByNodeId,
     };
 };
+

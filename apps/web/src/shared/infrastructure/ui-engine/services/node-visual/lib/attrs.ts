@@ -17,3 +17,4 @@ export function mergeAttrs(base?: CellAttrs, patch?: CellAttrs): CellAttrs | und
 
     return next;
 }
+

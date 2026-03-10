@@ -12,3 +12,5 @@ export type CatalogValidationService = {
     validateLibrary: (library: CatalogLibraryDocument) => CatalogValidationResult<"library">;
     validateDocument: (document: CatalogDocument) => CatalogValidationResult<"document">;
 };
+
+

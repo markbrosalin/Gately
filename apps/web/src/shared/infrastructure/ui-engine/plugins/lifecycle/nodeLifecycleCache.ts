@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { UIEnginePlugin } from "../../model/types";
+import type { UIEnginePlugin } from "../../model";
 
 export const nodeLifecycleCachePlugin: UIEnginePlugin = {
     name: "tools:nodeLifecycleCachePlugin",
@@ -19,3 +19,4 @@ export const nodeLifecycleCachePlugin: UIEnginePlugin = {
         };
     },
 };
+

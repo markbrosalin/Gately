@@ -8,3 +8,4 @@ export type CatalogLogicModule = CatalogModuleBase<
         params?: CatalogExtensions;
     }
 >;
+

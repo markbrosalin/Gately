@@ -1,4 +1,4 @@
-import { PinRef, PortSide } from "../../model/types";
+import { PinRef, PortSide } from "../../model";
 
 export const encodePortId = (config: { side: PortSide; id: string }): string => {
     const sideCode = config.side === "left" ? "L" : "R";
@@ -21,3 +21,4 @@ export const portIdToPinRef = (portId: string): PinRef => {
     const { side, id } = decodePortId(portId);
     return { side: side === "left" ? "input" : "output", index: id };
 };
+

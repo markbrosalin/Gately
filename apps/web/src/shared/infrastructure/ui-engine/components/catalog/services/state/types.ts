@@ -9,3 +9,5 @@ export type CatalogStateService = {
     upsertItem: (item: CatalogItem) => CatalogItem;
     removeItem: (item: CatalogItem) => CatalogItem | undefined;
 };
+
+

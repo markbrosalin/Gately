@@ -1,6 +1,6 @@
 import { Edge } from "@antv/x6";
 import { getValueClassFromElement } from "../../lib/logic-values";
-import type { LogicValueClass } from "../../model/types";
+import type { LogicValueClass } from "../../model";
 import { setValueClassToEdge } from "../../lib/logic-values/set-value";
 import type { EdgeStateMapContract } from "./types";
 
@@ -45,3 +45,4 @@ export const createEdgeStateMap = (): EdgeStateMapContract => {
         remove,
     };
 };
+

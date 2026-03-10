@@ -20,3 +20,4 @@ export type CatalogPortsModule = CatalogModuleBase<
         outputs?: CatalogPortSpec[];
     }
 >;
+

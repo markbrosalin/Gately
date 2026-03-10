@@ -24,3 +24,5 @@ export type WorkspaceStateService = {
     setActiveTab: (tabId?: string) => void;
     setNavigationPath: (rootWorkspaceId: string, navigationPath: string[]) => void;
 };
+
+

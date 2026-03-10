@@ -7,3 +7,4 @@ export const ensurePositiveDimension = (value: number, label: string): number =>
 
     return value;
 };
+

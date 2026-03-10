@@ -50,3 +50,4 @@ export type WorkspaceControllerDeps = {
     logicEngine: CinabonoClient;
     getActiveTabId: () => string | undefined;
 };
+

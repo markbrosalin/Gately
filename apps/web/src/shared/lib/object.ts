@@ -41,3 +41,4 @@ export const mergeObjects = <T extends Record<string, unknown>>(
         return mergeObjectValues(acc, source as T);
     }, { ...defaults } as T);
 };
+

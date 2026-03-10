@@ -19,3 +19,4 @@ export const AND_LOGIC_ITEM = buildStdLogicItem({
     }),
     visual: buildStdIconVisual(AND_LOGIC_ICON_PATH),
 });
+

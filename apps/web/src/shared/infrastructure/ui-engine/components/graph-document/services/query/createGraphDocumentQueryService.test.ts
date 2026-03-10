@@ -25,3 +25,4 @@ describe("createGraphDocumentQueryService", () => {
         expect(query.hasDocument("workspace-2")).toBe(false);
     });
 });
+

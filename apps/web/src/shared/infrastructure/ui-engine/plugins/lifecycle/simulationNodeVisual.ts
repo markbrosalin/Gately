@@ -1,7 +1,7 @@
 import { logicValueToClass, pinRefToPortId } from "../../lib";
 import { SIMULATION_BATCH_APPLIED_EVENT } from "../../model/events";
 import type { SimulationBatchAppliedEvent } from "../../model/events";
-import type { UIEnginePlugin } from "../../model/types";
+import type { UIEnginePlugin } from "../../model";
 
 const SIMULATION_UI_BATCH_NAME = "simulation:apply-ui";
 
@@ -42,3 +42,4 @@ export const simulationNodeVisualPlugin: UIEnginePlugin = {
         });
     },
 };
+

@@ -12,3 +12,4 @@ export type GraphRendererInstanceService = {
     open: (input: GraphRendererInstanceOpenInput) => Graph;
     close: () => void;
 };
+

@@ -1,5 +1,5 @@
 import type { Graph } from "@antv/x6";
-import type { EdgeRouterMode, LogicValueClass, UIEngineContext } from "../../model/types";
+import type { EdgeRouterMode, LogicValueClass, UIEngineContext } from "../../model";
 
 export type EdgeService = ReturnType<typeof useEdgeService>;
 
@@ -32,3 +32,4 @@ export const useEdgeService = (graph: Graph, ctx: UIEngineContext) => {
         setIncomingPortValueClass,
     };
 };
+

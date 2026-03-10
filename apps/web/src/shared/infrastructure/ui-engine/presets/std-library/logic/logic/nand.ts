@@ -19,3 +19,4 @@ export const NAND_LOGIC_ITEM = buildStdLogicItem({
     }),
     visual: buildStdIconVisual(NAND_LOGIC_ICON_PATH),
 });
+

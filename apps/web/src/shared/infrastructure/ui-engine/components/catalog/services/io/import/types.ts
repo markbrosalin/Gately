@@ -19,3 +19,5 @@ export type CatalogImportService = {
     importDocument: (document: CatalogDocument) => CatalogImportDocumentResult;
     importBundle: (bundle: CatalogBundleDocument) => CatalogImportBundleResult;
 };
+
+

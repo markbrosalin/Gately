@@ -3,7 +3,7 @@ import { hasItemInputPins, hasItemOutputPins } from "@cnbn/schema";
 import { XYCoords } from "@gately/shared/types";
 import { buildPortClass, encodePortId, logicValueToClass } from "../../../lib";
 import type { PortMetadata } from "@antv/x6/lib/model/port";
-import { UIEngineNodeProps } from "../../../model/types";
+import { UIEngineNodeProps } from "../../../model";
 import type { AnyVisualBinding } from "../../../model/visual";
 import { calcNodeSize } from "./calcNodeSize";
 import { STROKE_WIDTH } from "../../../model";
@@ -91,3 +91,4 @@ export const buildNodeProps = (
         ports: toPorts(item),
     };
 };
+

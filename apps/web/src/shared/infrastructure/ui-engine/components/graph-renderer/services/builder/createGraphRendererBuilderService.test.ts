@@ -1,17 +1,11 @@
 import { createBaseNodeMarkup, STROKE_WIDTH } from "@engine-model";
-import type { CatalogLogicItem } from "@engine-model/catalog";
+import type { CatalogAnnotationItem, CatalogLogicItem } from "@engine-model/catalog";
 import {
     BUFFER_LOGIC_ICON_PATH,
     BUFFER_LOGIC_ITEM,
-} from "@engine-components/catalog/specs/std-library/logic/logic/buffer";
-import { describe, expect, it, vi } from "vitest";
+} from "@engine-presets/std-library/logic/logic/buffer";
+import { describe, expect, it } from "vitest";
 import { createGraphRendererBuilderApi } from "./createGraphRendererBuilderService";
-
-vi.mock("../../../../services/node-visual/port-layout-registrator", () => ({
-    useVisualPortLayoutRegistrator: () => ({
-        registerPortLayouts: vi.fn(),
-    }),
-}));
 
 const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogicItem => ({
     ref: {
@@ -22,6 +16,27 @@ const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogi
     kind: "logic",
     meta: {
         name: "Test item",
+        createdAt: 0,
+    },
+    layout: {
+        width: 64,
+        height: 32,
+    },
+    modules: [],
+    ...overrides,
+});
+
+const createAnnotationItem = (
+    overrides: Partial<CatalogAnnotationItem> = {},
+): CatalogAnnotationItem => ({
+    ref: {
+        libraryId: "std",
+        path: ["annotation"],
+        itemName: "note",
+    },
+    kind: "annotation",
+    meta: {
+        name: "Annotation item",
         createdAt: 0,
     },
     layout: {
@@ -107,7 +122,7 @@ describe("createGraphRendererBuilderService", () => {
 
         const props = builder.buildNodeProps({ item });
         const ports = (
-            props.ports as { items: Array<{ id: string; group: string; args?: { dx?: number } }> }
+            props.ports as { items: Array<{ id: string; group: string; args?: { dy?: number } }> }
         ).items;
 
         expect(props.markup).toEqual([{ tagName: "rect", selector: "custom-body" }]);
@@ -118,7 +133,7 @@ describe("createGraphRendererBuilderService", () => {
         ]);
     });
 
-    it("falls back to base node defaults when visual and ports modules are absent", () => {
+    it("falls back to the base logic shell when visual and ports modules are absent", () => {
         const builder = createGraphRendererBuilderApi();
         const item = createLogicItem({
             ref: {
@@ -134,4 +149,14 @@ describe("createGraphRendererBuilderService", () => {
         expect(props.attrs?.body?.width).toBe(64);
         expect((props.ports as { items: unknown[] }).items).toEqual([]);
     });
+
+    it("throws a clear builder error for unsupported item kinds", () => {
+        const builder = createGraphRendererBuilderApi();
+
+        expect(() => builder.buildNodeProps({ item: createAnnotationItem() })).toThrow(
+            'Graph renderer builder strategy for item kind "annotation" is not implemented.',
+        );
+    });
 });
+
+

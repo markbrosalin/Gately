@@ -27,3 +27,4 @@ export type CatalogDocument = {
     libraries: CatalogLibraryDocument[];
     extensions?: CatalogExtensions;
 };
+

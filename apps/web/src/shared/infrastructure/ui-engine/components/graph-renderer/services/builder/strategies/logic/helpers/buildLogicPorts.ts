@@ -1,15 +1,15 @@
 import type { CatalogItem } from "@engine-model/catalog";
 import { baseNodePorts } from "@engine-model";
-import { getPortsModule } from "../getCatalogModules";
-import { createPortMetadata } from "./portMetadata";
+import { getPortsModule } from "../../../helpers";
+import { buildLogicPortMetadata } from "./buildLogicPortMetadata";
 
-export const createPorts = (item: CatalogItem) => {
+export const buildLogicPorts = (item: CatalogItem) => {
     const portsModule = getPortsModule(item);
     const inputPorts = (portsModule?.config.inputs ?? []).map((port) =>
-        createPortMetadata(port, "input"),
+        buildLogicPortMetadata(port, "input"),
     );
     const outputPorts = (portsModule?.config.outputs ?? []).map((port) =>
-        createPortMetadata(port, "output"),
+        buildLogicPortMetadata(port, "output"),
     );
 
     return {
@@ -17,3 +17,4 @@ export const createPorts = (item: CatalogItem) => {
         items: [...inputPorts, ...outputPorts],
     };
 };
+

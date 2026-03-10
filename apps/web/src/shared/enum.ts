@@ -4,3 +4,4 @@ export enum MouseButton {
     RIGHT,
     ANY,
 }
+

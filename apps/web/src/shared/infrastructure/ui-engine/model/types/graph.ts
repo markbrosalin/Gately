@@ -52,3 +52,4 @@ export type EdgeData = {
     from: EdgeEndpoint;
     to?: EdgeEndpoint;
 };
+

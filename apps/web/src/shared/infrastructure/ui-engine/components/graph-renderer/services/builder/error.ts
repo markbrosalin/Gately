@@ -4,3 +4,4 @@ export class GraphRendererBuilderError extends Error {
         this.name = "GraphRendererBuilderError";
     }
 }
+

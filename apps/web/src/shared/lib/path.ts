@@ -5,3 +5,4 @@ export const idToPath = (id: string): string[] => {
 export const pathToId = (path: string[]): string => {
     return path.join("/");
 };
+

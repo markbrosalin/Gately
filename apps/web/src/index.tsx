@@ -14,3 +14,4 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 const dispose = render(() => <App />, root!);
 if (import.meta.hot) import.meta.hot.dispose(() => dispose());
+

@@ -21,3 +21,4 @@ export const attachWorkspaceBridge = (opts: AttachWorkspaceBridgeOptions): (() =
         runtime.graph.off("node:click", onNodeClick);
     };
 };
+

@@ -1,4 +1,4 @@
-import type { ComponentDeps, UIEngineContext, UIEngineErrorEvent } from "../../model/types";
+import type { ComponentDeps, UIEngineContext, UIEngineErrorEvent } from "../../model";
 import type { SharedServiceGetter, SharedServiceName } from "../../shared-services";
 
 export const createComponentRegistry = (ctx: UIEngineContext) => {
@@ -46,3 +46,4 @@ export const createComponentRegistry = (ctx: UIEngineContext) => {
         register,
     };
 };
+

@@ -27,3 +27,4 @@ export const createGraphRendererQueryService = (
 ): GraphRendererQueryService => {
     return createGraphRendererQueryApi(ctx.getService("instance"));
 };
+

@@ -1,6 +1,6 @@
 import type { Graph } from "@antv/x6";
 import { buildContextServiceRegistry } from "../../../lib/registry/buildServiceRegistry";
-import type { ServiceDefinitionMap, UIEngineContext } from "../../../model/types";
+import type { ServiceDefinitionMap, UIEngineContext } from "../../../model";
 import { useCacheService } from "../../../services/cache";
 import { useEdgeService } from "../../../services/edges";
 import { useVisualService } from "../../../services/node-visual";
@@ -70,3 +70,4 @@ export const buildGraphServices = (graph: Graph, ctx: UIEngineContext): GraphRun
 
     return services;
 };
+

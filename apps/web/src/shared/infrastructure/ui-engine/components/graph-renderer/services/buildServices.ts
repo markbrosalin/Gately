@@ -2,6 +2,7 @@ import { buildContextServiceRegistry } from "@gately/shared/infrastructure/ui-en
 import { createGraphRendererBuilderService } from "./builder";
 import { createGraphRendererDocumentService } from "./document";
 import { createGraphRendererInstanceService } from "./instance";
+import { createGraphRendererLayoutsService } from "./layouts";
 import { createGraphRendererNodesService } from "./nodes";
 import { createGraphRendererQueryService } from "./query";
 import type {
@@ -25,6 +26,9 @@ const createServiceDefinitions = (
     document: {
         create: () => createGraphRendererDocumentService(ctx.getService("instance")),
         createDeps: ["instance"],
+    },
+    layouts: {
+        create: () => createGraphRendererLayoutsService(),
     },
     builder: {
         create: () => createGraphRendererBuilderService(),
@@ -53,3 +57,5 @@ export const buildGraphRendererServices = (
 
     return services;
 };
+
+

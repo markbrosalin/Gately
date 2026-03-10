@@ -50,3 +50,4 @@ describe("edgeLifecycleCachePlugin", () => {
         expect(edgeMap.remove).toHaveBeenCalledWith(edge);
     });
 });
+

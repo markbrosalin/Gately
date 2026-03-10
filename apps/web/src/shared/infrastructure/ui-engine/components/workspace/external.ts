@@ -3,3 +3,4 @@ export type WorkspaceExternal = {
         call: (path: string, input: unknown) => Promise<unknown>;
     };
 };
+

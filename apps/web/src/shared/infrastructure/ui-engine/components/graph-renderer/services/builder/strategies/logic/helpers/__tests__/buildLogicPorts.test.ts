@@ -1,6 +1,6 @@
 import type { CatalogLogicItem } from "@engine-model/catalog";
 import { describe, expect, it } from "vitest";
-import { createPorts } from "../createPorts";
+import { buildLogicPorts } from "../buildLogicPorts";
 
 const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogicItem => ({
     ref: {
@@ -21,15 +21,15 @@ const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogi
     ...overrides,
 });
 
-describe("createPorts", () => {
+describe("buildLogicPorts", () => {
     it("returns empty port items when ports module is absent", () => {
-        const result = createPorts(createLogicItem());
+        const result = buildLogicPorts(createLogicItem());
 
         expect(result.items).toEqual([]);
     });
 
     it("keeps input and output order and maps anchor-specific args", () => {
-        const result = createPorts(
+        const result = buildLogicPorts(
             createLogicItem({
                 modules: [
                     {
@@ -71,3 +71,4 @@ describe("createPorts", () => {
         ]);
     });
 });
+

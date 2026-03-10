@@ -6,3 +6,5 @@ export const DEFAULT_ITEM_LAYOUT: CatalogItemLayout = {
     width: 64,
     height: 32,
 };
+
+

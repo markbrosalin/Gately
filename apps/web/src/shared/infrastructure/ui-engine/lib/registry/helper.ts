@@ -3,3 +3,4 @@ export const createUninitializedGetter = <TGetter>(componentName: string): TGett
         throw new Error(`[UIEngine] ${componentName} service getter is not initialized`);
     }) as TGetter;
 };
+

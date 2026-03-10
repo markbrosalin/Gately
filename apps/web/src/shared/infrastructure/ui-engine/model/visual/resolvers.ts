@@ -24,3 +24,4 @@ export const resolveSingleFullInputState: VisualStateResolver<FullLogicState> = 
     if (value === "X") return "error";
     return "error";
 };
+

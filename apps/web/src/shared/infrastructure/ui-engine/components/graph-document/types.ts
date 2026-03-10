@@ -18,3 +18,5 @@ export type GraphDocumentApi = {
     importDocument: GraphDocumentImportDocumentUseCase;
     exportDocument: GraphDocumentExportDocumentUseCase;
 };
+
+

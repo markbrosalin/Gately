@@ -1,7 +1,7 @@
 import type { Graph } from "@antv/x6";
 import { toArray } from "@cnbn/utils";
 import type { LogicValue } from "@cnbn/schema";
-import type { PinUpdate as UIPinUpdate } from "@gately/shared/infrastructure/ui-engine/model/types";
+import type { PinUpdate as UIPinUpdate } from "@gately/shared/infrastructure/ui-engine/model";
 import type { EnginePinEvent } from "@gately/shared/types";
 
 type ApplyEngineEventsOptions = {
@@ -93,3 +93,4 @@ export const applyEngineEvents = (
         if (graph) (graph as unknown as { __bridgeSilent?: boolean }).__bridgeSilent = false;
     }
 };
+

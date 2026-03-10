@@ -1,5 +1,5 @@
 import type { Edge, Node } from "@antv/x6";
-import type { LogicValueClass } from "../../model/types";
+import type { LogicValueClass } from "../../model";
 
 export type PortDomState = {
     circle: Element;
@@ -33,3 +33,4 @@ export type CacheServiceContract = {
     ports: PortStateMapContract;
     edges: EdgeStateMapContract;
 };
+

@@ -9,3 +9,4 @@ export const useCloseTab = () => {
 
     return { closeTab, canCloseTab };
 };
+

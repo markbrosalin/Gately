@@ -9,3 +9,4 @@ export const removeLogicValueClass = (className?: string): string => {
     );
     return filtered.join(" ");
 };
+

@@ -16,3 +16,4 @@ export const buildWorkspaceUseCases = (deps: WorkspaceUseCaseDeps): WorkspaceUse
         updateTitle: createUpdateTitleUseCase(deps),
     };
 };
+

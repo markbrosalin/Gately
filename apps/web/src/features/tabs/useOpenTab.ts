@@ -8,3 +8,4 @@ export const useOpenNewTab = () => {
 
     return { openNewTab, openTab };
 };
+

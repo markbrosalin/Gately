@@ -35,3 +35,4 @@ export const XNOR_VISUAL = createVisualBinding({
         },
     },
 });
+

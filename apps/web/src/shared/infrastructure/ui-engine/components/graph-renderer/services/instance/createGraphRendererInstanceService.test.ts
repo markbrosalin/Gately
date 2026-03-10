@@ -74,3 +74,4 @@ describe("createGraphRendererInstanceService", () => {
         expect(service.activeWorkspaceId()).toBe("workspace-2");
     });
 });
+

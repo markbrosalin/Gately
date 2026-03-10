@@ -14,3 +14,4 @@ export type WorkspaceSimulationMode = "instant" | "0.5sec";
 
 export type EnginePinEvent = SimInputEvent | SimOutputEvent;
 export type EngineSignalEvent = Pick<EnginePinEvent, "itemId" | "pin" | "value" | "kind">;
+

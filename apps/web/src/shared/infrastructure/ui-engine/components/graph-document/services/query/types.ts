@@ -6,3 +6,5 @@ export type GraphDocumentQueryService = {
     getDocument: (workspaceId: string) => GraphDocument | undefined;
     hasDocument: (workspaceId: string) => boolean;
 };
+
+

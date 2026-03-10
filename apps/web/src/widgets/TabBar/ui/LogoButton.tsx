@@ -15,3 +15,4 @@ export const LogoButton: Component<{ class?: string }> = (props) => {
         </Toggler>
     );
 };
+

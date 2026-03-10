@@ -5,3 +5,5 @@ export const getVisualModule = (item: CatalogItem): CatalogVisualModule =>
 
 export const getPortsModule = (item: CatalogItem): CatalogPortsModule =>
     item.modules.find((module) => module.type === "ports") as CatalogPortsModule;
+
+

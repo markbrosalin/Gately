@@ -1,7 +1,7 @@
 import { Graph } from "@antv/x6";
 import type { XYOffset } from "@gately/shared/types";
 import { GRID_SIZE, NODE_INSET, NODE_PORT_LAYOUTS } from "../../model/constants";
-import type { PortSide } from "../../model/types";
+import type { PortSide } from "../../model";
 import type { VisualPortLayoutRegistratorContract } from "./types";
 
 let registered = false;
@@ -84,3 +84,4 @@ export const useVisualPortLayoutRegistrator = (): VisualPortLayoutRegistratorCon
         registerPortLayouts: registerNodePortLayouts,
     };
 };
+

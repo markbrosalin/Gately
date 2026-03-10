@@ -25,3 +25,4 @@ export type WorkspaceNavigationChangedEvent = {
     navigationPath: string[];
 };
 
+

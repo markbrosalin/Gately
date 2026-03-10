@@ -24,3 +24,4 @@ export const calcNodeSize = (args: NodeSizeInput): NodeSize => {
         height: Math.max(minHeight, contentHeight, pinsHeight),
     };
 };
+

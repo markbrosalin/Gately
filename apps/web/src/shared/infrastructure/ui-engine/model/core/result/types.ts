@@ -47,3 +47,4 @@ export type SubjectResult<
 > = Result<TValue, TIssue> & {
     subject: TSubject;
 };
+

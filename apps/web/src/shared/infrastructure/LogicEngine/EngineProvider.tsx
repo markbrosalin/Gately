@@ -21,3 +21,4 @@ export const useLogicEngine = () => {
     if (!ctx) throw new Error("useLogicEngine must be used within LogicEngineProvider");
     return ctx;
 };
+

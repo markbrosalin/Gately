@@ -22,3 +22,4 @@ export type { CatalogImportBundleUseCase } from "./importBundle";
 export type { CatalogImportLibraryUseCase } from "./importLibrary";
 export type { CatalogUpdateItemUseCase } from "./updateItem";
 export type { CatalogImportStrategy, CatalogUseCaseDeps, CatalogUseCases } from "./types";
+

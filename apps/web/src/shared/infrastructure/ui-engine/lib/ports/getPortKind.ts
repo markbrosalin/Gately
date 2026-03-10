@@ -8,3 +8,4 @@ export const getPortKind = (portId?: string | null, magnet?: Element | null): Pi
     if (magnet.classList.contains("port-input")) return "input";
     return null;
 };
+

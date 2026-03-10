@@ -7,3 +7,4 @@ export type GraphRendererQueryService = {
     isOpen: () => boolean;
     selectionCount: () => number;
 };
+

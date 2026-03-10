@@ -18,3 +18,4 @@ export const mergeScopeSnapshot = (
 
     return merged;
 };
+

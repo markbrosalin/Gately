@@ -52,3 +52,4 @@ export const createSnapshotHub = (hooks?: UIEngineHooks): SnapshotHubServiceCont
         importScopeSnapshot,
     };
 };
+

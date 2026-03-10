@@ -3,7 +3,7 @@ import {
     applyDependencyDefinitions,
     type OrderedDependencyDefinition,
 } from "../lib/registry/applyDependencyDefinitions";
-import type { UIEngineContext, UIEnginePlugin } from "../model/types";
+import type { UIEngineContext, UIEnginePlugin } from "../model";
 import { nodeInteractionPlugin } from "./behavior";
 import {
     edgeLifecycleCachePlugin,
@@ -66,3 +66,4 @@ export const applyPlugins = (graph: Graph, ctx: UIEngineContext): Array<() => vo
         apply: (definition) => definition.plugin.apply(graph, ctx),
     });
 };
+

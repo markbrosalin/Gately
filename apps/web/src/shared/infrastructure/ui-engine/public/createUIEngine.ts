@@ -2,7 +2,7 @@ import { createGraphRuntimeHost } from "../components/graph-runtime";
 import { createWorkspace } from "../components/workspace";
 import { createComponentRegistry, createUninitializedGetter } from "../lib/registry";
 import { buildSharedServices } from "../shared-services";
-import type { UIEngineContext, UIEngineExternalContext } from "../model/types";
+import type { UIEngineContext, UIEngineExternalContext } from "../model";
 import type { UIEngineInstance } from "./types";
 import { createUIEngineCommands } from "./createUIEngineCommands";
 import { createUIEngineHooks } from "./createUIEngineHooks";
@@ -51,4 +51,5 @@ export const createUIEngine = (externalCtx: UIEngineExternalContext = {}): UIEng
         dispose: graphRuntimeHost.dispose,
     };
 };
+
 

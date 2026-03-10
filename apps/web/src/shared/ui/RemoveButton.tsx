@@ -27,3 +27,4 @@ const RemoveButton: Component<RemoveButtonProps> = (props) => {
 };
 
 export default RemoveButton;
+

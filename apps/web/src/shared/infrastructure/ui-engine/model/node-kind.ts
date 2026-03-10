@@ -19,3 +19,4 @@ const NODE_KIND_BY_HASH: Record<NodeHashes, BaseNodeKind> = {
 };
 
 export const getNodeKindByHash = (hash: NodeHashes): BaseNodeKind => NODE_KIND_BY_HASH[hash];
+

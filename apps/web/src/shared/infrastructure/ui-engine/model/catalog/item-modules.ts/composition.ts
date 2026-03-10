@@ -51,3 +51,4 @@ export type CatalogCompositionModule = CatalogModuleBase<
         outputBindings: CatalogCompositionOutputBinding[];
     }
 >;
+

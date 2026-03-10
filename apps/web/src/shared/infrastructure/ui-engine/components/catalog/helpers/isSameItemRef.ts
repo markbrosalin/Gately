@@ -9,3 +9,5 @@ export const isSameItemRef = (left: CatalogItemRef, right: CatalogItemRef): bool
         left.path.every((segment, index) => segment === right.path[index])
     );
 };
+
+

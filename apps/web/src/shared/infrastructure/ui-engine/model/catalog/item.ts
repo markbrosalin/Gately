@@ -75,3 +75,4 @@ export type CatalogItemByKind = {
     debug: CatalogDebugItem;
     layout: CatalogLayoutItem;
 };
+

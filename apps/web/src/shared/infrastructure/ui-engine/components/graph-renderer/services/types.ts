@@ -4,9 +4,16 @@ import type { GraphRendererDocumentService } from "./document/types";
 import type { GraphRendererNodesService } from "./nodes/types";
 import type { GraphRendererQueryService } from "./query/types";
 import type { GraphRendererInstanceService } from "./instance/types";
+import type { GraphRendererLayoutsService } from "./layouts/types";
 import type { GraphRendererExternal } from "../types";
 
-export type GraphRendererServiceName = "instance" | "document" | "builder" | "nodes" | "query";
+export type GraphRendererServiceName =
+    | "instance"
+    | "document"
+    | "builder"
+    | "nodes"
+    | "query"
+    | "layouts";
 
 export type GraphRendererServices = {
     instance: GraphRendererInstanceService;
@@ -14,6 +21,7 @@ export type GraphRendererServices = {
     builder: GraphRendererBuilderService;
     nodes: GraphRendererNodesService;
     query: GraphRendererQueryService;
+    layouts: GraphRendererLayoutsService;
 };
 
 export type GraphRendererServiceContext = ComponentServiceContext<
@@ -21,3 +29,5 @@ export type GraphRendererServiceContext = ComponentServiceContext<
     GraphRendererServiceName,
     GraphRendererServices
 >;
+
+

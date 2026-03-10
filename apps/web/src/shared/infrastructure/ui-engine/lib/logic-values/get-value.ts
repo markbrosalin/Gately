@@ -17,3 +17,4 @@ export const getValueClassFromElement = (el: Element): LogicValueClass => {
 export const getValueClassFromNode = (node: Node, portId: string): LogicValueClass => {
     return pickLogicValueClass(node.getPortProp(portId, "attrs/circle/class"));
 };
+

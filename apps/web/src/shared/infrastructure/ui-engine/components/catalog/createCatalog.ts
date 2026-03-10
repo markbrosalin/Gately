@@ -35,3 +35,4 @@ export const createCatalog = (deps: CatalogDeps): CatalogApi => {
         exportCatalog: useCases.exportCatalog,
     };
 };
+

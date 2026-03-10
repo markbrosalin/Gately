@@ -3,3 +3,4 @@ export type CatalogItemRef = {
     path: string[];
     itemName: string;
 };
+

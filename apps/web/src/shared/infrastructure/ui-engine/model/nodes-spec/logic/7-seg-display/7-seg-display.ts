@@ -88,3 +88,4 @@ export const SEVEN_SEG_DISPLAY_VISUAL = createVisualBinding<BinaryVisualState>({
     },
     resolveState: resolveSevenSegState,
 });
+

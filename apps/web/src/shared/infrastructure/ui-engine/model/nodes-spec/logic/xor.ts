@@ -35,3 +35,4 @@ export const XOR_VISUAL = createVisualBinding({
         },
     },
 });
+

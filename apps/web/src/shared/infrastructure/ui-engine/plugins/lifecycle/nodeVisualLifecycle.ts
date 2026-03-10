@@ -1,5 +1,5 @@
 import type { Node } from "@antv/x6";
-import type { UIEnginePlugin } from "../../model/types";
+import type { UIEnginePlugin } from "../../model";
 
 type NodeEventArgs = { node: Node };
 
@@ -29,3 +29,4 @@ export const nodeVisualLifecyclePlugin: UIEnginePlugin = {
         };
     },
 };
+

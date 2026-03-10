@@ -32,3 +32,4 @@ export const useUIEngine = () => {
     if (!ctx) throw new Error("useUIEngine must be used within UIEngineProvider");
     return ctx;
 };
+

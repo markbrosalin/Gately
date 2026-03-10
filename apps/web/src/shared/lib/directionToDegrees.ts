@@ -8,3 +8,4 @@ export const directionToDegrees = (direction: Direction) => {
         bottom: "90deg",
     }[direction];
 };
+

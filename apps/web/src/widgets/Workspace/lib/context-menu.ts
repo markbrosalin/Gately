@@ -47,3 +47,4 @@ export const useWorkspaceContextMenu = (): WorkspaceContextMenuController => {
         registerAnchorSetter,
     };
 };
+

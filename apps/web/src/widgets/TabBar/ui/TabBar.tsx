@@ -42,3 +42,4 @@ export const TabBar: Component = () => {
         </ListScroller>
     );
 };
+

@@ -14,3 +14,4 @@ export type EventBusHandleContract = {
 export type EventBusServiceContract = EventBusHandleContract & {
     scope: (owner: string) => EventBusHandleContract;
 };
+

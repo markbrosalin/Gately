@@ -2,7 +2,7 @@ import type {
     UIEngineErrorEvent,
     UIEngineHooks,
     UIEngineLifecycleEvent,
-} from "../model/types";
+} from "../model";
 
 export const createUIEngineHooks = (hooks?: UIEngineHooks) => {
     const emitLifecycle = (event: UIEngineLifecycleEvent): void => {
@@ -18,3 +18,4 @@ export const createUIEngineHooks = (hooks?: UIEngineHooks) => {
         reportError,
     };
 };
+

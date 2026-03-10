@@ -1,4 +1,4 @@
-import type { UIScopeSnapshot } from "../../model/types/snapshot";
+import type { UIScopeSnapshot } from "../../model";
 
 export type SnapshotProtocolWriter = {
     exportScopeSnapshot?: () => Partial<UIScopeSnapshot> | null | undefined;
@@ -15,3 +15,4 @@ export type SnapshotHubServiceContract = {
     exportScopeSnapshot: () => Partial<UIScopeSnapshot> | undefined;
     importScopeSnapshot: (snapshot?: Partial<UIScopeSnapshot> | null) => void;
 };
+

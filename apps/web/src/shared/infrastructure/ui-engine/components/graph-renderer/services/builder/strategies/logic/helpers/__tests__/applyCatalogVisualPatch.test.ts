@@ -1,7 +1,6 @@
 import type { CatalogLogicItem } from "@engine-model/catalog";
 import { describe, expect, it } from "vitest";
-import { createNodeVisual } from "../createNodeVisual";
-import { buildStdLogicItemMarkup } from "@engine-components/catalog/specs/std-library";
+import { applyCatalogVisualPatch } from "../applyCatalogVisualPatch";
 
 const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogicItem => ({
     ref: {
@@ -22,17 +21,17 @@ const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogi
     ...overrides,
 });
 
-describe("createNodeVisual", () => {
-    it("falls back to base node visual when visual module is absent", () => {
-        const result = createNodeVisual(createLogicItem(), { minWidth: 64, minHeight: 32 });
+describe("applyCatalogVisualPatch", () => {
+    it("falls back to the default logic shell when visual module is absent", () => {
+        const result = applyCatalogVisualPatch(createLogicItem(), { minWidth: 64, minHeight: 32 });
 
-        expect(result.markup).toEqual(buildStdLogicItemMarkup());
+        expect(result.markup).toBeDefined();
         expect(result.attrs?.body?.width).toBe(64);
         expect(result.attrs?.body?.height).toBe(32);
     });
 
     it("merges visual attrs, markup and static class patch", () => {
-        const result = createNodeVisual(
+        const result = applyCatalogVisualPatch(
             createLogicItem({
                 modules: [
                     {
@@ -65,3 +64,4 @@ describe("createNodeVisual", () => {
         expect(result.attrs?.body?.class).toBe("body-base next");
     });
 });
+

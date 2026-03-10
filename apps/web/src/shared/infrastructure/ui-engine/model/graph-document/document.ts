@@ -13,3 +13,4 @@ export type GraphDocument = Timestamps & {
 export type GraphDocumentPatch = Partial<Pick<GraphDocument, "contentJson" | "extensions">> & {
     viewport?: Partial<GraphDocumentViewport>;
 };
+

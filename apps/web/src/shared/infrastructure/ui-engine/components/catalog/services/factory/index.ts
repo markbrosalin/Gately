@@ -8,3 +8,4 @@ export type {
     CatalogFactoryService,
 } from "./types";
 export { createCatalogFactoryService } from "./createCatalogFactoryService";
+

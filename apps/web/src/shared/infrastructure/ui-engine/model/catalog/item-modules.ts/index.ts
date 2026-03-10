@@ -28,3 +28,4 @@ export type CatalogItemModule =
     | CatalogVisualModule;
 
 export type CatalogItemModuleType = CatalogItemModule["type"];
+

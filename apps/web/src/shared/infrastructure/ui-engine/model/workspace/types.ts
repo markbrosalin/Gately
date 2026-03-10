@@ -32,3 +32,4 @@ export type WorkspaceTabSession = Timestamps & {
     navigationPath: string[];
     settings?: WorkspaceTabSessionSettings;
 };
+

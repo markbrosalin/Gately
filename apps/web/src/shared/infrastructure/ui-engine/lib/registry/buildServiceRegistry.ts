@@ -4,7 +4,7 @@ import type {
     ServiceGetter,
     UIEngineContext,
     UIEngineHooks,
-} from "../../model/types";
+} from "../../model";
 
 type ServiceRegistryContext = {
     getService: UIEngineContext["getService"];
@@ -117,3 +117,4 @@ export const buildContextServiceRegistry = <
         onError: options.ctx.external.hooks?.onError,
     });
 };
+

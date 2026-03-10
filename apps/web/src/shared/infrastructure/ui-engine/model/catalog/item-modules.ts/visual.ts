@@ -39,3 +39,4 @@ export type CatalogVisualModule<TState extends string = string> = {
     config: CatalogVisualConfig<TState>;
     extensions?: CatalogExtensions;
 };
+

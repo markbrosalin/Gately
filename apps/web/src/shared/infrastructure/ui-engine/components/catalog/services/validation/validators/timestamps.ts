@@ -31,3 +31,5 @@ export const validateOptionalTimestamps = (
         pushIssues(result, catalogValidationIssues.updatedAtInvalid(path));
     }
 };
+
+

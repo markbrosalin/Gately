@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getEdgeData, resolveEdgeEndpoints } from "../../lib/connecting/edgeLink";
-import type { EdgeData, UIEnginePlugin } from "../../model/types";
+import type { EdgeData, UIEnginePlugin } from "../../model";
 
 export const edgeLifecycleCachePlugin: UIEnginePlugin = {
     name: "tools:edgeLifecycleCachePlugin",
@@ -43,3 +43,4 @@ export const edgeLifecycleCachePlugin: UIEnginePlugin = {
         };
     },
 };
+

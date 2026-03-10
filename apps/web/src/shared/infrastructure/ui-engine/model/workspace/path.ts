@@ -5,3 +5,4 @@ export const getRootWorkspaceId = (path: string[]): string | undefined => {
 export const getParentWorkspaceId = (path: string[]): string | undefined => {
     return path.at(-1);
 };
+

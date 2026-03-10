@@ -36,3 +36,4 @@ describe("validateRefValue", () => {
         expect(result.issues[0]?.path).toEqual(["items", 0, "ref", "libraryId"]);
     });
 });
+

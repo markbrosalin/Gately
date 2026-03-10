@@ -5,3 +5,4 @@ export type CatalogValidationResult<TSubject extends string = string> = SubjectI
     TSubject,
     Issue
 >;
+

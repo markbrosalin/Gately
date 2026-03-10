@@ -116,3 +116,4 @@ export const attachWorkspaceGraphInteractions = (
         window.removeEventListener("keydown", onKeyDown);
     };
 };
+

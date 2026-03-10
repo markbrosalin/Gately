@@ -6,3 +6,5 @@ export type GraphDocumentCreateInput = Pick<GraphDocument, "workspaceId"> &
 export type GraphDocumentFactoryService = {
     createDocument: (input: GraphDocumentCreateInput) => GraphDocument;
 };
+
+

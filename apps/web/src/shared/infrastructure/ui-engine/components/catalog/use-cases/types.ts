@@ -28,3 +28,4 @@ export type CatalogUseCases = {
     exportBundle: CatalogExportBundleUseCase;
     exportCatalog: CatalogExportCatalogUseCase;
 };
+

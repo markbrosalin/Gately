@@ -4,7 +4,7 @@ import { makeGraphOptions } from "../../graph-options/graphOptions";
 import type { EngineSignalEvent } from "@gately/shared/types";
 import { buildGraphServices } from "./services";
 import { applyPlugins } from "../../plugins";
-import type { UIEngineContext, PinUpdate, UIScopeSnapshot } from "../../model/types";
+import type { UIEngineContext, PinUpdate, UIScopeSnapshot } from "../../model";
 
 export const createGraphRuntime = (container: HTMLDivElement, ctx: UIEngineContext) => {
     const graph = new Graph(makeGraphOptions(container, ctx));
@@ -63,3 +63,4 @@ export const createGraphRuntime = (container: HTMLDivElement, ctx: UIEngineConte
         dispose,
     };
 };
+

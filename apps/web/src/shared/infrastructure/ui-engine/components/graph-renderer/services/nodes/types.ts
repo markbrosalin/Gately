@@ -1,5 +1,5 @@
 import type { Node } from "@antv/x6";
-import type { UIEngineNodeData, UIEngineNodeProps } from "@engine-model/types";
+import type { UIEngineNodeData, UIEngineNodeProps } from "@engine-model";
 
 export type GraphRendererNodesService = {
     createNode: (props: UIEngineNodeProps) => Node;
@@ -7,3 +7,5 @@ export type GraphRendererNodesService = {
     removeNode: (nodeId: string) => void;
     updateNodeData: (nodeId: string, patch: Partial<UIEngineNodeData>) => void;
 };
+
+

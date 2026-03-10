@@ -33,3 +33,5 @@ export type CatalogQueryService = {
     findItemsByKind: (kind: CatalogItemKind) => CatalogItem[];
     findItemsByModuleType: (moduleType: CatalogItemModuleType) => CatalogItem[];
 };
+
+

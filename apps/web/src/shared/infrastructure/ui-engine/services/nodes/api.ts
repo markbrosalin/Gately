@@ -1,5 +1,5 @@
 import type { Graph, Node } from "@antv/x6";
-import type { UIEngineContext, UIEngineNodeData, UIEngineNodeProps } from "../../model/types";
+import type { UIEngineContext, UIEngineNodeData, UIEngineNodeProps } from "../../model";
 import { buildNodeProps } from "./lib/propsBuilder";
 
 export type NodeService = ReturnType<typeof useNodeService>;
@@ -58,3 +58,4 @@ export const useNodeService = (graph: Graph, _ctx: UIEngineContext) => {
 
     return { createNode, removeNode, getNode, updateNodeData, getNodeHash };
 };
+

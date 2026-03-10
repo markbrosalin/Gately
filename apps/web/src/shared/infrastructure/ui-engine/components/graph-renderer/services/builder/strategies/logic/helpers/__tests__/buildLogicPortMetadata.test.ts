@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { createPortMetadata } from "../portMetadata";
+import { buildLogicPortMetadata } from "../buildLogicPortMetadata";
 
-describe("createPortMetadata", () => {
+describe("buildLogicPortMetadata", () => {
     it("builds metadata with default anchor, label and signal class", () => {
-        const result = createPortMetadata(
+        const result = buildLogicPortMetadata(
             {
                 id: "in-0",
                 title: "A",
@@ -27,7 +27,7 @@ describe("createPortMetadata", () => {
 
     it("maps vertical offsets for top and bottom anchors", () => {
         expect(
-            createPortMetadata(
+            buildLogicPortMetadata(
                 {
                     id: "top-0",
                     anchor: "top",
@@ -43,3 +43,4 @@ describe("createPortMetadata", () => {
         });
     });
 });
+

@@ -3,7 +3,7 @@ import type {
     UIEngineContext,
     UIEngineErrorEvent,
     UIEngineLifecycleEvent,
-} from "../../model/types";
+} from "../../model";
 import { createGraphRuntime } from "./createGraphRuntime";
 
 type GraphRuntimeHostDeps = {
@@ -102,3 +102,4 @@ export const createGraphRuntimeHost = ({
         dispose,
     };
 };
+

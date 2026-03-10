@@ -21,3 +21,5 @@ export const createCatalogValidationService = (): CatalogValidationService => {
         validateDocument: (document: CatalogDocument) => validateDocumentValue(document),
     };
 };
+
+

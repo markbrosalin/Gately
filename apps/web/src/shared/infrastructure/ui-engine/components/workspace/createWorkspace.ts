@@ -24,3 +24,4 @@ export const createWorkspace = (deps: WorkspaceDeps) => {
         updateTitle: useCases.updateTitle,
     } satisfies WorkspaceApi;
 };
+

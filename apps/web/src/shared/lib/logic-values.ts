@@ -21,3 +21,4 @@ export const toLogicValueClass = (value?: LogicValue | null): LogicValueClass =>
     if (!value) return "value-x";
     return CLASS_BY_LOGIC_VALUE[value] ?? "value-x";
 };
+

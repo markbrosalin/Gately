@@ -44,3 +44,4 @@ describe("getCompositionDependencies", () => {
         expect(getCompositionDependencies(item)).toEqual([]);
     });
 });
+

@@ -22,3 +22,4 @@ export const BUFFER_VISUAL = createVisualBinding({
         },
     },
 });
+

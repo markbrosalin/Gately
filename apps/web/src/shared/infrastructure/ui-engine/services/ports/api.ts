@@ -8,7 +8,7 @@ import {
     pinRefToPortId,
     setValueClassToPort,
 } from "../../lib";
-import type { LogicValueClass, PinRef, PinSide, UIEngineContext } from "../../model/types";
+import type { LogicValueClass, PinRef, PinSide, UIEngineContext } from "../../model";
 
 export type PortService = ReturnType<typeof usePortService>;
 
@@ -67,3 +67,4 @@ export const usePortService = (_graph: Graph, ctx: UIEngineContext) => {
         readSignalsFromNode,
     };
 };
+

@@ -16,3 +16,5 @@ export type WorkspaceFactoryService = {
     createCircuitWorkspace: (data: WorkspaceCircuitFactoryInput) => Workspace;
     createTabSession: (data: WorkspaceTabSessionCreateInput) => WorkspaceTabSession;
 };
+
+

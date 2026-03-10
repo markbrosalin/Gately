@@ -19,3 +19,4 @@ export const XNOR_LOGIC_ITEM = buildStdLogicItem({
     }),
     visual: buildStdIconVisual(XNOR_LOGIC_ICON_PATH),
 });
+

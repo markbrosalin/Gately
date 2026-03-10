@@ -1,5 +1,5 @@
 import { resolveDependencyOrder } from "./resolveDependencyOrder";
-import type { UIEngineHooks } from "../../model/types";
+import type { UIEngineHooks } from "../../model";
 
 export type OrderedDependencyDefinition<TName extends string, TRequirement extends string = never> = {
     name: TName;
@@ -96,3 +96,4 @@ export const applyDependencyDefinitions = <
 
     return disposers;
 };
+

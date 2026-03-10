@@ -12,3 +12,4 @@ interface ZoomLimits {
 export function canZoom(deltaY: number, currValue: number, { min, max }: ZoomLimits): boolean {
     return (deltaY < 0 && currValue < max) || (deltaY > 0 && currValue > min);
 }
+

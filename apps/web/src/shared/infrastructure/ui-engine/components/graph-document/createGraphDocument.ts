@@ -19,3 +19,4 @@ export const createGraphDocument = (deps: GraphDocumentDeps) => {
         exportDocument: useCases.exportDocument,
     } satisfies GraphDocumentApi;
 };
+

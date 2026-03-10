@@ -73,3 +73,4 @@ export const LAMP_VISUAL = createVisualBinding<FullLogicState>({
     },
     resolveState: resolveSingleInputState,
 });
+

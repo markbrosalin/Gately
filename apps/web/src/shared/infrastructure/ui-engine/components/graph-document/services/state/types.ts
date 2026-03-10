@@ -8,3 +8,5 @@ export type GraphDocumentStateService = {
     setContentJson: (workspaceId: string, contentJson: string) => void;
     setViewport: (workspaceId: string, viewport: GraphDocument["viewport"]) => void;
 };
+
+

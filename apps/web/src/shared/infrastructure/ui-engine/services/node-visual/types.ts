@@ -1,7 +1,7 @@
 import type { Node } from "@antv/x6";
 import type { LogicValue } from "@cnbn/schema";
 import type { AnyVisualBinding, VisualBinding, VisualResolvedState } from "../../model/visual";
-import type { PinSide } from "../../model/types";
+import type { PinSide } from "../../model";
 
 export type RegisterVisualPresetOptions = {
     replace?: boolean;
@@ -39,3 +39,4 @@ export type VisualServiceContract = {
     unmountNode: (node: Node) => void;
     updateByNodeId: (nodeId: string) => VisualResolvedState<string> | undefined;
 };
+

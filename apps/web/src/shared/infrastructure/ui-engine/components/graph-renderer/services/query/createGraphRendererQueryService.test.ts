@@ -22,3 +22,4 @@ describe("createGraphRendererQueryService", () => {
         expect(query.graph()).toBe(graph);
     });
 });
+

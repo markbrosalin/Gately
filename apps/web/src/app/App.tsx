@@ -16,3 +16,4 @@ export const App: Component = () => {
         </AppProvider>
     );
 };
+

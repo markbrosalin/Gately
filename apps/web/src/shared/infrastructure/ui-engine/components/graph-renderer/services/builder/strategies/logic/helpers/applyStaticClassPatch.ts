@@ -30,3 +30,4 @@ export const applyStaticClassPatch = (
 
     return next;
 };
+

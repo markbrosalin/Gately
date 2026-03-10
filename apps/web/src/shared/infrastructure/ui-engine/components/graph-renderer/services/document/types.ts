@@ -9,3 +9,5 @@ export type GraphRendererDocumentService = {
     loadDocument: (input: GraphRendererDocumentLoadInput) => void;
     exportDocument: (workspaceId: string) => GraphDocument;
 };
+
+

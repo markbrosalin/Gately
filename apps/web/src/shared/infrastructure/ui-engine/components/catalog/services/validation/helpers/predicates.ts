@@ -13,3 +13,4 @@ export const isPositiveFiniteNumber = (value: unknown): value is number => {
 export const isNonNegativeFiniteNumber = (value: unknown): value is number => {
     return typeof value === "number" && Number.isFinite(value) && value >= 0;
 };
+

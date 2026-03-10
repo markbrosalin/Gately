@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { UIEnginePlugin } from "../../model/types";
+import type { UIEnginePlugin } from "../../model";
 
 export const nodeInteractionPlugin: UIEnginePlugin = {
     name: "behavior:nodeInteraction",
@@ -20,3 +20,4 @@ export const nodeInteractionPlugin: UIEnginePlugin = {
         };
     },
 };
+

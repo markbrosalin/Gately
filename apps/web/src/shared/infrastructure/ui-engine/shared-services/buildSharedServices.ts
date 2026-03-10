@@ -33,3 +33,4 @@ export const buildSharedServices = (hooks?: UIEngineHooks) => {
         },
     );
 };
+

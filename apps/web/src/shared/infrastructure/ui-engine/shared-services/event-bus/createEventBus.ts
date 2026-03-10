@@ -1,4 +1,4 @@
-import type { UIEngineHooks } from "../../model/types";
+import type { UIEngineHooks } from "../../model";
 import type { UIEngineEventListener, UIEngineEventMap, UIEngineEventName } from "../../model/events";
 import type { EventBusHandleContract, EventBusServiceContract } from "./types";
 
@@ -99,3 +99,4 @@ export const createEventBus = (hooks?: UIEngineHooks): EventBusServiceContract =
         scope: createHandle,
     };
 };
+

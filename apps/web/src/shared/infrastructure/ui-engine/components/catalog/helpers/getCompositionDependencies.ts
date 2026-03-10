@@ -25,3 +25,5 @@ export const getCompositionDependencies = (item: CatalogItem): CatalogItemRef[] 
 
     return [...refsByKey.values()];
 };
+
+

@@ -11,3 +11,4 @@ export const usePreventEvent = (isolate: boolean | undefined = true) => {
 
     return { stopPropagation, preventDefault };
 };
+

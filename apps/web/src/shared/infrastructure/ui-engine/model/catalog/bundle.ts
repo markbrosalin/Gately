@@ -29,3 +29,4 @@ export type CatalogBundleDocument = {
     libraries: CatalogBundleLibrary[];
     extensions?: CatalogExtensions;
 };
+

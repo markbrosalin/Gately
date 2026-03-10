@@ -7,3 +7,4 @@ export type ProtocolHub<TContribution> = {
     register: ProtocolRegister<TContribution>;
     values: () => TContribution[];
 };
+

@@ -90,7 +90,8 @@ export const createTestCompositionItem = ({
         modules.push({
             type: "ports",
             config: {
-                items: [],
+                inputs: [],
+                outputs: [],
             },
         });
     }

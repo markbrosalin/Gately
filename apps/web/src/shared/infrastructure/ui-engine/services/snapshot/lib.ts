@@ -54,3 +54,4 @@ export const applySnapshot = (graph: Graph, snapshot: UIScopeSnapshot): void => 
     graph.zoomTo(snapshot.viewport.zoom);
     graph.translate(snapshot.viewport.tx, snapshot.viewport.ty);
 };
+

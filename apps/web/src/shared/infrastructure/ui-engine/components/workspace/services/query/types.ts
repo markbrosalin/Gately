@@ -25,3 +25,5 @@ export type WorkspaceQueryService = {
     getActiveWorkspace: () => Workspace | undefined;
     getActiveTabSession: () => WorkspaceTabSession | undefined;
 };
+
+

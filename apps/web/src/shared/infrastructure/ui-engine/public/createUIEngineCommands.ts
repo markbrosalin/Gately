@@ -1,6 +1,6 @@
 import type { ItemBuilderResult } from "@cnbn/engine";
 import { getNodeKindByHash } from "../model";
-import type { UIEngineContext, UIEngineErrorEvent } from "../model/types";
+import type { UIEngineContext, UIEngineErrorEvent } from "../model";
 import type { createGraphRuntimeHost } from "../components/graph-runtime";
 import type { createWorkspace } from "../components/workspace";
 import type { UIEnginePublicApi } from "./types";
@@ -97,3 +97,4 @@ export const createUIEngineCommands = ({
         },
     };
 };
+

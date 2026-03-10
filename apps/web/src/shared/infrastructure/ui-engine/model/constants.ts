@@ -1,6 +1,6 @@
-import type { UIScopeSnapshot } from "./types";
+import type { UIScopeSnapshot } from "./workspace";
 import type { LogicValue } from "@cnbn/schema";
-import type { EdgeRouterMode, LogicValueClass } from "./types";
+import type { EdgeRouterMode, LogicValueClass } from "./graph-renderer";
 
 export const NODE_PORT_LAYOUTS = {
     left: "logic-left",
@@ -38,3 +38,4 @@ export const DEFAULT_SCOPE_SNAPSHOT: UIScopeSnapshot = {
 export const STROKE_WIDTH = 2;
 export const NODE_INSET = STROKE_WIDTH / 2;
 export const GRID_SIZE = 16;
+

@@ -14,3 +14,4 @@ export type GraphDocumentUseCases = {
     importDocument: GraphDocumentImportDocumentUseCase;
     exportDocument: GraphDocumentExportDocumentUseCase;
 };
+

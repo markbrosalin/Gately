@@ -47,3 +47,4 @@ export const useTabCtx = () => {
     if (!ctx) throw new Error("useTabCtx must be used within a TabProvider");
     return ctx;
 };
+

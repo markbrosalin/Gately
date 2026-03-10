@@ -19,3 +19,4 @@ const TabTitleInput: Component = () => {
 };
 
 export default TabTitleInput;
+

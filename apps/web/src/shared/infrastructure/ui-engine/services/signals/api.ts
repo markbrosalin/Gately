@@ -1,6 +1,6 @@
 import type { Graph } from "@antv/x6";
 import type { EngineSignalEvent } from "@gately/shared/types";
-import type { PinUpdate, UIEngineContext } from "../../model/types";
+import type { PinUpdate, UIEngineContext } from "../../model";
 import { SIMULATION_BATCH_APPLIED_EVENT } from "../../model/events";
 
 export type SignalService = ReturnType<typeof useSignalService>;
@@ -68,3 +68,4 @@ export const useSignalService = (_graph: Graph, ctx: UIEngineContext) => {
         applyEvents,
     };
 };
+

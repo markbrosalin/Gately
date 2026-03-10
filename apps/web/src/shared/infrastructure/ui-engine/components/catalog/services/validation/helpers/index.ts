@@ -5,3 +5,4 @@ export {
     isNonNegativeFiniteNumber,
     isFiniteNumber,
 } from "./predicates";
+

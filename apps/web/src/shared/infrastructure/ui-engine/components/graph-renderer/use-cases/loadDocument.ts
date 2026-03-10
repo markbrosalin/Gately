@@ -55,3 +55,5 @@ export const createLoadDocumentUseCase = ({
         return createOkResult(nextDocument);
     };
 };
+
+

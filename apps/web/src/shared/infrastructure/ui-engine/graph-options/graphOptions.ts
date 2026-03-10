@@ -1,6 +1,6 @@
 import { GraphManual } from "@antv/x6";
 import { createConnectingConfig } from "./connecting";
-import type { UIEngineContext } from "../model/types";
+import type { UIEngineContext } from "../model";
 import { GRID_SIZE } from "../model";
 
 export const makeGraphOptions = (
@@ -42,3 +42,4 @@ export const makeGraphOptions = (
         contentContainer.addEventListener("mousedown", () => node.toFront());
     },
 });
+

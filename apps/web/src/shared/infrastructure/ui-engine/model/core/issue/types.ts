@@ -10,3 +10,4 @@ export type IssueDefinition<TParams = void> = {
     code: string;
     message: string | ((params: TParams) => string);
 };
+

@@ -55,3 +55,5 @@ export type CatalogFactoryService = {
     createLibrary: (input: CatalogCreateLibraryInput) => Model.CatalogLibraryDocument;
     createItem: (input: CatalogCreateItemInput) => Model.CatalogItem;
 };
+
+

@@ -18,3 +18,4 @@ export const bindWheelZoom = (props: {
         props.element.removeEventListener("wheel", wheel);
     };
 };
+

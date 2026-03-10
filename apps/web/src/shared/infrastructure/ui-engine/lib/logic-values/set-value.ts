@@ -30,3 +30,4 @@ export const setValueClassToPort = ({
     const merged = `${base} ${valueClass}`.trim();
     node.setPortProp(portId, "attrs/circle/class", merged);
 };
+

@@ -22,3 +22,4 @@ export const createVisualBinding = <TState extends string>(
             options.resolveState ?? ((() => "default") as unknown as VisualStateResolver<TState>),
     };
 };
+

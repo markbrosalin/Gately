@@ -26,3 +26,4 @@ export const LOGIC_LOGIC_ITEMS = [
     XOR_LOGIC_ITEM,
     XNOR_LOGIC_ITEM,
 ];
+

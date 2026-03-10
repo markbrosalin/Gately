@@ -26,3 +26,4 @@ export const useViewportBinding = ({ drag, zoom, options }: ReturnType<typeof us
 
     return { bindDrag, bindZoom };
 };
+

@@ -17,3 +17,4 @@ export function useListScroller() {
     if (!ctx) throw new Error("ListScroller components must be used inside <ListScroller.Root>");
     return ctx;
 }
+

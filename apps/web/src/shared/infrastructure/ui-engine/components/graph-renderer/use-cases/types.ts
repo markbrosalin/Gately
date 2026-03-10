@@ -14,3 +14,4 @@ export type GraphRendererUseCases = {
     loadDocument: GraphRendererLoadDocumentUseCase;
     exportDocument: GraphRendererExportDocumentUseCase;
 };
+

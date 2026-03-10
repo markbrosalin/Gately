@@ -63,3 +63,4 @@ export type AnyVisualBinding = VisualBinding<any>;
 
 export type BinaryVisualState = "on" | "off";
 export type FullLogicState = "on" | "off" | "error" | "high-z";
+
