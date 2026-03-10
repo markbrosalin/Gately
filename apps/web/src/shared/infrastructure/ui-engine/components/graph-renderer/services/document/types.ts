@@ -1,4 +1,4 @@
-import type { GraphDocument } from "@engine-model";
+import type { GraphDocument } from "@engine-model/graph-document";
 
 export type GraphRendererDocumentLoadInput = {
     document: GraphDocument;

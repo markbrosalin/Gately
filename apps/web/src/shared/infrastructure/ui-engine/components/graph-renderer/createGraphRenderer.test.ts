@@ -2,7 +2,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { buildSharedServices } from "../../shared-services";
 import { createGraphRenderer } from "./createGraphRenderer";
-import { GRAPH_DOCUMENT_FORMAT_VERSION, type GraphDocument } from "@engine-model";
+import { GRAPH_DOCUMENT_FORMAT_VERSION, type GraphDocument } from "@engine-model/graph-document";
 import { BUFFER_LOGIC_ITEM } from "@engine-presets/std-library/logic/logic/buffer";
 
 const graphInstances: Array<{

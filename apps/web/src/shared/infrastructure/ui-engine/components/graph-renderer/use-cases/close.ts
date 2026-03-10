@@ -1,4 +1,5 @@
-import { createOkResult, type Result, type UseCase } from "@engine-model";
+import { createOkResult, type Result } from "@engine-model/core/result";
+import type { UseCase } from "@engine-model/core/use-case";
 import type { GraphRendererUseCaseDeps } from "./types";
 
 type GraphRendererCloseResult = Result;

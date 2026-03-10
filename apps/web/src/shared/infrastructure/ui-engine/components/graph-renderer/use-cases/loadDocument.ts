@@ -1,10 +1,10 @@
 import {
     createErrResult,
     createOkResult,
-    type GraphDocument,
     type Result,
-    type UseCase,
-} from "@engine-model";
+} from "@engine-model/core/result";
+import type { UseCase } from "@engine-model/core/use-case";
+import type { GraphDocument } from "@engine-model/graph-document";
 import { parseGraphRendererDocumentContentJson } from "../services/document";
 import { graphRendererUseCaseIssues } from "./issues";
 import type { GraphRendererUseCaseDeps } from "./types";

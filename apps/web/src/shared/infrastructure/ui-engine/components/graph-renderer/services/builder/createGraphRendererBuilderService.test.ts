@@ -1,4 +1,5 @@
-import { createBaseNodeMarkup, STROKE_WIDTH } from "@engine-model";
+import { STROKE_WIDTH } from "@engine-model/constants";
+import { createBaseNodeMarkup } from "@engine-model/nodes-spec";
 import type { CatalogAnnotationItem, CatalogLogicItem } from "@engine-model/catalog";
 import {
     BUFFER_LOGIC_ICON_PATH,

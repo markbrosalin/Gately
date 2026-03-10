@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { createBaseNodeMarkup } from "@engine-model/nodes-spec";
 import { buildLogicNodeShell } from "../buildLogicNodeShell";
-import { createBaseNodeMarkup } from "@engine-model";
 
 describe("buildLogicNodeShell", () => {
     it("builds the default logic shell markup and attrs", () => {

@@ -1,10 +1,9 @@
+import { DEFAULT_VALUE_CLASS } from "@engine-model/constants";
+import type { PinSide } from "@engine-model/graph-renderer";
 import type { CatalogPortAnchor, CatalogPortSpec } from "@engine-model/catalog";
-import { DEFAULT_VALUE_CLASS } from "@engine-model";
 import type { LabelMetadata, PortMetadata } from "@antv/x6/lib/model/port";
-import { buildPortClass } from "../../../../../../../lib/ports/buildPortClass";
+import { buildPortClass } from "./buildPortClass";
 import { PORT_LABEL_MARKUP } from "../../../constants";
-
-type PinSide = "input" | "output";
 
 const resolvePortAnchor = (port: CatalogPortSpec, side: PinSide): CatalogPortAnchor => {
     return port.anchor ?? (side === "input" ? "left" : "right");

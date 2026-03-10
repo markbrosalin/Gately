@@ -1,10 +1,12 @@
 import {
     createErrResult,
     createOkResult,
+    type Result,
+} from "@engine-model/core/result";
+import {
     GRAPH_DOCUMENT_FORMAT_VERSION,
-    Result,
     type GraphDocument,
-} from "@engine-model";
+} from "@engine-model/graph-document";
 import type { GraphRendererInstanceService } from "../instance";
 import type { GraphRendererDocumentLoadInput, GraphRendererDocumentService } from "./types";
 

@@ -1,4 +1,5 @@
-import { STROKE_WIDTH, type UIEngineNodeProps } from "@engine-model";
+import { STROKE_WIDTH } from "@engine-model/constants";
+import type { UIEngineNodeProps } from "@engine-model/graph-renderer";
 import type { CatalogLogicItem, CatalogItemLayout } from "@engine-model/catalog";
 import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 import { DEFAULT_NODE_POSITION } from "../../constants";

@@ -1,5 +1,6 @@
 export * from "./applyCatalogVisualPatch";
 export * from "./applyStaticClassPatch";
+export * from "./buildPortClass";
 export * from "./buildLogicNodeShell";
 export * from "./buildLogicPortMetadata";
 export * from "./buildLogicPorts";

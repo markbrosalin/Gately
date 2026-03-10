@@ -1,5 +1,5 @@
 import type { Node } from "@antv/x6";
-import type { UIEngineNodeData, UIEngineNodeProps } from "@engine-model";
+import type { UIEngineNodeData, UIEngineNodeProps } from "@engine-model/graph-renderer";
 import type { GraphRendererInstanceService } from "../instance";
 import type { GraphRendererNodesService } from "./types";
 

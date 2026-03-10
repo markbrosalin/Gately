@@ -1,5 +1,5 @@
 import type { CatalogItem } from "@engine-model/catalog";
-import { baseNodePorts } from "@engine-model";
+import { baseNodePorts } from "@engine-model/nodes-spec";
 import { getPortsModule } from "../../../helpers";
 import { buildLogicPortMetadata } from "./buildLogicPortMetadata";
 
