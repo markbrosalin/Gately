@@ -1,4 +1,4 @@
-import { createIssue } from "engine-model/core/issue";
+import { createIssue } from "@engine-model/core/issue";
 
 export const graphRendererUseCaseIssueDefs = {
     rendererNotOpen: {

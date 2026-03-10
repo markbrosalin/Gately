@@ -1,9 +1,6 @@
-import type {
-    CatalogBundleDocument,
-    CatalogLibraryDocument,
-} from "engine-model/catalog";
-import type { UseCase, Result } from "engine-model";
-import { createErrResult, createOkResult } from "engine-model";
+import type { CatalogBundleDocument, CatalogLibraryDocument } from "@engine-model/catalog";
+import type { UseCase, Result } from "@engine-model";
+import { createErrResult, createOkResult } from "@engine-model";
 import { createImportLibraryUseCase } from "./importLibrary";
 import type { CatalogImportStrategy, CatalogUseCaseDeps } from "./types";
 

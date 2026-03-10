@@ -1,5 +1,5 @@
-import { createIssue } from "engine-model/core/issue";
-import type { CatalogPortsSide } from "engine-model/catalog";
+import { createIssue } from "@engine-model/core/issue";
+import type { CatalogPortsSide } from "@engine-model/catalog";
 
 export const catalogValidationIssueDefs = {
     createdAtInvalid: {

@@ -1,7 +1,4 @@
-import {
-    type Workspace,
-    type WorkspaceTabSession,
-} from "engine-model";
+import { type Workspace, type WorkspaceTabSession } from "@engine-model";
 import {
     WorkspaceCircuitFactoryInput,
     WorkspaceFactoryService,

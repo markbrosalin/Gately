@@ -1,9 +1,5 @@
 import { createStore, produce } from "solid-js/store";
-import type {
-    CatalogDocument,
-    CatalogItem,
-    CatalogLibraryDocument,
-} from "engine-model/catalog";
+import type { CatalogDocument, CatalogItem, CatalogLibraryDocument } from "@engine-model/catalog";
 import { createCatalogDocument } from "../../helpers/createCatalogDocument";
 import { isSameItemRef } from "../../helpers/isSameItemRef";
 import type { CatalogStateService } from "./types";

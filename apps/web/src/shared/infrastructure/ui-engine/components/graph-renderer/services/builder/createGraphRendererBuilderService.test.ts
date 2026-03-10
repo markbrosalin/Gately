@@ -1,9 +1,9 @@
-import { createBaseNodeMarkup, STROKE_WIDTH } from "engine-model";
-import type { CatalogLogicItem } from "engine-model/catalog";
+import { createBaseNodeMarkup, STROKE_WIDTH } from "@engine-model";
+import type { CatalogLogicItem } from "@engine-model/catalog";
 import {
     BUFFER_LOGIC_ICON_PATH,
     BUFFER_LOGIC_ITEM,
-} from "engine-components/catalog/specs/std-library/logic/logic/buffer";
+} from "@engine-components/catalog/specs/std-library/logic/logic/buffer";
 import { describe, expect, it, vi } from "vitest";
 import { createGraphRendererBuilderApi } from "./createGraphRendererBuilderService";
 

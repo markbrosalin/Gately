@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CATALOG_FORMAT_VERSION } from "engine-model/catalog";
+import { CATALOG_FORMAT_VERSION } from "@engine-model/catalog";
 import { catalogValidationIssueDefs } from "../../issues";
 import { validateLibraryValue } from "../library";
 

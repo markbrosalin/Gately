@@ -1,8 +1,5 @@
-import type {
-    WorkspaceTabCloseConditions,
-    WorkspaceTabSession,
-} from "engine-model";
-import { createErrResult, createOkResult, type Result, type UseCase } from "engine-model";
+import type { WorkspaceTabCloseConditions, WorkspaceTabSession } from "@engine-model";
+import { createErrResult, createOkResult, type Result, type UseCase } from "@engine-model";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";
 

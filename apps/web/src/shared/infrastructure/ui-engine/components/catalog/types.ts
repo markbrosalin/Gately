@@ -1,4 +1,4 @@
-import { ComponentDeps } from "engine-model";
+import { ComponentDeps } from "@engine-model";
 import * as Services from "./services";
 import type {
     CatalogCreateItemUseCase,

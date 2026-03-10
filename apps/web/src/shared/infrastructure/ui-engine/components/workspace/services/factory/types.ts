@@ -1,4 +1,4 @@
-import type { Workspace, WorkspaceTabSession } from "engine-model";
+import type { Workspace, WorkspaceTabSession } from "@engine-model";
 
 export type WorkspaceCircuitFactoryInput = Pick<Workspace, "id" | "title" | "path"> &
     Partial<Pick<Workspace, "childrenIds">>;

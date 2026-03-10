@@ -1,14 +1,12 @@
 import { describe, expect, it } from "vitest";
-import type { Workspace } from "engine-model";
+import type { Workspace } from "@engine-model";
 import {
     collectWorkspaceTree,
     collectWorkspaceTreeByQuery,
     collectWorkspaceTreeIds,
 } from "./collectWorkspaceTree";
 
-const createWorkspace = (
-    overrides: Partial<Workspace> & Pick<Workspace, "id">,
-): Workspace => ({
+const createWorkspace = (overrides: Partial<Workspace> & Pick<Workspace, "id">): Workspace => ({
     id: overrides.id,
     kind: overrides.kind ?? "tab",
     title: overrides.title ?? overrides.id,

@@ -4,7 +4,7 @@ import {
     type Result,
     type UseCase,
     type WorkspaceTabDocument,
-} from "engine-model";
+} from "@engine-model";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";
 

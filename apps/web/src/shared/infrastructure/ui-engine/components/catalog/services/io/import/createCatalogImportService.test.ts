@@ -3,7 +3,7 @@ import type {
     CatalogBundleDocument,
     CatalogDocument,
     CatalogValidationResult,
-} from "engine-model/catalog";
+} from "@engine-model/catalog";
 import {
     createTestBundle,
     createTestCompositionItem,

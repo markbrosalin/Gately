@@ -1,7 +1,7 @@
-import type { CatalogItem } from "engine-model/catalog";
+import type { CatalogItem } from "@engine-model/catalog";
 import type { Node } from "@antv/x6";
-import { createErrResult, createOkResult, type Result, type UseCase } from "engine-model";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+import { createErrResult, createOkResult, type Result, type UseCase } from "@engine-model";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 import { GraphRendererBuilderError, type GraphRendererNodePosition } from "../services/builder";
 import { graphRendererUseCaseIssues } from "./issues";
 import type { GraphRendererUseCaseDeps } from "./types";

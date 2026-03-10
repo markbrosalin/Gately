@@ -5,11 +5,11 @@ import {
     type CatalogBundleDocument,
     type CatalogItem,
     type CatalogItemRef,
-} from "engine-model/catalog";
-import { createErrResult, createOkResult, type Issue } from "engine-model";
+} from "@engine-model/catalog";
+import { createErrResult, createOkResult, type Issue } from "@engine-model";
 import { catalogImportIssues } from "./issues";
 import type { CatalogImportService, CatalogImportServiceDeps } from "./types";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 import { collectDependenciesFromRoots } from "../../../helpers/collectDependenciesFromRoots";
 import { getCompositionDependencies } from "../../../helpers/getCompositionDependencies";
 
@@ -97,10 +97,7 @@ export const createCatalogImportService = ({
         }
     };
 
-    const _pushLibraryIssues = (
-        libraries: CatalogBundleLibrary[],
-        issues: Issue[],
-    ) => {
+    const _pushLibraryIssues = (libraries: CatalogBundleLibrary[], issues: Issue[]) => {
         for (let i = 0; i < libraries.length; i++) {
             const lib = libraries[i];
             const libraryResult = validation.validateLibrary({
@@ -116,10 +113,7 @@ export const createCatalogImportService = ({
         }
     };
 
-    const _pushBundleHeaderIssues = (
-        bundle: CatalogBundleDocument,
-        issues: Issue[],
-    ) => {
+    const _pushBundleHeaderIssues = (bundle: CatalogBundleDocument, issues: Issue[]) => {
         if (bundle.formatVersion !== CATALOG_FORMAT_VERSION) {
             issues.push(catalogImportIssues.bundleFormatVersionInvalid(bundle.formatVersion));
         }

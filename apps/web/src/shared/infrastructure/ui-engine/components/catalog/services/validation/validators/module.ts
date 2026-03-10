@@ -3,7 +3,7 @@ import type {
     CatalogItemModule,
     CatalogCompositionPinRef,
     CatalogPortsSide,
-} from "engine-model/catalog";
+} from "@engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import {
     isFiniteNumber,
@@ -12,7 +12,7 @@ import {
     prefixIssues,
     pushIssues,
 } from "../helpers";
-import type { CatalogValidationResult } from "engine-model/catalog";
+import type { CatalogValidationResult } from "@engine-model/catalog";
 import { validateRefValue } from "./ref";
 
 const ALLOWED_MODULE_TYPES_BY_KIND: Record<CatalogItemKind, CatalogItemModule["type"][]> = {

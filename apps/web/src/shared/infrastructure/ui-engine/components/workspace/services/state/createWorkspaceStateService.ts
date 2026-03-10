@@ -1,9 +1,5 @@
 import { createStore, produce } from "solid-js/store";
-import {
-    getParentWorkspaceId,
-    type Workspace,
-    type WorkspaceTabSession,
-} from "engine-model";
+import { getParentWorkspaceId, type Workspace, type WorkspaceTabSession } from "@engine-model";
 import { collectWorkspaceTreeIds } from "../../helpers";
 import type { WorkspaceStateService } from "./types";
 

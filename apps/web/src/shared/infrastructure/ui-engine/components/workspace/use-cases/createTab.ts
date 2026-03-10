@@ -1,4 +1,4 @@
-import { createErrResult, createOkResult, type AsyncUseCase, type Result } from "engine-model";
+import { createErrResult, createOkResult, type AsyncUseCase, type Result } from "@engine-model";
 import { WorkspaceTabFactoryInput } from "../services";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";

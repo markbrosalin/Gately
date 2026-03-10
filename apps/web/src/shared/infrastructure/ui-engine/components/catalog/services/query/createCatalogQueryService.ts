@@ -8,8 +8,8 @@ import type {
     CatalogItemRef,
     CatalogLibraryDocument,
     CatalogLibrarySummary,
-} from "engine-model/catalog";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+} from "@engine-model/catalog";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 import { isSameItemRef } from "../../helpers/isSameItemRef";
 import { getCompositionDependencies } from "../../helpers/getCompositionDependencies";
 import { collectDependenciesFromRoots } from "../../helpers/collectDependenciesFromRoots";

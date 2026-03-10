@@ -1,4 +1,4 @@
-import type { ComponentServiceContext } from "engine-model";
+import type { ComponentServiceContext } from "@engine-model";
 import type { GraphRendererBuilderService } from "./builder/types";
 import type { GraphRendererDocumentService } from "./document/types";
 import type { GraphRendererNodesService } from "./nodes/types";

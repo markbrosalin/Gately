@@ -1,5 +1,5 @@
-import type { CatalogItem } from "engine-model/catalog";
-import type { UIEngineNodeProps } from "engine-model/types";
+import type { CatalogItem } from "@engine-model/catalog";
+import type { UIEngineNodeProps } from "@engine-model/types";
 import type { XYCoords } from "@gately/shared/types";
 
 export type GraphRendererNodePosition = XYCoords;

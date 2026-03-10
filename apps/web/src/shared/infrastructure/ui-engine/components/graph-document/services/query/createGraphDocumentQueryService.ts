@@ -1,4 +1,4 @@
-import type { GraphDocument } from "engine-model";
+import type { GraphDocument } from "@engine-model";
 import type { GraphDocumentStateService } from "../state";
 import type { GraphDocumentServiceContext } from "../types";
 import type { GraphDocumentQueryService } from "./types";

@@ -1,6 +1,6 @@
-import type { CatalogItem } from "engine-model/catalog";
-import type { UseCase, Result } from "engine-model";
-import { createErrResult, createOkResult } from "engine-model";
+import type { CatalogItem } from "@engine-model/catalog";
+import type { UseCase, Result } from "@engine-model";
+import { createErrResult, createOkResult } from "@engine-model";
 import { catalogUseCaseIssues } from "./issues";
 import type { CatalogUseCaseDeps } from "./types";
 

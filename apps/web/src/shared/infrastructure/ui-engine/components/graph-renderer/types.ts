@@ -1,4 +1,4 @@
-import { ComponentDeps } from "engine-model";
+import { ComponentDeps } from "@engine-model";
 import type { GraphRendererQueryService } from "./services/query";
 import type { GraphRendererCloseUseCase } from "./use-cases/close";
 import type { GraphRendererCreateNodeUseCase } from "./use-cases/createNode";

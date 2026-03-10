@@ -3,8 +3,13 @@ import type {
     CatalogItem,
     CatalogItemRef,
     CatalogLibraryDocument,
-} from "engine-model/catalog";
-import { validateDocumentValue, validateItemValue, validateLibraryValue, validateRefValue } from "./validators";
+} from "@engine-model/catalog";
+import {
+    validateDocumentValue,
+    validateItemValue,
+    validateLibraryValue,
+    validateRefValue,
+} from "./validators";
 import type { CatalogValidationService } from "./types";
 
 /** Validates catalog documents and entities without mutating catalog state. */

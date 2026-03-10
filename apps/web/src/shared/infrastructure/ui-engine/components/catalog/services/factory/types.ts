@@ -1,4 +1,4 @@
-import * as Model from "engine-model/catalog";
+import * as Model from "@engine-model/catalog";
 
 export type CatalogCreateLibraryInput = Pick<Model.CatalogLibraryManifest, "id" | "name"> &
     Partial<Pick<Model.CatalogLibraryManifest, "version" | "description">> & {

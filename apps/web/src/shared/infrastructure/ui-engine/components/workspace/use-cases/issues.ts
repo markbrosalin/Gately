@@ -1,4 +1,4 @@
-import { createIssue } from "engine-model/core/issue";
+import { createIssue } from "@engine-model/core/issue";
 
 export const workspaceUseCaseIssueDefs = {
     logicEngineNotConfigured: {
@@ -45,7 +45,10 @@ export const workspaceUseCaseIssueDefs = {
 
 export const workspaceUseCaseIssues = {
     logicEngineNotConfigured: () =>
-        createIssue(workspaceUseCaseIssueDefs.logicEngineNotConfigured, ["external", "logicEngine"]),
+        createIssue(workspaceUseCaseIssueDefs.logicEngineNotConfigured, [
+            "external",
+            "logicEngine",
+        ]),
     workspaceNotFound: (path: Array<string | number>, workspaceId: string) =>
         createIssue(workspaceUseCaseIssueDefs.workspaceNotFound, path, {
             workspaceId,

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CATALOG_FORMAT_VERSION } from "engine-model/catalog";
+import { CATALOG_FORMAT_VERSION } from "@engine-model/catalog";
 import { catalogValidationIssueDefs } from "../../issues";
 import { validateDocumentValue } from "../document";
 
@@ -25,11 +25,11 @@ describe("validateDocumentValue", () => {
         expect(result.issues.map((issue) => issue.code)).toContain(
             catalogValidationIssueDefs.libraryManifestNameRequired.code,
         );
-        expect(result.issues.find((issue) => issue.code === catalogValidationIssueDefs.libraryManifestNameRequired.code)?.path).toEqual([
-            "libraries",
-            0,
-            "manifest",
-            "name",
-        ]);
+        expect(
+            result.issues.find(
+                (issue) =>
+                    issue.code === catalogValidationIssueDefs.libraryManifestNameRequired.code,
+            )?.path,
+        ).toEqual(["libraries", 0, "manifest", "name"]);
     });
 });

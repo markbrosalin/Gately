@@ -2,7 +2,7 @@ import type {
     CatalogBundleDocument,
     CatalogDocument,
     CatalogLibraryDocument,
-} from "engine-model/catalog";
+} from "@engine-model/catalog";
 import type { CatalogValidationService } from "../../validation";
 import type {
     CatalogImportDocumentResult,

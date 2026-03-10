@@ -1,6 +1,6 @@
-import type { CatalogItemRef } from "engine-model/catalog";
-import { createIssue } from "engine-model/core/issue";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+import type { CatalogItemRef } from "@engine-model/catalog";
+import { createIssue } from "@engine-model/core/issue";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 
 export const catalogUseCaseIssueDefs = {
     libraryAlreadyExists: {

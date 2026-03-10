@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { CatalogItem } from "engine-model/catalog";
+import type { CatalogItem } from "@engine-model/catalog";
 import { createTestCompositionItem, createTestRef } from "../../__tests__/factories";
 import { collectDependenciesFromRoots } from "../collectDependenciesFromRoots";
 import { getCompositionDependencies } from "../getCompositionDependencies";

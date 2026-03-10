@@ -2,10 +2,10 @@ import {
     CATALOG_FORMAT_VERSION,
     type CatalogItem,
     type CatalogBundleLibrary,
-} from "engine-model/catalog";
-import { createErrResult, createOkResult } from "engine-model";
+} from "@engine-model/catalog";
+import { createErrResult, createOkResult } from "@engine-model";
 import { cloneCatalogValue } from "../helpers";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 import { catalogExportIssues } from "./issues";
 import type { CatalogExportService, CatalogExportServiceDeps } from "./types";
 

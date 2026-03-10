@@ -2,8 +2,8 @@ import type {
     CatalogBundleDocument,
     CatalogDocument,
     CatalogLibraryDocument,
-} from "engine-model/catalog";
-import type { Result } from "engine-model";
+} from "@engine-model/catalog";
+import type { Result } from "@engine-model";
 import { CatalogExportService } from "./export";
 import { CatalogImportService } from "./import";
 

@@ -38,11 +38,15 @@ export default defineConfig({
         alias: {
             "@": path.resolve(__dirname, "src"),
             "@gately": path.resolve(__dirname, "src"),
-            "engine-components": path.resolve(
+            "@engine-components": path.resolve(
                 __dirname,
                 "src/shared/infrastructure/ui-engine/components",
             ),
-            "engine-model": path.resolve(__dirname, "src/shared/infrastructure/ui-engine/model"),
+            "@engine-presets": path.resolve(
+                __dirname,
+                "src/shared/infrastructure/ui-engine/presets",
+            ),
+            "@engine-model": path.resolve(__dirname, "src/shared/infrastructure/ui-engine/model"),
         },
         dedupe: ["solid-js"],
     },

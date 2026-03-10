@@ -1,10 +1,7 @@
-import {
-    CATALOG_FORMAT_VERSION,
-    type CatalogDocument,
-} from "engine-model/catalog";
+import { CATALOG_FORMAT_VERSION, type CatalogDocument } from "@engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import { createValidationResult, prefixIssues, pushIssues } from "../helpers";
-import type { CatalogValidationResult } from "engine-model/catalog";
+import type { CatalogValidationResult } from "@engine-model/catalog";
 import { validateLibraryValue } from "./library";
 
 export const validateDocumentValue = (

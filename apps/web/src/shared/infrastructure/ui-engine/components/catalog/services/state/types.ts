@@ -1,8 +1,4 @@
-import type {
-    CatalogDocument,
-    CatalogItem,
-    CatalogLibraryDocument,
-} from "engine-model/catalog";
+import type { CatalogDocument, CatalogItem, CatalogLibraryDocument } from "@engine-model/catalog";
 
 export type CatalogStateService = {
     document: () => CatalogDocument;

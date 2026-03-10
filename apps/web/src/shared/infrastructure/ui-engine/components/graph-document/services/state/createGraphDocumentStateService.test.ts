@@ -3,7 +3,7 @@ import {
     DEFAULT_GRAPH_DOCUMENT_VIEWPORT,
     GRAPH_DOCUMENT_FORMAT_VERSION,
     type GraphDocument,
-} from "engine-model";
+} from "@engine-model";
 import { createGraphDocumentStateService } from "./createGraphDocumentStateService";
 
 const createDocument = (overrides: Partial<GraphDocument> = {}): GraphDocument => ({

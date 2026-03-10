@@ -1,4 +1,4 @@
-import { CatalogBundleDocument } from "engine-model/catalog";
+import { CatalogBundleDocument } from "@engine-model/catalog";
 import type { CatalogQueryService } from "../../query";
 import type {
     CatalogExportBundleResult,

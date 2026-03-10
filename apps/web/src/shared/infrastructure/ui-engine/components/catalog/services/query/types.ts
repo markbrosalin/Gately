@@ -9,7 +9,7 @@ import type {
     CatalogItemRef,
     CatalogLibraryDocument,
     CatalogLibrarySummary,
-} from "engine-model/catalog";
+} from "@engine-model/catalog";
 
 export type CatalogQueryService = {
     document: () => CatalogDocument;

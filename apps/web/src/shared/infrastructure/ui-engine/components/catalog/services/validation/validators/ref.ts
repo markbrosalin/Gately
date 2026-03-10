@@ -1,7 +1,7 @@
-import type { CatalogItemRef } from "engine-model/catalog";
+import type { CatalogItemRef } from "@engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import { createValidationResult, isNonEmptyString, pushIssues } from "../helpers";
-import type { CatalogValidationResult } from "engine-model/catalog";
+import type { CatalogValidationResult } from "@engine-model/catalog";
 
 export const validateRefValue = (
     ref: CatalogItemRef,

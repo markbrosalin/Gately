@@ -1,10 +1,10 @@
-import type {
-    CatalogItem,
-    CatalogLibraryDocument,
-} from "engine-model/catalog";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+import type { CatalogItem, CatalogLibraryDocument } from "@engine-model/catalog";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 
-const mergeLibraryItems = (currentItems: CatalogItem[], importedItems: CatalogItem[]): CatalogItem[] => {
+const mergeLibraryItems = (
+    currentItems: CatalogItem[],
+    importedItems: CatalogItem[],
+): CatalogItem[] => {
     const itemsByRefKey = new Map<string, CatalogItem>();
 
     currentItems.forEach((item) => {

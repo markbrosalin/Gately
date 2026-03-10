@@ -1,7 +1,7 @@
-import type { CatalogLogicItem } from "engine-model/catalog";
+import type { CatalogLogicItem } from "@engine-model/catalog";
 import { describe, expect, it } from "vitest";
 import { createNodeVisual } from "../createNodeVisual";
-import { buildStdLogicItemMarkup } from "engine-components/catalog/specs/std-library";
+import { buildStdLogicItemMarkup } from "@engine-components/catalog/specs/std-library";
 
 const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogicItem => ({
     ref: {

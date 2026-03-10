@@ -1,15 +1,12 @@
-import type { CatalogPortAnchor, CatalogPortSpec } from "engine-model/catalog";
-import { DEFAULT_VALUE_CLASS } from "engine-model";
+import type { CatalogPortAnchor, CatalogPortSpec } from "@engine-model/catalog";
+import { DEFAULT_VALUE_CLASS } from "@engine-model";
 import type { LabelMetadata, PortMetadata } from "@antv/x6/lib/model/port";
 import { buildPortClass } from "../../../../../../lib/ports/buildPortClass";
 import { PORT_LABEL_MARKUP } from "../../constants";
 
 type PortDirection = "input" | "output";
 
-const resolvePortAnchor = (
-    port: CatalogPortSpec,
-    direction: PortDirection,
-): CatalogPortAnchor => {
+const resolvePortAnchor = (port: CatalogPortSpec, direction: PortDirection): CatalogPortAnchor => {
     return port.anchor ?? (direction === "input" ? "left" : "right");
 };
 

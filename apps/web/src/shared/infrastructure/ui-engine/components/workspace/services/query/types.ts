@@ -1,8 +1,4 @@
-import type {
-    Workspace,
-    WorkspaceTabCloseConditions,
-    WorkspaceTabSession,
-} from "engine-model";
+import type { Workspace, WorkspaceTabCloseConditions, WorkspaceTabSession } from "@engine-model";
 
 export type WorkspaceQueryTab = Pick<Workspace, "id" | "title">;
 

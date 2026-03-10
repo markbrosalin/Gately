@@ -1,10 +1,10 @@
-import { STROKE_WIDTH, type UIEngineNodeProps } from "engine-model";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+import { STROKE_WIDTH, type UIEngineNodeProps } from "@engine-model";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 import { useVisualPortLayoutRegistrator } from "../../../../services/node-visual/port-layout-registrator";
 import { DEFAULT_NODE_POSITION } from "./constants";
 import { createNodeVisual, createPorts, ensurePositiveDimension } from "./helpers";
 import type { GraphRendererBuildNodeInput, GraphRendererBuilderService } from "./types";
-import { CatalogItemLayout } from "engine-model/catalog";
+import { CatalogItemLayout } from "@engine-model/catalog";
 
 export const createGraphRendererBuilderApi = (): GraphRendererBuilderService => {
     const ensurePositiveLayoutDimensions = (

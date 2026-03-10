@@ -1,7 +1,7 @@
-import type { CatalogLibraryDocument } from "engine-model/catalog";
+import type { CatalogLibraryDocument } from "@engine-model/catalog";
 import type { CatalogCreateLibraryInput } from "../services";
-import type { Result, UseCase } from "engine-model";
-import { createErrResult, createOkResult } from "engine-model";
+import type { Result, UseCase } from "@engine-model";
+import { createErrResult, createOkResult } from "@engine-model";
 import { catalogUseCaseIssues } from "./issues";
 import type { CatalogUseCaseDeps } from "./types";
 

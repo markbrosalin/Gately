@@ -1,4 +1,4 @@
-import type { Issue } from "engine-model";
+import type { Issue } from "@engine-model";
 
 /** Clones serializable catalog payloads before crossing the IO boundary. */
 export const cloneCatalogValue = <TValue>(value: TValue): TValue =>

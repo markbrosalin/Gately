@@ -1,4 +1,4 @@
-import type { GraphDocument } from "engine-model";
+import type { GraphDocument } from "@engine-model";
 
 export type GraphDocumentCreateInput = Pick<GraphDocument, "workspaceId"> &
     Partial<Pick<GraphDocument, "contentJson" | "viewport" | "extensions">>;

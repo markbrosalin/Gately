@@ -1,7 +1,4 @@
-import {
-    CATALOG_FORMAT_VERSION,
-    type CatalogDocument,
-} from "engine-model/catalog";
+import { CATALOG_FORMAT_VERSION, type CatalogDocument } from "@engine-model/catalog";
 
 export const createCatalogDocument = (
     overrides: Partial<CatalogDocument> = {},

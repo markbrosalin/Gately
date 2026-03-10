@@ -1,5 +1,10 @@
-import { createErrResult, createOkResult, type Result, type WorkspaceTabDocument } from "engine-model";
-import { WORKSPACE_TAB_DOCUMENT_FORMAT_VERSION } from "engine-model/workspace/constants";
+import {
+    createErrResult,
+    createOkResult,
+    type Result,
+    type WorkspaceTabDocument,
+} from "@engine-model";
+import { WORKSPACE_TAB_DOCUMENT_FORMAT_VERSION } from "@engine-model/workspace/constants";
 import { collectWorkspaceTreeByQuery } from "../helpers";
 import { workspaceUseCaseIssues } from "./issues";
 import { type WorkspaceUseCaseDeps } from "./types";

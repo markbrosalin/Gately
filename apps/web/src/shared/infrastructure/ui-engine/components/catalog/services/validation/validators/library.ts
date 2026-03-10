@@ -1,13 +1,10 @@
-import {
-    CATALOG_FORMAT_VERSION,
-    type CatalogLibraryDocument,
-} from "engine-model/catalog";
+import { CATALOG_FORMAT_VERSION, type CatalogLibraryDocument } from "@engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import { createValidationResult, isNonEmptyString, prefixIssues, pushIssues } from "../helpers";
-import type { CatalogValidationResult } from "engine-model/catalog";
+import type { CatalogValidationResult } from "@engine-model/catalog";
 import { validateItemValue } from "./item";
 import { validateRequiredTimestamps } from "./timestamps";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 
 export const validateLibraryValue = (
     library: CatalogLibraryDocument,

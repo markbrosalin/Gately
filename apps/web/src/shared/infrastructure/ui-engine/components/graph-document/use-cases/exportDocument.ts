@@ -1,4 +1,10 @@
-import { createErrResult, createOkResult, type GraphDocument, type Result, type UseCase } from "engine-model";
+import {
+    createErrResult,
+    createOkResult,
+    type GraphDocument,
+    type Result,
+    type UseCase,
+} from "@engine-model";
 import { graphDocumentUseCaseIssues } from "./issues";
 import type { GraphDocumentUseCaseDeps } from "./types";
 

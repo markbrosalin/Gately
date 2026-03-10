@@ -1,8 +1,5 @@
-import { createErrResult, createOkResult, type Result, type UseCase } from "engine-model";
-import {
-    GRAPH_DOCUMENT_FORMAT_VERSION,
-    type GraphDocument,
-} from "engine-model";
+import { createErrResult, createOkResult, type Result, type UseCase } from "@engine-model";
+import { GRAPH_DOCUMENT_FORMAT_VERSION, type GraphDocument } from "@engine-model";
 import { graphDocumentUseCaseIssues } from "./issues";
 import type { GraphDocumentUseCaseDeps } from "./types";
 

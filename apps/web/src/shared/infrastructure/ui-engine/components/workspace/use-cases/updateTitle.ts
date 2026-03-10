@@ -1,4 +1,10 @@
-import { createErrResult, createOkResult, type Result, type UseCase, type Workspace } from "engine-model";
+import {
+    createErrResult,
+    createOkResult,
+    type Result,
+    type UseCase,
+    type Workspace,
+} from "@engine-model";
 import { workspaceUseCaseIssues } from "./issues";
 import type { WorkspaceUseCaseDeps } from "./types";
 

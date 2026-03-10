@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type {
-    CatalogItemRef,
-    CatalogLibraryDocument,
-} from "engine-model/catalog";
+import type { CatalogItemRef, CatalogLibraryDocument } from "@engine-model/catalog";
 import {
     createTestCompositionItem,
     createTestDocument,
@@ -13,9 +10,7 @@ import type { CatalogQueryService } from "../../query";
 import { createCatalogExportService } from "./createCatalogExportService";
 import { catalogExportIssueDefs } from "./issues";
 
-const createQueryStub = (
-    overrides: Partial<CatalogQueryService> = {},
-): CatalogQueryService => ({
+const createQueryStub = (overrides: Partial<CatalogQueryService> = {}): CatalogQueryService => ({
     document: () => ({ formatVersion: 1, libraries: [] }),
     libraries: () => [],
     librarySummaries: () => [],

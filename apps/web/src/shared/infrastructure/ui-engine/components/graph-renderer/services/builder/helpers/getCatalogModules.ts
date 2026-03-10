@@ -1,4 +1,4 @@
-import type { CatalogItem, CatalogPortsModule, CatalogVisualModule } from "engine-model/catalog";
+import type { CatalogItem, CatalogPortsModule, CatalogVisualModule } from "@engine-model/catalog";
 
 export const getVisualModule = (item: CatalogItem): CatalogVisualModule =>
     item.modules.find((module) => module.type === "visual") as CatalogVisualModule;

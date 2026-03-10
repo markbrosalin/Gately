@@ -1,4 +1,4 @@
-import type { CatalogVisualPatch } from "engine-model/catalog";
+import type { CatalogVisualPatch } from "@engine-model/catalog";
 import type { CellAttrs } from "@antv/x6/lib/registry/attr";
 import { mergeClassTokens } from "./mergeClassTokens";
 

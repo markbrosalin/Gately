@@ -2,7 +2,7 @@ import { createRoot } from "solid-js";
 import { describe, expect, it, vi } from "vitest";
 import { createWorkspace } from "./createWorkspace";
 import { buildSharedServices } from "../../shared-services";
-import type { Workspace, WorkspaceTabDocument } from "engine-model";
+import type { Workspace, WorkspaceTabDocument } from "@engine-model";
 import type { WorkspaceDeps } from "./types";
 
 const createWorkspaceDeps = (): WorkspaceDeps => {

@@ -1,4 +1,4 @@
-import type { GraphDocument } from "engine-model";
+import type { GraphDocument } from "@engine-model";
 
 export type GraphDocumentStateService = {
     documentsByWorkspaceId: () => Record<string, GraphDocument>;

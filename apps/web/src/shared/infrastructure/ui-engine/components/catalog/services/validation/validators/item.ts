@@ -1,4 +1,4 @@
-import type { CatalogItem } from "engine-model/catalog";
+import type { CatalogItem } from "@engine-model/catalog";
 import { catalogValidationIssues } from "../issues";
 import {
     createValidationResult,
@@ -7,7 +7,7 @@ import {
     prefixIssues,
     pushIssues,
 } from "../helpers";
-import type { CatalogValidationResult } from "engine-model/catalog";
+import type { CatalogValidationResult } from "@engine-model/catalog";
 import { validateModuleValue } from "./module";
 import { validateRefValue } from "./ref";
 import { validateRequiredTimestamps } from "./timestamps";
@@ -35,8 +35,8 @@ export const validateItemValue = (
     }
 
     if (
-        item.kind === "logic"
-        && !item.modules.some((module) => module.type === "logic" || module.type === "composition")
+        item.kind === "logic" &&
+        !item.modules.some((module) => module.type === "logic" || module.type === "composition")
     ) {
         pushIssues(result, catalogValidationIssues.itemLogicModuleMissing(path));
     }

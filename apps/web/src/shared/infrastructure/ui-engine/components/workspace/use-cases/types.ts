@@ -1,4 +1,4 @@
-import type { UIEngineExternalContext, WorkspaceTabDocument } from "engine-model";
+import type { UIEngineExternalContext, WorkspaceTabDocument } from "@engine-model";
 import type {
     WorkspaceFactoryService,
     WorkspaceQueryService,

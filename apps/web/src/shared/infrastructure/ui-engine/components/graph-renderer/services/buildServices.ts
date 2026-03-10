@@ -9,7 +9,7 @@ import type {
     GraphRendererServiceName,
     GraphRendererServices,
 } from "./types";
-import type { ServiceDefinitionMap } from "engine-model/core/context";
+import type { ServiceDefinitionMap } from "@engine-model/core/context";
 
 type GraphRendererServiceDefinitions = ServiceDefinitionMap<
     GraphRendererServiceName,

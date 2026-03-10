@@ -1,4 +1,4 @@
-import type { CatalogLogicItem } from "engine-model/catalog";
+import type { CatalogLogicItem } from "@engine-model/catalog";
 import { describe, expect, it } from "vitest";
 import { createPorts } from "../createPorts";
 

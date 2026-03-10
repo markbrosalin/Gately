@@ -1,8 +1,4 @@
-import type {
-    Workspace,
-    WorkspaceTabCloseConditions,
-    WorkspaceTabSession,
-} from "engine-model";
+import type { Workspace, WorkspaceTabCloseConditions, WorkspaceTabSession } from "@engine-model";
 import type { WorkspaceStateService } from "../state/types";
 import type { WorkspaceServiceContext } from "../types";
 import type { WorkspaceQueryService, WorkspaceQueryTab } from "./types";
@@ -22,10 +18,7 @@ export const createWorkspaceQueryApi = (state: WorkspaceStateService): Workspace
             })
             .filter((tab): tab is WorkspaceQueryTab => Boolean(tab));
 
-    const findWorkspace = (
-        workspaces: Workspace[],
-        workspaceId: string,
-    ): Workspace | undefined => {
+    const findWorkspace = (workspaces: Workspace[], workspaceId: string): Workspace | undefined => {
         return workspaces.find((workspace) => workspace.id === workspaceId);
     };
 
@@ -76,10 +69,7 @@ export const createWorkspaceQueryApi = (state: WorkspaceStateService): Workspace
     const hasWorkspace = (workspaceId: string): boolean => Boolean(getWorkspace(workspaceId));
 
     const hasTabSession = (tabId: string): boolean => Boolean(getTabSession(tabId));
-    const canCloseTab = (
-        tabId: string,
-        conditions?: WorkspaceTabCloseConditions,
-    ): boolean => {
+    const canCloseTab = (tabId: string, conditions?: WorkspaceTabCloseConditions): boolean => {
         if (orderedTabs().length <= 1) return false;
         if (!hasTabSession(tabId)) return false;
         if (conditions?.isEditing) return false;

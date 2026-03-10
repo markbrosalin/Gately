@@ -1,8 +1,5 @@
-import type {
-    CatalogItem,
-    CatalogItemRef,
-} from "engine-model/catalog";
-import { createCatalogItemRefKey } from "engine-model/catalog/lib";
+import type { CatalogItem, CatalogItemRef } from "@engine-model/catalog";
+import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 
 type CollectDepsOptions = {
     rootRefs: CatalogItemRef[];

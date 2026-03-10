@@ -1,4 +1,4 @@
-import { createIssue as createCatalogIssue } from "engine-model/core/issue";
+import { createIssue as createCatalogIssue } from "@engine-model/core/issue";
 
 export const catalogImportIssueDefs = {
     bundleFormatVersionInvalid: {
