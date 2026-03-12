@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" fill="none">
+  <rect width="1200" height="560" rx="28" fill="#0F172A"/>
+  <text x="60" y="72" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Demo scenario: half-adder</text>
+  <text x="60" y="110" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="20">This is the strongest first example for README and interviews.</text>
+
+  <rect x="60" y="160" width="1080" height="270" rx="22" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <circle cx="174" cy="230" r="24" fill="#1D4ED8"/>
+  <circle cx="174" cy="360" r="24" fill="#1D4ED8"/>
+  <rect x="310" y="202" width="110" height="56" rx="14" fill="#0B1220" stroke="#7C3AED"/>
+  <rect x="310" y="332" width="110" height="56" rx="14" fill="#0B1220" stroke="#0F766E"/>
+  <circle cx="1008" cy="230" r="24" fill="#F59E0B"/>
+  <circle cx="1008" cy="360" r="24" fill="#F59E0B"/>
+  <path d="M198 230H310" stroke="#64748B" stroke-width="4"/>
+  <path d="M198 360H310" stroke="#64748B" stroke-width="4"/>
+  <path d="M420 230H984" stroke="#64748B" stroke-width="4"/>
+  <path d="M420 360H984" stroke="#64748B" stroke-width="4"/>
+
+  <text x="138" y="236" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">A</text>
+  <text x="138" y="366" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">B</text>
+  <text x="344" y="236" fill="#C4B5FD" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">XOR</text>
+  <text x="344" y="366" fill="#5EEAD4" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">AND</text>
+  <text x="1038" y="236" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">SUM</text>
+  <text x="1028" y="366" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">CARRY</text>
+
+  <text x="60" y="492" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="18">Recommended real shot: two toggles as inputs, XOR for SUM, AND for CARRY, lamps on both outputs.</text>
+</svg>

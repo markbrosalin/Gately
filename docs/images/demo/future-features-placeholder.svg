@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" fill="none">
+  <rect width="1200" height="560" rx="28" fill="#0F172A"/>
+  <text x="60" y="72" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Future features</text>
+  <text x="60" y="110" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="20">Keep future ideas visually separated from current product capabilities.</text>
+
+  <rect x="60" y="160" width="250" height="260" rx="22" fill="#111827" stroke="#1D4ED8" stroke-width="2"/>
+  <text x="94" y="214" fill="#93C5FD" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Custom circuits</text>
+  <text x="94" y="256" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">Reusable user-defined</text>
+  <text x="94" y="284" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">logic blocks and compositions</text>
+
+  <rect x="340" y="160" width="250" height="260" rx="22" fill="#111827" stroke="#0F766E" stroke-width="2"/>
+  <text x="374" y="214" fill="#5EEAD4" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Images</text>
+  <text x="374" y="256" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">Visual assets inside</text>
+  <text x="374" y="284" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">the editor canvas</text>
+
+  <rect x="620" y="160" width="250" height="260" rx="22" fill="#111827" stroke="#7C3AED" stroke-width="2"/>
+  <text x="654" y="214" fill="#C4B5FD" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Text fields</text>
+  <text x="654" y="256" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">Annotations and</text>
+  <text x="654" y="284" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">text-based UI objects</text>
+
+  <rect x="900" y="160" width="250" height="260" rx="22" fill="#111827" stroke="#C2410C" stroke-width="2"/>
+  <text x="934" y="214" fill="#FDBA74" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Groups</text>
+  <text x="934" y="256" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">Higher-level editor</text>
+  <text x="934" y="284" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">organization tools</text>
+
+  <text x="270" y="498" fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="18">Replace this placeholder later if you decide to show roadmap visuals directly in the README.</text>
+</svg>
