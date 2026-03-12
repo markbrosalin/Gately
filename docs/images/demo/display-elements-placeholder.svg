@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" fill="none">
+  <rect width="1200" height="560" rx="28" fill="#0F172A"/>
+  <rect x="36" y="36" width="1128" height="488" rx="24" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="72" y="96" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Display elements</text>
+  <text x="72" y="136" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="20">Replace with the visual outputs that make the simulation easy to read.</text>
+
+  <rect x="120" y="182" width="360" height="252" rx="26" fill="#0B1220" stroke="#1D4ED8" stroke-width="2"/>
+  <circle cx="300" cy="308" r="72" fill="#1E293B" stroke="#60A5FA" stroke-width="12"/>
+  <circle cx="300" cy="308" r="42" fill="#FACC15"/>
+  <text x="248" y="420" fill="#93C5FD" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">LAMP</text>
+
+  <rect x="560" y="182" width="520" height="252" rx="26" fill="#0B1220" stroke="#C2410C" stroke-width="2"/>
+  <rect x="700" y="220" width="236" height="176" rx="18" fill="#111827" stroke="#FDBA74" stroke-width="8"/>
+  <text x="734" y="316" fill="#FB923C" font-family="Segoe UI, Arial, sans-serif" font-size="72" font-weight="700">8</text>
+  <text x="690" y="420" fill="#FDBA74" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">7_SEG_DISPLAY</text>
+
+  <text x="314" y="484" fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="18">Recommended content: show both simple and richer visual outputs in one readable frame.</text>
+</svg>
