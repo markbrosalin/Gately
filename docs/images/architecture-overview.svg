@@ -1,116 +1,84 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
-  <rect width="1200" height="720" rx="28" fill="#0F172A"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" fill="none">
+  <rect width="1200" height="640" rx="28" fill="#0F172A"/>
   <text x="60" y="68" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">
-    Gately architecture overview
+    Gately: two-core architecture
   </text>
 
-  <rect x="60" y="110" width="500" height="420" rx="24" fill="#111827" stroke="#1D4ED8" stroke-width="2"/>
-  <text x="92" y="158" fill="#93C5FD" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">
+  <rect x="60" y="120" width="460" height="360" rx="24" fill="#111827" stroke="#1D4ED8" stroke-width="2"/>
+  <text x="96" y="170" fill="#93C5FD" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">
     UI Engine
   </text>
-  <text x="92" y="196" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">
-    Browser-facing visual layer
+  <text x="96" y="208" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">
+    Visual core of the editor
   </text>
 
-  <rect x="92" y="228" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="116" y="268" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    workspace
+  <rect x="96" y="246" width="180" height="86" rx="16" fill="#0B1220" stroke="#334155"/>
+  <text x="128" y="282" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    SolidJS
   </text>
-  <text x="116" y="296" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    tabs, navigation, state
-  </text>
-
-  <rect x="328" y="228" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="352" y="268" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    graph-runtime
-  </text>
-  <text x="352" y="296" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    X6 graph instance
+  <text x="128" y="308" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
+    signals and state
   </text>
 
-  <rect x="92" y="348" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="116" y="388" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    graph-renderer
+  <rect x="304" y="246" width="180" height="86" rx="16" fill="#0B1220" stroke="#334155"/>
+  <text x="336" y="282" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    AntV X6
   </text>
-  <text x="116" y="416" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    visual node building
-  </text>
-
-  <rect x="328" y="348" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="352" y="388" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    graph-document
-  </text>
-  <text x="352" y="416" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    import and export
+  <text x="336" y="308" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
+    graph and SVG editor
   </text>
 
-  <rect x="210" y="468" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="244" y="508" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    catalog
+  <rect x="96" y="358" width="388" height="88" rx="16" fill="#0B1220" stroke="#334155"/>
+  <text x="126" y="394" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    Current focus
   </text>
-  <text x="244" y="536" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    libraries and items
+  <text x="126" y="422" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
+    graph-document, catalog, graph-renderer, simulation
   </text>
 
-  <rect x="640" y="110" width="500" height="420" rx="24" fill="#111827" stroke="#0F766E" stroke-width="2"/>
-  <text x="672" y="158" fill="#5EEAD4" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">
+  <rect x="680" y="120" width="460" height="360" rx="24" fill="#111827" stroke="#0F766E" stroke-width="2"/>
+  <text x="716" y="170" fill="#5EEAD4" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">
     Logic Engine
   </text>
-  <text x="672" y="196" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">
-    Circuit model and simulation layer
+  <text x="716" y="208" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">
+    Cinabono core written from scratch
   </text>
 
-  <rect x="672" y="228" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="700" y="268" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    @cnbn/engine
+  <rect x="716" y="246" width="180" height="86" rx="16" fill="#0B1220" stroke="#334155"/>
+  <text x="746" y="282" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    Cinabono
   </text>
-  <text x="700" y="296" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    core engine and API
-  </text>
-
-  <rect x="908" y="228" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="926" y="268" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    engine-worker
-  </text>
-  <text x="926" y="296" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    worker client bridge
+  <text x="746" y="308" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
+    circuit model and rules
   </text>
 
-  <rect x="672" y="348" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="708" y="388" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    schema
+  <rect x="924" y="246" width="180" height="86" rx="16" fill="#0B1220" stroke="#334155"/>
+  <text x="952" y="282" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    Simulation
   </text>
-  <text x="708" y="416" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    items, scopes, links
-  </text>
-
-  <rect x="908" y="348" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="940" y="388" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    simulation
-  </text>
-  <text x="940" y="416" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    runtime execution
+  <text x="952" y="308" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
+    state calculation
   </text>
 
-  <rect x="790" y="468" width="200" height="92" rx="16" fill="#0B1220" stroke="#334155"/>
-  <text x="820" y="508" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    plugin-ready
+  <rect x="716" y="358" width="388" height="88" rx="16" fill="#0B1220" stroke="#334155"/>
+  <text x="746" y="394" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    Responsibility
   </text>
-  <text x="820" y="536" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    extensible engine core
-  </text>
-
-  <path d="M560 320H640" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
-  <path d="M560 440H640" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
-  <text x="582" y="302" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
-    worker/client
+  <text x="746" y="422" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">
+    what the circuit means and how it behaves
   </text>
 
-  <rect x="60" y="584" width="1080" height="86" rx="18" fill="#111827" stroke="#334155"/>
-  <text x="92" y="622" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
-    Key point
+  <path d="M520 300H680" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M520 348H680" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <text x="566" y="284" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">
+    Web Worker
   </text>
-  <text x="92" y="650" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="18">
-    UI Engine answers how the user sees and edits the circuit. Logic Engine answers what the circuit means and how it behaves.
+  <text x="550" y="372" fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="16">
+    UI talks to logic through worker
+  </text>
+
+  <rect x="60" y="528" width="1080" height="66" rx="18" fill="#111827" stroke="#334155"/>
+  <text x="92" y="570" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="18">
+    Keep the README focused on the two cores. Internal UI composition can still evolve.
   </text>
 </svg>
