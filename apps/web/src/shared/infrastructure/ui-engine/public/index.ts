@@ -1,12 +1,15 @@
 export * from "../model";
 export type {
-    UIEngineCommandApi,
-    UIEngineAddNodeCommandInput,
     UIEngineInstance,
     UIEngineDebugApi,
     UIEngineMountApi,
     UIEnginePublicApi,
-    UIEngineStateApi,
+    UIEngineQueryApi,
+    UIEngineUseCasesApi,
+    UIEngineTab,
+    UIEngineTabCloseConditions,
+    UIEngineTabCreateInput,
+    UIEngineScope,
 } from "./types";
+export { createUIEngine } from "./engine";
 export { useUIEngine, UIEngineProvider } from "./UIEngineProvider";
-

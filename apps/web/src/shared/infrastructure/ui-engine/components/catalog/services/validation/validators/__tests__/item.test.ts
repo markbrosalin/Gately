@@ -3,29 +3,46 @@ import { catalogValidationIssueDefs } from "../../issues";
 import { validateItemValue } from "../item";
 
 describe("validateItemValue", () => {
-    it("requires a logic or composition module for logic items", () => {
+    it("accepts a visual-only logic item", () => {
         const result = validateItemValue({
             ref: {
                 libraryId: "std",
-                path: ["gates"],
-                itemName: "AND",
+                path: ["logic"],
+                itemName: "BUFFER",
             },
             kind: "logic",
             meta: {
-                name: "AND",
+                name: "BUFFER",
                 createdAt: 1,
             },
             layout: {
                 width: 120,
                 height: 80,
             },
-            modules: [],
+            modules: [
+                {
+                    type: "ports",
+                    config: {
+                        inputs: [{ id: "in-0" }],
+                        outputs: [{ id: "out-0" }],
+                    },
+                },
+                {
+                    type: "visual",
+                    config: {
+                        base: {
+                            attrs: {
+                                icon: {
+                                    d: "M0 0",
+                                },
+                            },
+                        },
+                    },
+                },
+            ],
         });
 
-        expect(result.ok).toBe(false);
-        expect(result.issues.map((issue) => issue.code)).toContain(
-            catalogValidationIssueDefs.itemLogicModuleMissing.code,
-        );
+        expect(result.ok).toBe(true);
     });
 
     it("accepts a composition-only logic item", () => {
@@ -62,7 +79,8 @@ describe("validateItemValue", () => {
                 {
                     type: "ports",
                     config: {
-                        items: [],
+                        inputs: [],
+                        outputs: [],
                     },
                 },
             ],

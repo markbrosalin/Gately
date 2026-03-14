@@ -15,6 +15,9 @@ export const createGraphRenderer = (deps: GraphRendererDeps) => {
         open: useCases.open,
         close: useCases.close,
         createNode: useCases.createNode,
+        removeSelection: useCases.removeSelection,
+        removeNode: useCases.removeNode,
+        removeEdge: useCases.removeEdge,
         loadDocument: useCases.loadDocument,
         exportDocument: useCases.exportDocument,
     } satisfies GraphRendererApi;

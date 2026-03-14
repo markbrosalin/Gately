@@ -1,10 +1,6 @@
-import type {
-    UIEngineErrorEvent,
-    UIEngineHooks,
-    UIEngineLifecycleEvent,
-} from "../model";
+import type { UIEngineErrorEvent, UIEngineHooks, UIEngineLifecycleEvent } from "@engine-model";
 
-export const createUIEngineHooks = (hooks?: UIEngineHooks) => {
+export const createEngineHooks = (hooks?: UIEngineHooks) => {
     const emitLifecycle = (event: UIEngineLifecycleEvent): void => {
         hooks?.onLifecycle?.(event);
     };
@@ -18,4 +14,3 @@ export const createUIEngineHooks = (hooks?: UIEngineHooks) => {
         reportError,
     };
 };
-

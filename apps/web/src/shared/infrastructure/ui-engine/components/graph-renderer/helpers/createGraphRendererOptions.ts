@@ -1,8 +1,10 @@
 import type { GraphManual } from "@antv/x6";
 import { GRID_SIZE } from "@engine-model/constants";
-import { createConnectingConfig } from "../../../graph-options";
 
-export const createGraphRendererOptions = (container: HTMLDivElement): Partial<GraphManual> => ({
+export const createGraphRendererOptions = (
+    container: HTMLDivElement,
+    connecting: GraphManual["connecting"],
+): Partial<GraphManual> => ({
     container,
     async: true,
     grid: {
@@ -23,7 +25,7 @@ export const createGraphRendererOptions = (container: HTMLDivElement): Partial<G
         enabled: true,
         eventTypes: ["mouseWheelDown"],
     },
-    connecting: createConnectingConfig("manhattan"),
+    connecting,
     preventDefaultBlankAction: true,
     preventDefaultContextMenu: true,
     preventDefaultDblClick: true,

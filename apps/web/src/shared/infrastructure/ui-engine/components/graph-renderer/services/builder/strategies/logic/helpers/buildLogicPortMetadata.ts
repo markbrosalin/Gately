@@ -23,8 +23,6 @@ const createPortArgs = (anchor: CatalogPortAnchor, offset?: number) => {
             return { dy: -offset };
         case "bottom":
             return { dy: offset };
-        default:
-            return undefined;
     }
 };
 
@@ -39,24 +37,19 @@ const createPortLabel = (anchor: CatalogPortAnchor, title?: string): LabelMetada
     };
 };
 
-export const buildLogicPortMetadata = (
-    port: CatalogPortSpec,
-    side: PinSide,
-): PortMetadata => {
+export const buildLogicPortMetadata = (port: CatalogPortSpec, side: PinSide): PortMetadata => {
     const anchor = resolvePortAnchor(port, side);
     const baseClass = buildPortClass(side, DEFAULT_VALUE_CLASS);
+    const args = createPortArgs(anchor, port.offset);
 
     return {
         id: port.id,
         group: anchor,
         ...(port.title ? { label: createPortLabel(anchor, port.title) } : {}),
-        ...(createPortArgs(anchor, port.offset)
-            ? { args: createPortArgs(anchor, port.offset) }
-            : {}),
+        ...(args ? { args } : {}),
         attrs: {
             circle: { class: baseClass },
             ...(port.title ? { text: { text: port.title } } : {}),
         },
     };
 };
-

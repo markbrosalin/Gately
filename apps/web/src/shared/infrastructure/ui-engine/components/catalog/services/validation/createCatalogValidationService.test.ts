@@ -41,21 +41,6 @@ describe("createCatalogValidationService", () => {
                                         executor: "std.and",
                                     },
                                 },
-                                {
-                                    type: "ports",
-                                    config: {
-                                        items: [
-                                            {
-                                                id: "in-1",
-                                                direction: "input",
-                                            },
-                                            {
-                                                id: "out-1",
-                                                direction: "output",
-                                            },
-                                        ],
-                                    },
-                                },
                             ],
                         },
                     ],
@@ -135,5 +120,3 @@ describe("createCatalogValidationService", () => {
         );
     });
 });
-
-

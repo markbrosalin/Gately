@@ -4,6 +4,18 @@ import { WORKSPACE_TAB_DOCUMENT_FORMAT_VERSION } from "./constants";
 export type WorkspaceKind = "tab" | "circuit";
 export type WorkspaceSymbolStandard = "ansi" | "ieee";
 
+export type UIScopeViewport = {
+    zoom: number;
+    tx: number;
+    ty: number;
+};
+
+export type UIScopeSnapshot = {
+    contentJson: string;
+    viewport: UIScopeViewport;
+    extensions?: Record<string, unknown>;
+};
+
 export type WorkspaceTabDocument = {
     formatVersion: typeof WORKSPACE_TAB_DOCUMENT_FORMAT_VERSION;
     session: WorkspaceTabSession;

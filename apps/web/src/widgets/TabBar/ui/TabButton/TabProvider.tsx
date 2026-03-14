@@ -28,7 +28,7 @@ export const TabProvider: Component<{ tab: UIEngineTab; children: JSX.Element }>
 
     const [isTitleEditing, setIsTitleEditing] = createSignal(false);
     const [isHovered, setIsHovered] = createSignal(false);
-    const isActive = () => props.tab.id === uiEngine.state.activeTabId();
+    const isActive = () => props.tab.id === uiEngine.query.workspace.activeTabId();
 
     const context: TabContext = {
         tab,

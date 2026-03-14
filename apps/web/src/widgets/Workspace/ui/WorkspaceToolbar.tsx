@@ -29,7 +29,7 @@ export const WorkspaceToolbar: Component<WorkspaceToolbarProps> = (props) => {
         addFalseConstant,
         add7segDisplay,
     } = useAddLogicNode();
-    const disabled = () => !uiEngine.state.activeScopeId();
+    const disabled = () => !uiEngine.query.workspace.activeWorkspaceId();
 
     return (
         <div class="absolute left-3 top-3 z-10 flex flex-col gap-2">

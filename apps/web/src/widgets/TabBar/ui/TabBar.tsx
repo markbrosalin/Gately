@@ -13,13 +13,14 @@ export const TabBar: Component = () => {
     const firstTab = useOpenNewTab();
 
     onMount(() => {
-        if (uiEngine.state.tabs().length || uiEngine.state.activeTabId()) return;
+        if (uiEngine.query.workspace.orderedTabs().length || uiEngine.query.workspace.activeTabId())
+            return;
         void firstTab.openNewTab();
     });
 
     return (
         <ListScroller
-            activeKey={uiEngine.state.activeTabId}
+            activeKey={uiEngine.query.workspace.activeTabId}
             step={150}
             wheelMultiplier={0.25}
             behavior="smooth"
@@ -27,13 +28,15 @@ export const TabBar: Component = () => {
         >
             <Tabs
                 class="bg-gray-12 flex flex-row h-10 w-full overflow-hidden"
-                value={uiEngine.state.activeTabId()}
+                value={uiEngine.query.workspace.activeTabId()}
             >
                 <LogoButton class="shrink-0" />
 
                 <Tabs.List class="flex-1 flex items-center overflow-x-hidden h-full">
                     <ListScroller.List class="flex items-center h-full overflow-x-auto scrollbar-hide">
-                        <For each={uiEngine.state.tabs()}>{(tab) => <Tab tab={tab} />}</For>
+                        <For each={uiEngine.query.workspace.orderedTabs()}>
+                            {(tab) => <Tab tab={tab} />}
+                        </For>
                     </ListScroller.List>
                     <TabAdder class="shrink-0" />
                 </Tabs.List>

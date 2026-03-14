@@ -30,7 +30,7 @@ export const createWorkspaceSimulation = (
         const hasEvents = events.length > 0;
         if (!hasEvents) return false;
 
-        opts.uiEngine.commands.applySignalEvents(events);
+        opts.uiEngine.applySignalEvents?.(events);
         return hasEvents;
     };
 

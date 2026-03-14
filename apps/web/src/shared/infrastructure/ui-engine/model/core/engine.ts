@@ -15,4 +15,3 @@ export type UIEnginePlugin = {
 };
 
 export type UIEngineContext = ComponentServiceContext<{}, string, Record<string, any>>;
-

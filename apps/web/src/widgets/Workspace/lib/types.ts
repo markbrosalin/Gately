@@ -1,5 +1,7 @@
 import type { Graph } from "@antv/x6";
 import type { CinabonoClient } from "@cnbn/engine-worker";
+import type { EngineSignalEvent } from "@gately/shared/types";
+import type { PinUpdate } from "@gately/shared/infrastructure/ui-engine/model/graph-renderer";
 import type { UIEnginePublicApi } from "@gately/shared/infrastructure/ui-engine";
 import type { WorkspaceSimulationMode, XYCoords } from "@gately/shared/types";
 import type { Accessor } from "solid-js";
@@ -39,10 +41,12 @@ export type WorkspaceController = {
     simulation: WorkspaceSimulationController;
 };
 
-export type WorkspaceUIEngine = Pick<UIEnginePublicApi, "commands" | "debug"> & {
+export type WorkspaceUIEngine = Pick<UIEnginePublicApi, "debug"> & {
     debug: {
         graph: () => Graph | undefined;
     };
+    applyPinPatch?: (patch: PinUpdate | PinUpdate[]) => void;
+    applySignalEvents?: (events: EngineSignalEvent | EngineSignalEvent[]) => void;
 };
 
 export type WorkspaceControllerDeps = {

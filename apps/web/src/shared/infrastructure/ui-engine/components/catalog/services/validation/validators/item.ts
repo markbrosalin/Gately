@@ -34,13 +34,6 @@ export const validateItemValue = (
         pushIssues(result, catalogValidationIssues.itemLayoutHeightInvalid(path));
     }
 
-    if (
-        item.kind === "logic" &&
-        !item.modules.some((module) => module.type === "logic" || module.type === "composition")
-    ) {
-        pushIssues(result, catalogValidationIssues.itemLogicModuleMissing(path));
-    }
-
     item.modules.forEach((module, index) => {
         validateModuleValue(module, item.kind, result, [...path, "modules", index]);
     });

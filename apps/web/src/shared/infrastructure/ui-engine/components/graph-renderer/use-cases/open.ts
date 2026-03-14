@@ -14,10 +14,16 @@ export type GraphRendererOpenUseCase = UseCase<
 export const createOpenUseCase = ({
     instance,
     layouts,
-}: Pick<GraphRendererUseCaseDeps, "instance" | "layouts">): GraphRendererOpenUseCase => {
+    selection,
+}: Pick<
+    GraphRendererUseCaseDeps,
+    "instance" | "layouts" | "selection"
+>): GraphRendererOpenUseCase => {
     return (input) => {
         layouts.registerPortLayouts();
-        return createOkResult(instance.open(input));
+        const graph = instance.open(input);
+        selection.install();
+        return createOkResult(graph);
     };
 };
 

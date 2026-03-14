@@ -1,49 +1,46 @@
-import type { Graph, Node } from "@antv/x6";
-import type { EngineSignalEvent } from "@gately/shared/types";
-import type { Accessor } from "solid-js";
+import type { Graph } from "@antv/x6";
+import type { Workspace, WorkspaceTabCloseConditions } from "@engine-model/workspace";
+import type { CatalogQueryService } from "../components/catalog/services/query";
+import type { GraphDocumentQueryService } from "../components/graph-document/services/query";
+import type { GraphRendererQueryService } from "../components/graph-renderer/services/query";
+import type { WorkspaceQueryService, WorkspaceQueryTab } from "../components/workspace/services/query";
+import type { WorkspaceCreateTabUseCaseInput } from "../components/workspace/use-cases/createTab";
 import type {
-    NodeHashes,
-    PinUpdate,
-    UIScopeSnapshot,
-    UIEngineTabCloseConditions,
-    UIEngineTabCreateInput,
-    UIEngineTab,
-    UIEngineScope,
-} from "../model";
+    UIEngineCloseTabUseCase,
+    UIEngineCreateNodeFromCatalogItemUseCase,
+    UIEngineCreateTabUseCase,
+    UIEngineOpenWorkspaceUseCase,
+    UIEngineSaveActiveDocumentUseCase,
+} from "./engine/use-cases";
 
-export type UIEngineAddNodeCommandInput = {
-    hash: NodeHashes;
-};
-
-export type UIEngineCommandApi = {
-    createTab: (input?: UIEngineTabCreateInput) => Promise<{ tabId: string }>;
-    openTab: (tabId?: string) => void;
-    openScope: (scopeId: string, tabId?: string) => void;
-    canCloseTab: (tabId: string, conditions?: UIEngineTabCloseConditions) => boolean;
-    closeTab: (tabId: string, conditions?: UIEngineTabCloseConditions) => Promise<boolean>;
-    addNode: (input: UIEngineAddNodeCommandInput) => Promise<Node | undefined>;
-    exportScopeSnapshot: () => UIScopeSnapshot;
-    importScopeSnapshot: (snapshot?: Partial<UIScopeSnapshot> | null) => void;
-    applyPinPatch: (patch: PinUpdate | PinUpdate[]) => void;
-    applySignalEvents: (events: EngineSignalEvent | EngineSignalEvent[]) => void;
-};
-
-export type UIEngineStateApi = {
-    ready: Accessor<boolean>;
-    selectionCount: () => number;
-    tabs: () => UIEngineTab[];
-    activeTabId: Accessor<string | undefined>;
-    activeScopeId: Accessor<string | undefined>;
-    getScopeById: (id: string) => UIEngineScope | undefined;
-    getScopeChildrenById: (id: string) => UIEngineScope[];
-    getNavigationPathByTabId: (tabId: string) => string[];
-    getNavigationScopesByTabId: (tabId: string) => UIEngineScope[];
-    activeNavigationPath: () => string[];
-    activeNavigationScopes: () => UIEngineScope[];
-};
+export type UIEngineTabCreateInput = WorkspaceCreateTabUseCaseInput;
+export type UIEngineTabCloseConditions = WorkspaceTabCloseConditions;
+export type UIEngineTab = WorkspaceQueryTab;
+export type UIEngineScope = Workspace;
 
 export type UIEngineMountApi = {
     setContainer: (container?: HTMLDivElement) => void;
+};
+
+export type UIEngineEngineQueryApi = {
+    isMounted: () => boolean;
+    isReady: () => boolean;
+};
+
+export type UIEngineQueryApi = {
+    engine: UIEngineEngineQueryApi;
+    catalog: CatalogQueryService;
+    workspace: WorkspaceQueryService;
+    graphDocument: GraphDocumentQueryService;
+    graphRenderer: GraphRendererQueryService;
+};
+
+export type UIEngineUseCasesApi = {
+    createTab: UIEngineCreateTabUseCase;
+    openWorkspace: UIEngineOpenWorkspaceUseCase;
+    closeTab: UIEngineCloseTabUseCase;
+    createNodeFromCatalogItem: UIEngineCreateNodeFromCatalogItemUseCase;
+    saveActiveDocument: UIEngineSaveActiveDocumentUseCase;
 };
 
 export type UIEngineDebugApi = {
@@ -52,12 +49,11 @@ export type UIEngineDebugApi = {
 
 export type UIEnginePublicApi = {
     mount: UIEngineMountApi;
-    state: UIEngineStateApi;
-    commands: UIEngineCommandApi;
+    query: UIEngineQueryApi;
+    useCases: UIEngineUseCasesApi;
     debug: UIEngineDebugApi;
 };
 
 export type UIEngineInstance = UIEnginePublicApi & {
     dispose: () => void;
 };
-

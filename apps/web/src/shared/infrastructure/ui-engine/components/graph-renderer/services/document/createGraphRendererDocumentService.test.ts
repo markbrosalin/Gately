@@ -64,6 +64,7 @@ describe("createGraphRendererDocumentService", () => {
         const graph = createGraph();
         const instance: GraphRendererInstanceService = {
             activeWorkspaceId: () => "workspace-1",
+            addDisposer: vi.fn(),
             container: () => ({}) as HTMLDivElement,
             graph: () => graph as never,
             open: vi.fn() as never,
@@ -86,6 +87,7 @@ describe("createGraphRendererDocumentService", () => {
         const graph = createGraph();
         const instance: GraphRendererInstanceService = {
             activeWorkspaceId: () => "workspace-1",
+            addDisposer: vi.fn(),
             container: () => ({}) as HTMLDivElement,
             graph: () => graph as never,
             open: vi.fn() as never,
@@ -115,6 +117,7 @@ describe("createGraphRendererDocumentService", () => {
 
         const instance: GraphRendererInstanceService = {
             activeWorkspaceId: () => "workspace-1",
+            addDisposer: vi.fn(),
             container: () => ({}) as HTMLDivElement,
             graph: () => graph as never,
             open: vi.fn() as never,

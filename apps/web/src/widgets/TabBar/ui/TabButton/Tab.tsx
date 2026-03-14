@@ -27,7 +27,7 @@ const InnerTab: Component = () => {
                     value={ctx.tab().id}
                     class={styles.tab.trigger()}
                 >
-                    <span class={styles.tab.title()}>{ctx.tab().name}</span>
+                    <span class={styles.tab.title()}>{ctx.tab().title}</span>
                 </Tabs.Trigger>
                 <TabClose />
             </div>

@@ -8,19 +8,26 @@ import { BUFFER_LOGIC_ITEM } from "@engine-presets/std-library/logic/logic/buffe
 const graphInstances: Array<{
     options: unknown;
     addNode: ReturnType<typeof vi.fn>;
+    cleanSelection: ReturnType<typeof vi.fn>;
     dispose: ReturnType<typeof vi.fn>;
     clearCells: ReturnType<typeof vi.fn>;
     fromJSON: ReturnType<typeof vi.fn>;
     getCellById: ReturnType<typeof vi.fn>;
     getSelectedCellCount: ReturnType<typeof vi.fn>;
+    getSelectedCells: ReturnType<typeof vi.fn>;
+    removeCells: ReturnType<typeof vi.fn>;
+    removeEdge: ReturnType<typeof vi.fn>;
     removeNode: ReturnType<typeof vi.fn>;
     toJSON: ReturnType<typeof vi.fn>;
     translate: ReturnType<typeof vi.fn>;
+    use: ReturnType<typeof vi.fn>;
     zoom: ReturnType<typeof vi.fn>;
     zoomTo: ReturnType<typeof vi.fn>;
     runtime: {
         json: Record<string, unknown>;
         nodes: Map<string, unknown>;
+        edges: Map<string, unknown>;
+        selectedCells: unknown[];
         tx: number;
         ty: number;
         zoom: number;
@@ -31,11 +38,17 @@ vi.mock("@antv/x6", () => ({
     routerPresets: {
         orth: vi.fn(),
     },
+    Selection: vi.fn().mockImplementation(() => ({
+        clean: vi.fn(),
+        dispose: vi.fn(),
+    })),
     Graph: Object.assign(
         vi.fn().mockImplementation((options: unknown) => {
             const runtime = {
                 json: { cells: [] },
                 nodes: new Map<string, unknown>(),
+                edges: new Map<string, unknown>(),
+                selectedCells: [] as unknown[],
                 tx: 0,
                 ty: 0,
                 zoom: 1,
@@ -54,16 +67,38 @@ vi.mock("@antv/x6", () => ({
                     runtime.nodes.set(nodeId, node);
                     return node;
                 }),
+                cleanSelection: vi.fn(() => {
+                    runtime.selectedCells = [];
+                }),
                 dispose: vi.fn(),
                 clearCells: vi.fn(() => {
                     runtime.json = { cells: [] };
                     runtime.nodes.clear();
+                    runtime.edges.clear();
+                    runtime.selectedCells = [];
                 }),
                 fromJSON: vi.fn((value: Record<string, unknown>) => {
                     (runtime as any).json = value;
                 }),
-                getCellById: vi.fn((nodeId: string) => runtime.nodes.get(nodeId)),
-                getSelectedCellCount: vi.fn(() => 0),
+                getCellById: vi.fn(
+                    (cellId: string) => runtime.nodes.get(cellId) ?? runtime.edges.get(cellId),
+                ),
+                getSelectedCellCount: vi.fn(() => runtime.selectedCells.length),
+                getSelectedCells: vi.fn(() => runtime.selectedCells),
+                removeCells: vi.fn((cells: Array<{ id: string; isNode?: () => boolean }>) => {
+                    cells.forEach((cell) => {
+                        if (cell.isNode?.()) {
+                            runtime.nodes.delete(cell.id);
+                            return;
+                        }
+
+                        runtime.edges.delete(cell.id);
+                    });
+                    runtime.selectedCells = [];
+                }),
+                removeEdge: vi.fn((edgeId: string) => {
+                    runtime.edges.delete(edgeId);
+                }),
                 removeNode: vi.fn((nodeId: string) => {
                     runtime.nodes.delete(nodeId);
                 }),
@@ -80,6 +115,7 @@ vi.mock("@antv/x6", () => ({
                 zoomTo: vi.fn((value: number) => {
                     runtime.zoom = value;
                 }),
+                use: vi.fn(),
                 runtime,
             };
             graphInstances.push(instance);
@@ -127,7 +163,9 @@ describe("createGraphRenderer", () => {
         expect(renderer.query.isOpen()).toBe(true);
         expect(renderer.query.activeWorkspaceId()).toBe("workspace-1");
         expect(renderer.query.container()).toBe(container);
+        expect(renderer.query.hasSelection()).toBe(false);
         expect(renderer.query.selectionCount()).toBe(0);
+        expect(graphInstances[0]?.use).toHaveBeenCalledTimes(1);
 
         const closeResult = renderer.close();
 
@@ -195,6 +233,93 @@ describe("createGraphRenderer", () => {
         expect(invalidItemResult.issues[0]?.code).toBe(
             "graph-renderer.use-case.node.build.invalid",
         );
+    });
+
+    it("reads selection state and removes selected cells through the public component API", () => {
+        const shared = buildSharedServices();
+        const renderer = createGraphRenderer({
+            external: {},
+            getSharedService: shared.getService,
+        });
+
+        renderer.open({
+            workspaceId: "workspace-1",
+            container: {} as HTMLDivElement,
+        });
+
+        const selectedNode = {
+            id: "node-1",
+            isNode: () => true,
+            isEdge: () => false,
+        };
+        const selectedEdge = {
+            id: "edge-1",
+            isNode: () => false,
+            isEdge: () => true,
+        };
+        graphInstances[0]?.runtime.nodes.set("node-1", selectedNode);
+        graphInstances[0]?.runtime.edges.set("edge-1", selectedEdge);
+        graphInstances[0]!.runtime.selectedCells = [selectedNode, selectedEdge];
+
+        expect(renderer.query.hasSelection()).toBe(true);
+        expect(renderer.query.selectionCount()).toBe(2);
+        expect(renderer.query.selectedCellIds()).toEqual(["node-1", "edge-1"]);
+        expect(renderer.query.selectedNodeIds()).toEqual(["node-1"]);
+        expect(renderer.query.selectedEdgeIds()).toEqual(["edge-1"]);
+
+        const removeSelectionResult = renderer.removeSelection();
+
+        expect(removeSelectionResult.ok).toBe(true);
+        expect(graphInstances[0]?.removeCells).toHaveBeenCalledWith([selectedNode, selectedEdge]);
+        expect(graphInstances[0]?.cleanSelection).toHaveBeenCalledTimes(1);
+    });
+
+    it("removes nodes and edges by id and returns issues when a cell is missing", () => {
+        const shared = buildSharedServices();
+        const renderer = createGraphRenderer({
+            external: {},
+            getSharedService: shared.getService,
+        });
+
+        const closedRemoveResult = renderer.removeNode({ nodeId: "node-1" });
+        if (closedRemoveResult.ok) {
+            throw new Error("Expected removeNode to fail while renderer is closed");
+        }
+        expect(closedRemoveResult.issues[0]?.code).toBe("graph-renderer.use-case.renderer.not-open");
+
+        renderer.open({
+            workspaceId: "workspace-1",
+            container: {} as HTMLDivElement,
+        });
+
+        const node = {
+            id: "node-1",
+            isNode: () => true,
+            isEdge: () => false,
+        };
+        const edge = {
+            id: "edge-1",
+            isNode: () => false,
+            isEdge: () => true,
+        };
+        graphInstances[0]?.runtime.nodes.set("node-1", node);
+        graphInstances[0]?.runtime.edges.set("edge-1", edge);
+
+        expect(renderer.removeNode({ nodeId: "node-1" }).ok).toBe(true);
+        expect(graphInstances[0]?.removeNode).toHaveBeenCalledWith("node-1");
+
+        expect(renderer.removeEdge({ edgeId: "edge-1" }).ok).toBe(true);
+        expect(graphInstances[0]?.removeEdge).toHaveBeenCalledWith("edge-1");
+
+        const missingNodeResult = renderer.removeNode({ nodeId: "missing-node" });
+        const missingEdgeResult = renderer.removeEdge({ edgeId: "missing-edge" });
+
+        if (missingNodeResult.ok || missingEdgeResult.ok) {
+            throw new Error("Expected missing cell removal to fail");
+        }
+
+        expect(missingNodeResult.issues[0]?.code).toBe("graph-renderer.use-case.node.not-found");
+        expect(missingEdgeResult.issues[0]?.code).toBe("graph-renderer.use-case.edge.not-found");
     });
 
     it("loads and exports a document through the public component API", () => {

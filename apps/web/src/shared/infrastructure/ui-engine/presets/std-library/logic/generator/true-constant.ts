@@ -32,11 +32,12 @@ export const TRUE_CONSTANT_GENERATOR_ITEM = buildStdLogicItem({
                     fill: "var(--color-gray-1)",
                 },
                 plate: {
+                    stroke: "none",
                     fill: "var(--color-true)",
                     x: 4,
                     y: 4,
-                    width: 26,
-                    height: 26,
+                    width: 28,
+                    height: 28,
                     rx: 2,
                     ry: 2,
                 },
@@ -49,4 +50,3 @@ export const TRUE_CONSTANT_GENERATOR_ITEM = buildStdLogicItem({
         },
     },
 });
-

@@ -48,14 +48,17 @@ export const TOGGLE_GENERATOR_ITEM = buildStdLogicItem({
                 plate: {
                     x: 4,
                     y: 4,
-                    width: 26,
-                    height: 26,
+                    width: 28,
+                    height: 28,
                     rx: 2,
                     ry: 2,
+                    stroke: "none",
                 },
                 icon: {
                     d: TOGGLE_GENERATOR_ICON_PATH,
                     stroke: "none",
+                    fill: "var(--color-gray-11)",
+                    transform: "rotate(0, 0 0)",
                 },
                 "toggle-glare": {
                     cx: 0,
@@ -64,6 +67,8 @@ export const TOGGLE_GENERATOR_ITEM = buildStdLogicItem({
                     ref: "body",
                     refX: "50%",
                     refY: "50%",
+                    fill: "var(--color-gray-1)",
+                    cy: -18.5,
                 },
                 "toggle-on-outline": {
                     fill: "none",
@@ -71,6 +76,9 @@ export const TOGGLE_GENERATOR_ITEM = buildStdLogicItem({
                     ref: "body",
                     refX: "50%",
                     refY: "50%",
+                    stroke: "var(--color-gray-1)",
+                    transform: "translate(0, -24), rotate(180, 0 0)",
+                    d: TOGGLE_GENERATOR_OUTLINE_PATH,
                 },
             },
         },
@@ -118,4 +126,3 @@ export const TOGGLE_GENERATOR_ITEM = buildStdLogicItem({
         },
     },
 });
-

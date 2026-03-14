@@ -11,7 +11,7 @@ type ApplyOptimisticOutputArgs = {
 
 export const applyOptimisticOutput = (args: ApplyOptimisticOutputArgs): void => {
     const { uiEngine, node, pin, value } = args;
-    uiEngine.commands.applyPinPatch([
+    uiEngine.applyPinPatch?.([
         {
             elementId: node.id,
             pinRef: {

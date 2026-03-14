@@ -5,6 +5,10 @@ export type GraphRendererQueryService = {
     container: () => HTMLDivElement | undefined;
     activeWorkspaceId: () => string | undefined;
     isOpen: () => boolean;
+    hasSelection: () => boolean;
     selectionCount: () => number;
+    selectedCellIds: () => string[];
+    selectedNodeIds: () => string[];
+    selectedEdgeIds: () => string[];
 };
 

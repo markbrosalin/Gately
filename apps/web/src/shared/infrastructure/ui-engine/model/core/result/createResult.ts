@@ -17,4 +17,3 @@ export const createErrResult = <TIssue extends Issue = Issue>(
     ok: false,
     issues: Array.isArray(issues) ? issues : [issues],
 });
-

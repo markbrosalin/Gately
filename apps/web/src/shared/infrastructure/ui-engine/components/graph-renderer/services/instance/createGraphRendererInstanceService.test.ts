@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import type { GraphRendererConnectingService } from "../connecting";
 import { createGraphRendererInstanceService } from "./createGraphRendererInstanceService";
 import type { GraphRendererServiceContext } from "../types";
 
@@ -30,6 +31,10 @@ const createContext = (): GraphRendererServiceContext =>
         getSharedService: vi.fn(),
     }) as unknown as GraphRendererServiceContext;
 
+const createConnecting = (): GraphRendererConnectingService => ({
+    buildConfig: () => ({ allowBlank: true, allowPort: true } as never),
+});
+
 describe("createGraphRendererInstanceService", () => {
     afterEach(() => {
         graphInstances.length = 0;
@@ -37,7 +42,7 @@ describe("createGraphRendererInstanceService", () => {
     });
 
     it("opens and closes a graph instance", () => {
-        const service = createGraphRendererInstanceService(createContext());
+        const service = createGraphRendererInstanceService(createContext(), createConnecting());
         const container = {} as HTMLDivElement;
 
         const graph = service.open({
@@ -58,7 +63,7 @@ describe("createGraphRendererInstanceService", () => {
     });
 
     it("disposes the previous graph before opening a new one", () => {
-        const service = createGraphRendererInstanceService(createContext());
+        const service = createGraphRendererInstanceService(createContext(), createConnecting());
 
         service.open({
             workspaceId: "workspace-1",
@@ -72,6 +77,22 @@ describe("createGraphRendererInstanceService", () => {
 
         expect(graphInstances[0]?.dispose).toHaveBeenCalledTimes(1);
         expect(service.activeWorkspaceId()).toBe("workspace-2");
+    });
+
+    it("runs registered disposers before graph disposal", () => {
+        const service = createGraphRendererInstanceService(createContext(), createConnecting());
+        const disposePlugin = vi.fn();
+
+        service.open({
+            workspaceId: "workspace-1",
+            container: {} as HTMLDivElement,
+        });
+        service.addDisposer(disposePlugin);
+
+        service.close();
+
+        expect(disposePlugin).toHaveBeenCalledTimes(1);
+        expect(graphInstances[0]?.dispose).toHaveBeenCalledTimes(1);
     });
 });
 

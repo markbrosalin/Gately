@@ -1,5 +1,6 @@
 import { Graph } from "@antv/x6";
 import { createGraphRendererOptions } from "../../helpers";
+import type { GraphRendererConnectingService } from "../connecting";
 import type { GraphRendererServiceContext } from "../types";
 import type {
     GraphRendererInstanceOpenInput,
@@ -22,12 +23,16 @@ const createInitialRuntime = (): GraphRendererRuntime => ({
 
 export const createGraphRendererInstanceService = (
     ctx: GraphRendererServiceContext,
+    connecting: GraphRendererConnectingService,
 ): GraphRendererInstanceService => {
     let runtime = createInitialRuntime();
 
     const activeWorkspaceId = () => runtime.workspaceId;
     const container = () => runtime.container;
     const graph = () => runtime.graph;
+    const addDisposer = (dispose: () => void): void => {
+        runtime.disposers.push(dispose);
+    };
 
     const close = (): void => {
         const currentGraph = runtime.graph;
@@ -70,7 +75,9 @@ export const createGraphRendererInstanceService = (
             close();
         }
 
-        const nextGraph = new Graph(createGraphRendererOptions(container));
+        const nextGraph = new Graph(
+            createGraphRendererOptions(container, connecting.buildConfig()),
+        );
 
         runtime = {
             workspaceId,
@@ -86,6 +93,7 @@ export const createGraphRendererInstanceService = (
         activeWorkspaceId,
         container,
         graph,
+        addDisposer,
         open,
         close,
     };

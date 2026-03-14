@@ -1,10 +1,13 @@
 import { buildContextServiceRegistry } from "@gately/shared/infrastructure/ui-engine/lib/registry";
 import { createGraphRendererBuilderService } from "./builder";
+import { createGraphRendererConnectingService } from "./connecting";
 import { createGraphRendererDocumentService } from "./document";
 import { createGraphRendererInstanceService } from "./instance";
 import { createGraphRendererLayoutsService } from "./layouts";
 import { createGraphRendererNodesService } from "./nodes";
 import { createGraphRendererQueryService } from "./query";
+import { createGraphRendererRemovalService } from "./removal";
+import { createGraphRendererSelectionService } from "./selection";
 import type {
     GraphRendererServiceContext,
     GraphRendererServiceName,
@@ -20,8 +23,13 @@ type GraphRendererServiceDefinitions = ServiceDefinitionMap<
 const createServiceDefinitions = (
     ctx: GraphRendererServiceContext,
 ): GraphRendererServiceDefinitions => ({
+    connecting: {
+        create: () => createGraphRendererConnectingService(),
+    },
     instance: {
-        create: () => createGraphRendererInstanceService(ctx),
+        create: () =>
+            createGraphRendererInstanceService(ctx, ctx.getService("connecting")),
+        createDeps: ["connecting"],
     },
     document: {
         create: () => createGraphRendererDocumentService(ctx.getService("instance")),
@@ -37,9 +45,22 @@ const createServiceDefinitions = (
         create: () => createGraphRendererNodesService(ctx.getService("instance")),
         createDeps: ["instance"],
     },
+    selection: {
+        create: () => createGraphRendererSelectionService(ctx.getService("instance")),
+        createDeps: ["instance"],
+    },
+    removal: {
+        create: () =>
+            createGraphRendererRemovalService(
+                ctx.getService("instance"),
+                ctx.getService("nodes"),
+                ctx.getService("selection"),
+            ),
+        createDeps: ["instance", "nodes", "selection"],
+    },
     query: {
         create: () => createGraphRendererQueryService(ctx),
-        createDeps: ["instance"],
+        createDeps: ["instance", "selection"],
     },
 });
 

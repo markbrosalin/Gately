@@ -25,6 +25,14 @@ export const graphRendererUseCaseIssueDefs = {
         message: ({ refKey, reason }: { refKey: string; reason: string }) =>
             `Graph node for catalog item "${refKey}" could not be built: ${reason}`,
     },
+    nodeNotFound: {
+        code: "graph-renderer.use-case.node.not-found",
+        message: ({ nodeId }: { nodeId: string }) => `Graph node "${nodeId}" was not found.`,
+    },
+    edgeNotFound: {
+        code: "graph-renderer.use-case.edge.not-found",
+        message: ({ edgeId }: { edgeId: string }) => `Graph edge "${edgeId}" was not found.`,
+    },
 } as const;
 
 export const graphRendererUseCaseIssues = {
@@ -45,6 +53,14 @@ export const graphRendererUseCaseIssues = {
         createIssue(graphRendererUseCaseIssueDefs.nodeBuildInvalid, path, {
             refKey,
             reason,
+        }),
+    nodeNotFound: (path: Array<string | number>, nodeId: string) =>
+        createIssue(graphRendererUseCaseIssueDefs.nodeNotFound, path, {
+            nodeId,
+        }),
+    edgeNotFound: (path: Array<string | number>, edgeId: string) =>
+        createIssue(graphRendererUseCaseIssueDefs.edgeNotFound, path, {
+            edgeId,
         }),
 } as const;
 

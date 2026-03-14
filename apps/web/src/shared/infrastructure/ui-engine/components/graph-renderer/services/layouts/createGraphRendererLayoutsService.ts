@@ -6,16 +6,22 @@ import type { GraphRendererLayoutsService } from "./types";
 
 let registered = false;
 
-const buildSideLayout = (side: Extract<CatalogPortAnchor, "left" | "right">) => {
+type LayoutBBox = {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+};
+
+const buildVerticalLayout = (side: Extract<CatalogPortAnchor, "left" | "right">) => {
     return (
         portsPositionArgs: Partial<XYOffset>[],
-        elemBBox: { x: number; y: number; width: number; height: number },
+        elemBBox: LayoutBBox,
         groupPositionArgs: Partial<XYOffset> = {},
     ) => {
         const gap = GRID_SIZE;
         const paddingTop = GRID_SIZE;
-        const baseX =
-            side === "left" ? elemBBox.x + NODE_INSET : elemBBox.x + elemBBox.width - NODE_INSET;
+        const baseX = (side === "left" ? elemBBox.x : elemBBox.x + elemBBox.width) + NODE_INSET;
         const startY = elemBBox.y + paddingTop + NODE_INSET;
 
         return portsPositionArgs.map((args, index) => {
@@ -28,44 +34,26 @@ const buildSideLayout = (side: Extract<CatalogPortAnchor, "left" | "right">) => 
     };
 };
 
-const buildBottomLayout = (
-    portsPositionArgs: Partial<XYOffset>[],
-    elemBBox: { x: number; y: number; width: number; height: number },
-    groupPositionArgs: Partial<XYOffset> = {},
-) => {
-    const gap = GRID_SIZE;
-    const centerX = elemBBox.x + elemBBox.width / 2;
-    const baseY = elemBBox.y + elemBBox.height - NODE_INSET;
-    const count = portsPositionArgs.length;
-    const startX = centerX - (Math.max(0, count - 1) * gap) / 2;
+const buildHorizontalLayout = (side: Extract<CatalogPortAnchor, "top" | "bottom">) => {
+    return (
+        portsPositionArgs: Partial<XYOffset>[],
+        elemBBox: LayoutBBox,
+        groupPositionArgs: Partial<XYOffset> = {},
+    ) => {
+        const gap = GRID_SIZE;
+        const centerX = elemBBox.x + elemBBox.width / 2 + NODE_INSET;
+        const baseY = side === "top" ? elemBBox.y + NODE_INSET : elemBBox.y + elemBBox.height;
+        const count = portsPositionArgs.length;
+        const startX = centerX - (Math.max(0, count - 1) * gap) / 2;
 
-    return portsPositionArgs.map((args, index) => {
-        const dx = (groupPositionArgs.dx ?? 0) + (args.dx ?? 0);
-        const dy = (groupPositionArgs.dy ?? 0) + (args.dy ?? 0);
-        const x = Math.round(startX + index * gap + dx);
-        const y = Math.round(baseY + dy);
-        return { position: { x, y }, angle: 0, ...args };
-    });
-};
-
-const buildTopLayout = (
-    portsPositionArgs: Partial<XYOffset>[],
-    elemBBox: { x: number; y: number; width: number; height: number },
-    groupPositionArgs: Partial<XYOffset> = {},
-) => {
-    const gap = GRID_SIZE;
-    const centerX = elemBBox.x + elemBBox.width / 2;
-    const baseY = elemBBox.y + NODE_INSET;
-    const count = portsPositionArgs.length;
-    const startX = centerX - (Math.max(0, count - 1) * gap) / 2;
-
-    return portsPositionArgs.map((args, index) => {
-        const dx = (groupPositionArgs.dx ?? 0) + (args.dx ?? 0);
-        const dy = (groupPositionArgs.dy ?? 0) + (args.dy ?? 0);
-        const x = Math.round(startX + index * gap + dx);
-        const y = Math.round(baseY + dy);
-        return { position: { x, y }, angle: 0, ...args };
-    });
+        return portsPositionArgs.map((args, index) => {
+            const dx = (groupPositionArgs.dx ?? 0) + (args.dx ?? 0);
+            const dy = (groupPositionArgs.dy ?? 0) + (args.dy ?? 0);
+            const x = Math.round(startX + index * gap + dx);
+            const y = Math.round(baseY + dy);
+            return { position: { x, y }, angle: 0, ...args };
+        });
+    };
 };
 
 export const createGraphRendererLayoutsService = (): GraphRendererLayoutsService => {
@@ -74,10 +62,10 @@ export const createGraphRendererLayoutsService = (): GraphRendererLayoutsService
             return;
         }
 
-        Graph.registerPortLayout(NODE_PORT_LAYOUTS.left, buildSideLayout("left"), true);
-        Graph.registerPortLayout(NODE_PORT_LAYOUTS.right, buildSideLayout("right"), true);
-        Graph.registerPortLayout(NODE_PORT_LAYOUTS.top, buildTopLayout, true);
-        Graph.registerPortLayout(NODE_PORT_LAYOUTS.bottom, buildBottomLayout, true);
+        Graph.registerPortLayout(NODE_PORT_LAYOUTS.left, buildVerticalLayout("left"), true);
+        Graph.registerPortLayout(NODE_PORT_LAYOUTS.right, buildVerticalLayout("right"), true);
+        Graph.registerPortLayout(NODE_PORT_LAYOUTS.top, buildHorizontalLayout("top"), true);
+        Graph.registerPortLayout(NODE_PORT_LAYOUTS.bottom, buildHorizontalLayout("bottom"), true);
 
         registered = true;
     };
@@ -86,4 +74,3 @@ export const createGraphRendererLayoutsService = (): GraphRendererLayoutsService
         registerPortLayouts,
     };
 };
-
