@@ -48,8 +48,8 @@ export const TOGGLE_GENERATOR_ITEM = buildStdLogicItem({
                 plate: {
                     x: 4,
                     y: 4,
-                    width: 28,
-                    height: 28,
+                    width: 26,
+                    height: 26,
                     rx: 2,
                     ry: 2,
                     stroke: "none",

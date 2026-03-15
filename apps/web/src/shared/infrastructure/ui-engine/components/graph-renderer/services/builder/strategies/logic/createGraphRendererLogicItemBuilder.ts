@@ -1,6 +1,5 @@
 import type { UIEngineNodeProps } from "@engine-model/graph-renderer";
 import type { CatalogLogicItem, CatalogItemLayout } from "@engine-model/catalog";
-import { STROKE_WIDTH } from "@engine-model/constants";
 import { createCatalogItemRefKey } from "@engine-model/catalog/lib";
 import { DEFAULT_NODE_POSITION } from "../../constants";
 import type { GraphRendererBuildNodeInput } from "../../types";
@@ -27,20 +26,15 @@ export const createGraphRendererLogicItemBuilder =
         }: Omit<GraphRendererBuildNodeInput, "item"> & {
             item: CatalogLogicItem;
         }): UIEngineNodeProps => {
-            const { width, height, minHeight, minWidth } = ensurePositiveLayoutDimensions(
-                item.layout,
-            );
-            const { attrs, markup } = applyCatalogVisualPatch(item, {
-                minWidth,
-                minHeight,
-            });
+            const { width, height } = ensurePositiveLayoutDimensions(item.layout);
+            const { attrs, markup } = applyCatalogVisualPatch(item, { width, height });
             const nextPosition = position ?? DEFAULT_NODE_POSITION;
 
             return {
                 x: nextPosition.x,
                 y: nextPosition.y,
-                width: width + STROKE_WIDTH,
-                height: height + STROKE_WIDTH,
+                width: width,
+                height,
                 markup,
                 attrs,
                 ports: buildLogicPorts(item),

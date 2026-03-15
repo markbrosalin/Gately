@@ -7,10 +7,3 @@ export const LOGIC_ITEMS = [
     ...LOGIC_DISPLAY_ITEMS,
     ...LOGIC_GENERATOR_ITEMS,
 ] as const;
-
-export {
-    buildStdLogicItemAttrs,
-    buildStdLogicItemMarkup,
-    buildStdLogicItemPorts,
-} from "./visual-factories";
-

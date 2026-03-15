@@ -23,11 +23,13 @@ const createLogicItem = (overrides: Partial<CatalogLogicItem> = {}): CatalogLogi
 
 describe("applyCatalogVisualPatch", () => {
     it("falls back to the default logic shell when visual module is absent", () => {
-        const result = applyCatalogVisualPatch(createLogicItem(), { minWidth: 64, minHeight: 32 });
+        const result = applyCatalogVisualPatch(createLogicItem(), { width: 64, height: 32 });
 
         expect(result.markup).toBeDefined();
-        expect(result.attrs?.body?.width).toBe(64);
-        expect(result.attrs?.body?.height).toBe(32);
+        expect(result.attrs?.body?.x).toBe(1);
+        expect(result.attrs?.body?.y).toBe(1);
+        expect(result.attrs?.body?.width).toBe(62);
+        expect(result.attrs?.body?.height).toBe(30);
     });
 
     it("merges visual attrs, markup and static class patch", () => {
@@ -56,7 +58,7 @@ describe("applyCatalogVisualPatch", () => {
                     },
                 ],
             }),
-            { minWidth: 64, minHeight: 32 },
+            { width: 64, height: 32 },
         );
 
         expect(result.markup).toEqual([{ tagName: "rect", selector: "custom-body" }]);

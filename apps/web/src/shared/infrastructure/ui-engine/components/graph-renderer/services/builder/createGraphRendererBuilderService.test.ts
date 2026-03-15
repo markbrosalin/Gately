@@ -1,5 +1,4 @@
 import { STROKE_WIDTH } from "@engine-model/constants";
-import { createBaseNodeMarkup } from "@engine-model/nodes-spec";
 import type { CatalogAnnotationItem, CatalogLogicItem } from "@engine-model/catalog";
 import {
     BUFFER_LOGIC_ICON_PATH,
@@ -60,8 +59,8 @@ describe("createGraphRendererBuilderService", () => {
         expect(props).toMatchObject({
             x: 10,
             y: 20,
-            width: BUFFER_LOGIC_ITEM.layout.width + STROKE_WIDTH,
-            height: BUFFER_LOGIC_ITEM.layout.height + STROKE_WIDTH,
+            width: BUFFER_LOGIC_ITEM.layout.width,
+            height: BUFFER_LOGIC_ITEM.layout.height,
             data: {
                 ref: BUFFER_LOGIC_ITEM.ref,
                 refKey: "std::logic::buffer",
@@ -146,8 +145,18 @@ describe("createGraphRendererBuilderService", () => {
 
         const props = builder.buildNodeProps({ item });
 
-        expect(props.markup).toEqual(createBaseNodeMarkup());
-        expect(props.attrs?.body?.width).toBe(64);
+        expect(props.markup).toEqual([
+            {
+                tagName: "g",
+                className: "base-node",
+                children: [
+                    { tagName: "rect", selector: "body" },
+                    { tagName: "path", selector: "icon" },
+                ],
+            },
+        ]);
+        expect(props.attrs?.body?.width).toBe(64 - STROKE_WIDTH);
+        expect(props.attrs?.body?.height).toBe(32 - STROKE_WIDTH);
         expect((props.ports as { items: unknown[] }).items).toEqual([]);
     });
 
