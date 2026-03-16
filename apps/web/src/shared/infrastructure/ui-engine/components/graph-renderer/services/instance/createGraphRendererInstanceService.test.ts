@@ -32,7 +32,7 @@ const createContext = (): GraphRendererServiceContext =>
     }) as unknown as GraphRendererServiceContext;
 
 const createConnecting = (): GraphRendererConnectingService => ({
-    buildConfig: () => ({ allowBlank: true, allowPort: true } as never),
+    buildConfig: () => ({ allowBlank: true, allowPort: true }) as never,
 });
 
 describe("createGraphRendererInstanceService", () => {
@@ -41,58 +41,63 @@ describe("createGraphRendererInstanceService", () => {
         vi.clearAllMocks();
     });
 
-    it("opens and closes a graph instance", () => {
+    it("mounts and unmounts a graph instance", () => {
         const service = createGraphRendererInstanceService(createContext(), createConnecting());
         const container = {} as HTMLDivElement;
 
-        const graph = service.open({
-            workspaceId: "workspace-1",
+        const graph = service.mount({
             container,
         });
 
-        expect(service.activeWorkspaceId()).toBe("workspace-1");
         expect(service.container()).toBe(container);
         expect(service.graph()).toBe(graph);
 
-        service.close();
+        service.unmount();
 
         expect(graphInstances[0]?.dispose).toHaveBeenCalledTimes(1);
-        expect(service.activeWorkspaceId()).toBeUndefined();
         expect(service.container()).toBeUndefined();
         expect(service.graph()).toBeUndefined();
     });
 
-    it("disposes the previous graph before opening a new one", () => {
+    it("disposes the previous graph before mounting a new one", () => {
         const service = createGraphRendererInstanceService(createContext(), createConnecting());
 
-        service.open({
-            workspaceId: "workspace-1",
+        service.mount({
             container: {} as HTMLDivElement,
         });
 
-        service.open({
-            workspaceId: "workspace-2",
+        service.mount({
             container: {} as HTMLDivElement,
         });
 
         expect(graphInstances[0]?.dispose).toHaveBeenCalledTimes(1);
-        expect(service.activeWorkspaceId()).toBe("workspace-2");
     });
 
-    it("runs registered disposers before graph disposal", () => {
+    it("notifies graph lifecycle listeners on mount and unmount", () => {
         const service = createGraphRendererInstanceService(createContext(), createConnecting());
-        const disposePlugin = vi.fn();
+        const onGraphMount = vi.fn();
+        const onGraphUnmount = vi.fn();
+        const unsubscribeMount = service.onGraphMount(onGraphMount);
+        const unsubscribeUnmount = service.onGraphUnmount(onGraphUnmount);
+        const container = {} as HTMLDivElement;
 
-        service.open({
-            workspaceId: "workspace-1",
-            container: {} as HTMLDivElement,
+        const graph = service.mount({
+            container,
         });
-        service.addDisposer(disposePlugin);
 
-        service.close();
+        expect(onGraphMount).toHaveBeenCalledWith({
+            graph,
+            container,
+        });
 
-        expect(disposePlugin).toHaveBeenCalledTimes(1);
-        expect(graphInstances[0]?.dispose).toHaveBeenCalledTimes(1);
+        service.unmount();
+
+        expect(onGraphUnmount).toHaveBeenCalledWith({
+            graph,
+            container,
+        });
+
+        unsubscribeMount();
+        unsubscribeUnmount();
     });
 });
-

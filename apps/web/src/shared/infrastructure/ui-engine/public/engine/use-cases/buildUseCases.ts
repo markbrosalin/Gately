@@ -38,14 +38,8 @@ export type BuildUIEngineUseCasesResult = {
 export const buildUIEngineUseCases = (
     deps: UIEngineUseCasesFactoryDeps,
 ): BuildUIEngineUseCasesResult => {
-    const syncRendererReady = () => {
-        deps.setRendererReady(deps.graphRenderer.query.isOpen());
-    };
     const persistActiveGraphDocument = createPersistActiveGraphDocument(deps);
-    const activateWorkspaceScene = createActivateWorkspaceScene({
-        ...deps,
-        syncRendererReady,
-    });
+    const activateWorkspaceScene = createActivateWorkspaceScene(deps);
 
     const useCases: UIEngineUseCases = {
         createTab: createCreateTabUseCase({
@@ -62,7 +56,6 @@ export const buildUIEngineUseCases = (
             ...deps,
             activateWorkspaceScene,
             persistActiveGraphDocument,
-            syncRendererReady,
         }),
         createNodeFromCatalogItem: createCreateNodeFromCatalogItemUseCase({
             ...deps,
@@ -78,7 +71,6 @@ export const buildUIEngineUseCases = (
         internals: {
             persistActiveGraphDocument,
             activateWorkspaceScene,
-            syncRendererReady,
         },
     };
 };

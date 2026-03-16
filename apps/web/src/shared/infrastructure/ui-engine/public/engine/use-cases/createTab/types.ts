@@ -12,6 +12,6 @@ export type UIEngineCreateTabUseCase = AsyncUseCase<
 
 export type CreateTabUseCaseDeps = Pick<
     UIEngineUseCaseDeps,
-    "getContainer" | "graphDocument" | "workspace"
+    "graphDocument" | "graphRenderer" | "workspace"
 > &
     Pick<UIEngineUseCaseInternals, "activateWorkspaceScene" | "persistActiveGraphDocument">;

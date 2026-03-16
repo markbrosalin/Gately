@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import { createCatalog } from "../../components/catalog";
 import { createGraphDocument } from "../../components/graph-document";
 import { createGraphRenderer } from "../../components/graph-renderer";
@@ -49,16 +48,13 @@ export const createUIEngine = (externalCtx: UIEngineExternalContext = {}): UIEng
         throw error;
     }
 
-    const [container, setContainer] = createSignal<HTMLDivElement | undefined>(undefined);
-    const [rendererReady, setRendererReady] = createSignal(false);
-
     const query = createUIEngineQuery({
         catalog,
         workspace,
         graphDocument,
         graphRenderer,
-        isMounted: () => Boolean(container()),
-        isReady: () => Boolean(container()) && rendererReady(),
+        isMounted: graphRenderer.query.isMounted,
+        isReady: graphRenderer.query.isMounted,
     });
 
     const { useCases, internals } = buildUIEngineUseCases({
@@ -66,8 +62,6 @@ export const createUIEngine = (externalCtx: UIEngineExternalContext = {}): UIEng
         workspace,
         graphDocument,
         graphRenderer,
-        getContainer: container,
-        setRendererReady,
     });
 
     const reportIssues = (label: string, issues: Array<{ message: string }>) => {
@@ -80,9 +74,11 @@ export const createUIEngine = (externalCtx: UIEngineExternalContext = {}): UIEng
     };
 
     const mount = createUIEngineMount({
-        setContainerState: setContainer,
         getActiveWorkspaceId: workspace.query.activeWorkspaceId,
-        graphRendererClose: graphRenderer.close,
+        graphRendererMount: graphRenderer.mount,
+        graphRendererUnmount: graphRenderer.unmount,
+        graphRendererContainer: graphRenderer.query.container,
+        graphRendererIsMounted: graphRenderer.query.isMounted,
         reportIssues,
         ...internals,
     });
@@ -93,13 +89,12 @@ export const createUIEngine = (externalCtx: UIEngineExternalContext = {}): UIEng
             reportIssues("dispose.persist-active-graph-document", persistResult.issues);
         }
 
-        const closeResult = graphRenderer.close();
-        if (!closeResult.ok) {
-            reportIssues("dispose.close-graph-renderer", closeResult.issues);
+        if (graphRenderer.query.isMounted()) {
+            const unmountResult = graphRenderer.unmount();
+            if (!unmountResult.ok) {
+                reportIssues("dispose.unmount-graph-renderer", unmountResult.issues);
+            }
         }
-
-        setContainer(undefined);
-        internals.syncRendererReady();
     };
 
     return {

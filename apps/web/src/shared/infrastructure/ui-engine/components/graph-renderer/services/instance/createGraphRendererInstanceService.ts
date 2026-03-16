@@ -3,22 +3,16 @@ import { createGraphRendererOptions } from "../../helpers";
 import type { GraphRendererConnectingService } from "../connecting";
 import type { GraphRendererServiceContext } from "../types";
 import type {
-    GraphRendererInstanceOpenInput,
+    GraphRendererLifecycleContext,
+    GraphRendererLifecycleListener,
+    GraphRendererInstanceMountInput,
     GraphRendererInstanceService,
+    GraphRendererRuntime,
 } from "./types";
 
-type GraphRendererRuntime = {
-    workspaceId: string | undefined;
-    container: HTMLDivElement | undefined;
-    graph: Graph | undefined;
-    disposers: Array<() => void>;
-};
-
 const createInitialRuntime = (): GraphRendererRuntime => ({
-    workspaceId: undefined,
     container: undefined,
     graph: undefined,
-    disposers: [],
 });
 
 export const createGraphRendererInstanceService = (
@@ -26,36 +20,56 @@ export const createGraphRendererInstanceService = (
     connecting: GraphRendererConnectingService,
 ): GraphRendererInstanceService => {
     let runtime = createInitialRuntime();
+    const graphMountListeners = new Set<GraphRendererLifecycleListener>();
+    const graphUnmountListeners = new Set<GraphRendererLifecycleListener>();
 
-    const activeWorkspaceId = () => runtime.workspaceId;
     const container = () => runtime.container;
     const graph = () => runtime.graph;
-    const addDisposer = (dispose: () => void): void => {
-        runtime.disposers.push(dispose);
+
+    const onGraphMount = (listener: GraphRendererLifecycleListener): (() => void) => {
+        graphMountListeners.add(listener);
+        return () => {
+            graphMountListeners.delete(listener);
+        };
+    };
+    const onGraphUnmount = (listener: GraphRendererLifecycleListener): (() => void) => {
+        graphUnmountListeners.add(listener);
+        return () => {
+            graphUnmountListeners.delete(listener);
+        };
+    };
+    const emitLifecycle = (
+        listeners: Set<GraphRendererLifecycleListener>,
+        payload: GraphRendererLifecycleContext,
+    ): void => {
+        listeners.forEach((listener) => {
+            try {
+                listener(payload);
+            } catch (error) {
+                ctx.external.hooks?.onError?.({
+                    label: "graph-renderer lifecycle",
+                    stage: "runtime",
+                    error,
+                });
+                console.error("[UIEngine] graph-renderer lifecycle listener failed", error);
+            }
+        });
     };
 
-    const close = (): void => {
+    const unmount = (): void => {
         const currentGraph = runtime.graph;
-        const currentDisposers = runtime.disposers;
+        const currentContainer = runtime.container;
+
+        if (currentGraph && currentContainer) {
+            emitLifecycle(graphUnmountListeners, {
+                graph: currentGraph,
+                container: currentContainer,
+            });
+        }
 
         runtime = createInitialRuntime();
 
-        currentDisposers.reverse().forEach((dispose) => {
-            try {
-                dispose();
-            } catch (error) {
-                ctx.external.hooks?.onError?.({
-                    label: "graph-renderer plugin",
-                    stage: "dispose",
-                    error,
-                });
-                console.error("[UIEngine] graph-renderer plugin dispose failed", error);
-            }
-        });
-
-        if (!currentGraph) {
-            return;
-        }
+        if (!currentGraph) return;
 
         try {
             currentGraph.dispose();
@@ -70,9 +84,9 @@ export const createGraphRendererInstanceService = (
         }
     };
 
-    const open = ({ workspaceId, container }: GraphRendererInstanceOpenInput): Graph => {
+    const mount = ({ container }: GraphRendererInstanceMountInput): Graph => {
         if (runtime.graph) {
-            close();
+            unmount();
         }
 
         const nextGraph = new Graph(
@@ -80,22 +94,24 @@ export const createGraphRendererInstanceService = (
         );
 
         runtime = {
-            workspaceId,
             container,
             graph: nextGraph,
-            disposers: [],
         };
+
+        emitLifecycle(graphMountListeners, {
+            graph: nextGraph,
+            container,
+        });
 
         return nextGraph;
     };
 
     return {
-        activeWorkspaceId,
         container,
         graph,
-        addDisposer,
-        open,
-        close,
+        onGraphMount,
+        onGraphUnmount,
+        mount,
+        unmount,
     };
 };
-

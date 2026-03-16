@@ -6,6 +6,8 @@ export type GraphRendererDocumentLoadInput = {
 };
 
 export type GraphRendererDocumentService = {
+    activeWorkspaceId: () => string | undefined;
+    clearActiveWorkspaceId: () => void;
     loadDocument: (input: GraphRendererDocumentLoadInput) => void;
     exportDocument: (workspaceId: string) => GraphDocument;
 };

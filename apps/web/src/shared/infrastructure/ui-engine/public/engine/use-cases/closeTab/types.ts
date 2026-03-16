@@ -15,7 +15,4 @@ export type UIEngineCloseTabUseCase = UseCase<
 >;
 
 export type CloseTabUseCaseDeps = Pick<UIEngineUseCaseDeps, "graphRenderer" | "workspace"> &
-    Pick<
-        UIEngineUseCaseInternals,
-        "activateWorkspaceScene" | "persistActiveGraphDocument" | "syncRendererReady"
-    >;
+    Pick<UIEngineUseCaseInternals, "activateWorkspaceScene" | "persistActiveGraphDocument">;

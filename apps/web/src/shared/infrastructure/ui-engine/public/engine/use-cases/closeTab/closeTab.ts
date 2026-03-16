@@ -6,7 +6,6 @@ export const createCloseTabUseCase = ({
     workspace,
     activateWorkspaceScene,
     persistActiveGraphDocument,
-    syncRendererReady,
 }: CloseTabUseCaseDeps): UIEngineCloseTabUseCase => {
     return ({ tabId, conditions }) => {
         const isClosingActiveTab = workspace.query.activeTabId() === tabId;
@@ -28,13 +27,11 @@ export const createCloseTabUseCase = ({
             if (!activateResult.ok) {
                 return createErrResult(activateResult.issues);
             }
-        } else if (graphRenderer.query.isOpen()) {
-            const closeRendererResult = graphRenderer.close();
-            if (!closeRendererResult.ok) {
-                return createErrResult(closeRendererResult.issues);
+        } else if (graphRenderer.query.isMounted()) {
+            const clearSceneResult = graphRenderer.clearScene();
+            if (!clearSceneResult.ok) {
+                return createErrResult(clearSceneResult.issues);
             }
-
-            syncRendererReady();
         }
 
         return createOkResult(closeResult.value);

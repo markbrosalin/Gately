@@ -149,7 +149,7 @@ describe("createUIEngine", () => {
         engine.mount.setContainer(createTestContainer());
 
         expect(engine.query.engine.isMounted()).toBe(true);
-        expect(engine.query.engine.isReady()).toBe(false);
+        expect(engine.query.engine.isReady()).toBe(true);
 
         const createTabResult = await engine.useCases.createTab({});
 
@@ -160,7 +160,7 @@ describe("createUIEngine", () => {
         expect(engine.query.workspace.activeTabId()).toBe(createTabResult.value.tabId);
         expect(engine.query.workspace.activeWorkspaceId()).toBe(createTabResult.value.tabId);
         expect(engine.query.graphDocument.hasDocument(createTabResult.value.tabId)).toBe(true);
-        expect(engine.query.graphRenderer.isOpen()).toBe(true);
+        expect(engine.query.graphRenderer.isMounted()).toBe(true);
         expect(engine.query.engine.isReady()).toBe(true);
     });
 

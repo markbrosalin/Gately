@@ -6,6 +6,7 @@ export const createGraphRendererSelectionApi = (
     instance: GraphRendererInstanceService,
 ): GraphRendererSelectionService => {
     let installedGraph: ReturnType<GraphRendererInstanceService["graph"]>;
+    let disposeSelection: (() => void) | undefined;
 
     const selectedCells = (): Cell[] => instance.graph()?.getSelectedCells?.() ?? [];
 
@@ -49,12 +50,21 @@ export const createGraphRendererSelectionApi = (
 
         graph.use(selection);
         installedGraph = graph;
-        instance.addDisposer(() => {
+        disposeSelection = () => {
             installedGraph = undefined;
             selection.clean?.();
             selection.dispose?.();
-        });
+            disposeSelection = undefined;
+        };
     };
+
+    instance.onGraphUnmount(({ graph }) => {
+        if (installedGraph !== graph) {
+            return;
+        }
+
+        disposeSelection?.();
+    });
 
     return {
         install,

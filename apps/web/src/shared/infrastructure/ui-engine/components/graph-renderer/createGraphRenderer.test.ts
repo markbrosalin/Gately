@@ -146,32 +146,44 @@ describe("createGraphRenderer", () => {
         ...overrides,
     });
 
-    it("opens and closes renderer through the public component API", () => {
+    it("mounts and unmounts renderer through the public component API", () => {
         const shared = buildSharedServices();
         const renderer = createGraphRenderer({
             external: {},
             getSharedService: shared.getService,
         });
         const container = {} as HTMLDivElement;
+        const onGraphMount = vi.fn();
+        const onGraphUnmount = vi.fn();
 
-        const openResult = renderer.open({
-            workspaceId: "workspace-1",
+        renderer.lifecycle.onGraphMount(onGraphMount);
+        renderer.lifecycle.onGraphUnmount(onGraphUnmount);
+
+        const mountResult = renderer.mount({
             container,
         });
 
-        expect(openResult.ok).toBe(true);
-        expect(renderer.query.isOpen()).toBe(true);
-        expect(renderer.query.activeWorkspaceId()).toBe("workspace-1");
+        expect(mountResult.ok).toBe(true);
+        expect(renderer.query.isMounted()).toBe(true);
+        expect(renderer.query.activeWorkspaceId()).toBeUndefined();
         expect(renderer.query.container()).toBe(container);
         expect(renderer.query.hasSelection()).toBe(false);
         expect(renderer.query.selectionCount()).toBe(0);
         expect(graphInstances[0]?.use).toHaveBeenCalledTimes(1);
+        expect(onGraphMount).toHaveBeenCalledWith({
+            graph: graphInstances[0] as never,
+            container,
+        });
 
-        const closeResult = renderer.close();
+        const unmountResult = renderer.unmount();
 
-        expect(closeResult.ok).toBe(true);
-        expect(renderer.query.isOpen()).toBe(false);
+        expect(unmountResult.ok).toBe(true);
+        expect(renderer.query.isMounted()).toBe(false);
         expect(renderer.query.activeWorkspaceId()).toBeUndefined();
+        expect(onGraphUnmount).toHaveBeenCalledWith({
+            graph: graphInstances[0] as never,
+            container,
+        });
     });
 
     it("creates a node from a catalog item through the public component API", () => {
@@ -189,8 +201,7 @@ describe("createGraphRenderer", () => {
 
         expect(closedResult.issues[0]?.code).toBe("graph-renderer.use-case.renderer.not-open");
 
-        renderer.open({
-            workspaceId: "workspace-1",
+        renderer.mount({
             container: {} as HTMLDivElement,
         });
 
@@ -242,8 +253,7 @@ describe("createGraphRenderer", () => {
             getSharedService: shared.getService,
         });
 
-        renderer.open({
-            workspaceId: "workspace-1",
+        renderer.mount({
             container: {} as HTMLDivElement,
         });
 
@@ -287,8 +297,7 @@ describe("createGraphRenderer", () => {
         }
         expect(closedRemoveResult.issues[0]?.code).toBe("graph-renderer.use-case.renderer.not-open");
 
-        renderer.open({
-            workspaceId: "workspace-1",
+        renderer.mount({
             container: {} as HTMLDivElement,
         });
 
@@ -331,8 +340,7 @@ describe("createGraphRenderer", () => {
             getSharedService: shared.getService,
         });
 
-        renderer.open({
-            workspaceId: "workspace-1",
+        renderer.mount({
             container: {} as HTMLDivElement,
         });
 
@@ -367,7 +375,7 @@ describe("createGraphRenderer", () => {
             createdAt: 1234,
         });
 
-        const closeResult = renderer.close();
+        const closeResult = renderer.unmount();
 
         expect(closeResult.ok).toBe(true);
         expect(graphInstances[0]?.dispose).toHaveBeenCalledTimes(1);
@@ -396,25 +404,17 @@ describe("createGraphRenderer", () => {
             "graph-renderer.use-case.renderer.not-open",
         );
 
-        renderer.open({
-            workspaceId: "workspace-1",
+        renderer.mount({
             container: {} as HTMLDivElement,
         });
 
-        const mismatchedWorkspaceResult = renderer.loadDocument({
-            document: createDocument({ workspaceId: "workspace-2" }),
-        });
         const invalidJsonResult = renderer.loadDocument({
             document: createDocument({ contentJson: "{bad-json" }),
         });
 
-        if (mismatchedWorkspaceResult.ok || invalidJsonResult.ok) {
+        if (invalidJsonResult.ok) {
             throw new Error("Expected invalid renderer document loads to fail");
         }
-
-        expect(mismatchedWorkspaceResult.issues[0]?.code).toBe(
-            "graph-renderer.use-case.document.workspace-id.mismatch",
-        );
         expect(invalidJsonResult.issues[0]?.code).toBe(
             "graph-renderer.use-case.document.content-json.invalid",
         );

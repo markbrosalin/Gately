@@ -18,7 +18,7 @@ export const createPersistActiveGraphDocument = ({
 }: CreatePersistActiveGraphDocumentUseCaseDeps): UIEngineUseCaseInternals["persistActiveGraphDocument"] => {
     return (): PersistActiveGraphDocumentResult => {
         const activeWorkspaceId = workspace.query.activeWorkspaceId();
-        if (!graphRenderer.query.isOpen() || !activeWorkspaceId) {
+        if (!graphRenderer.query.isMounted() || !activeWorkspaceId) {
             return createOkResult<GraphDocument | undefined>(undefined);
         }
 

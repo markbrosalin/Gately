@@ -15,7 +15,7 @@ export const createRemoveSelectionUseCase = ({
     removal,
 }: Pick<GraphRendererUseCaseDeps, "query" | "removal">): GraphRendererRemoveSelectionUseCase => {
     return () => {
-        if (!query.isOpen()) {
+        if (!query.isMounted()) {
             return createErrResult(graphRendererUseCaseIssues.rendererNotOpen([]));
         }
 

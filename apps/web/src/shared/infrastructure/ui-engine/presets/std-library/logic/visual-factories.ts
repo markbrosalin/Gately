@@ -11,8 +11,6 @@ export const buildStdLogicItemMarkup = (
         tagName: "g",
         className: "base-node",
         children: [
-            { tagName: "rect", selector: "selection-fill" },
-            { tagName: "rect", selector: "selection-outline" },
             ...(props.beforeBody ?? []),
             { tagName: "rect", selector: "body" },
             ...(props.beforeIcon ?? []),

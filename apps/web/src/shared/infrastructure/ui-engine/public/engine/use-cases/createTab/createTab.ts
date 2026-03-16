@@ -6,8 +6,8 @@ import type {
 } from "./types";
 
 export const createCreateTabUseCase = ({
-    getContainer,
     graphDocument,
+    graphRenderer,
     workspace,
     activateWorkspaceScene,
     persistActiveGraphDocument,
@@ -29,7 +29,7 @@ export const createCreateTabUseCase = ({
             return createErrResult(ensureResult.issues);
         }
 
-        if (getContainer() && workspace.query.activeWorkspaceId() === tabId) {
+        if (graphRenderer.query.isMounted() && workspace.query.activeWorkspaceId() === tabId) {
             const activateResult = activateWorkspaceScene(tabId);
             if (!activateResult.ok) {
                 return createErrResult(activateResult.issues);

@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import type { GraphRendererInstanceService } from "../instance";
+import type { GraphRendererDocumentService } from "../document/types";
 import type { GraphRendererSelectionService } from "../selection";
 import { createGraphRendererQueryApi } from "./createGraphRendererQueryService";
 
@@ -11,12 +12,18 @@ describe("createGraphRendererQueryService", () => {
         const selectedNode = { id: "node-1" };
         const selectedEdge = { id: "edge-1" };
         const instance: GraphRendererInstanceService = {
-            activeWorkspaceId: () => "workspace-1",
-            addDisposer: vi.fn(),
             container: () => ({}) as HTMLDivElement,
             graph: () => graph as never,
-            open: vi.fn() as never,
-            close: vi.fn(),
+            onGraphMount: vi.fn(),
+            onGraphUnmount: vi.fn(),
+            mount: vi.fn() as never,
+            unmount: vi.fn(),
+        };
+        const document: GraphRendererDocumentService = {
+            activeWorkspaceId: vi.fn(() => "workspace-1"),
+            clearActiveWorkspaceId: vi.fn(),
+            loadDocument: vi.fn(),
+            exportDocument: vi.fn() as never,
         };
         const selection: GraphRendererSelectionService = {
             install: vi.fn(),
@@ -26,10 +33,10 @@ describe("createGraphRendererQueryService", () => {
             selectedEdges: vi.fn(() => [selectedEdge as never]),
             hasSelection: vi.fn(() => true),
         };
-        const query = createGraphRendererQueryApi(instance, selection);
+        const query = createGraphRendererQueryApi(instance, document, selection);
 
         expect(query.activeWorkspaceId()).toBe("workspace-1");
-        expect(query.isOpen()).toBe(true);
+        expect(query.isMounted()).toBe(true);
         expect(query.hasSelection()).toBe(true);
         expect(query.selectionCount()).toBe(2);
         expect(query.selectedCellIds()).toEqual(["node-1", "edge-1"]);

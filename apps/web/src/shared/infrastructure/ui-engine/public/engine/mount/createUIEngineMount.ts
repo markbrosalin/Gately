@@ -2,23 +2,25 @@ import type { UIEngineMountApi } from "../../types";
 import type { UIEngineUseCaseInternals } from "../use-cases";
 
 type CreateUIEngineMountDeps = {
-    setContainerState: (container?: HTMLDivElement) => void;
     getActiveWorkspaceId: () => string | undefined;
-    graphRendererClose: () => { ok: boolean; issues: Array<{ message: string }> };
+    graphRendererMount: (input: {
+        container: HTMLDivElement;
+    }) => { ok: boolean; issues: Array<{ message: string }> };
+    graphRendererUnmount: () => { ok: boolean; issues: Array<{ message: string }> };
+    graphRendererContainer: () => HTMLDivElement | undefined;
+    graphRendererIsMounted: () => boolean;
     reportIssues: (label: string, issues: Array<{ message: string }>) => void;
-} & Pick<
-    UIEngineUseCaseInternals,
-    "activateWorkspaceScene" | "persistActiveGraphDocument" | "syncRendererReady"
->;
+} & Pick<UIEngineUseCaseInternals, "activateWorkspaceScene" | "persistActiveGraphDocument">;
 
 export const createUIEngineMount = ({
-    setContainerState,
     getActiveWorkspaceId,
-    graphRendererClose,
+    graphRendererMount,
+    graphRendererUnmount,
+    graphRendererContainer,
+    graphRendererIsMounted,
     reportIssues,
     activateWorkspaceScene,
     persistActiveGraphDocument,
-    syncRendererReady,
 }: CreateUIEngineMountDeps): UIEngineMountApi => {
     return {
         setContainer(container) {
@@ -28,20 +30,29 @@ export const createUIEngineMount = ({
                     reportIssues("persist-active-graph-document", persistResult.issues);
                 }
 
-                const closeResult = graphRendererClose();
-                if (!closeResult.ok) {
-                    reportIssues("close-graph-renderer", closeResult.issues);
+                if (graphRendererIsMounted()) {
+                    const unmountResult = graphRendererUnmount();
+                    if (!unmountResult.ok) {
+                        reportIssues("unmount-graph-renderer", unmountResult.issues);
+                    }
                 }
 
-                setContainerState(undefined);
-                syncRendererReady();
                 return;
             }
 
-            setContainerState(container);
+            const shouldRemount =
+                !graphRendererIsMounted() || graphRendererContainer() !== container;
+
+            if (shouldRemount) {
+                const mountResult = graphRendererMount({ container });
+                if (!mountResult.ok) {
+                    reportIssues("mount-graph-renderer", mountResult.issues);
+                    return;
+                }
+            }
+
             const activeWorkspaceId = getActiveWorkspaceId();
             if (!activeWorkspaceId) {
-                syncRendererReady();
                 return;
             }
 

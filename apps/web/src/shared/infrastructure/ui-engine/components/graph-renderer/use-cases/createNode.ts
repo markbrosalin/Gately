@@ -28,7 +28,7 @@ export const createCreateNodeUseCase = ({
     "builder" | "nodes" | "query"
 >): GraphRendererCreateNodeUseCase => {
     return (input) => {
-        if (!query.isOpen()) {
+        if (!query.isMounted()) {
             return createErrResult(graphRendererUseCaseIssues.rendererNotOpen([]));
         }
 

@@ -60,7 +60,7 @@ const createServiceDefinitions = (
     },
     query: {
         create: () => createGraphRendererQueryService(ctx),
-        createDeps: ["instance", "selection"],
+        createDeps: ["instance", "document", "selection"],
     },
 });
 

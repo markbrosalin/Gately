@@ -22,12 +22,12 @@ describe("createGraphRendererNodesService", () => {
             }),
         };
         const instance: GraphRendererInstanceService = {
-            activeWorkspaceId: () => "workspace-1",
-            addDisposer: vi.fn(),
             container: () => ({}) as HTMLDivElement,
             graph: () => graph as never,
-            open: vi.fn() as never,
-            close: vi.fn(),
+            onGraphMount: vi.fn(),
+            onGraphUnmount: vi.fn(),
+            mount: vi.fn() as never,
+            unmount: vi.fn(),
         };
         const service = createGraphRendererNodesApi(instance);
 

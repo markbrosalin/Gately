@@ -19,7 +19,7 @@ export const createRemoveNodeUseCase = ({
     removal,
 }: Pick<GraphRendererUseCaseDeps, "query" | "removal">): GraphRendererRemoveNodeUseCase => {
     return ({ nodeId }) => {
-        if (!query.isOpen()) {
+        if (!query.isMounted()) {
             return createErrResult(graphRendererUseCaseIssues.rendererNotOpen([]));
         }
 

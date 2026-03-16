@@ -100,7 +100,6 @@ export const createUIEngineUseCaseTestContext = () => {
     const item = createTestCatalogItem();
 
     const fns = {
-        getContainer: vi.fn<UIEngineUseCaseDeps["getContainer"]>(() => container),
         catalogGetItem: vi.fn<CatalogApi["query"]["getItem"]>(() => item),
         workspaceCreateTab: vi.fn<WorkspaceApi["createTab"]>(async () =>
             createOkResult({ tabId: "tab-1" }),
@@ -125,8 +124,11 @@ export const createUIEngineUseCaseTestContext = () => {
                     }),
                 ),
         ),
-        graphRendererOpen: vi.fn<GraphRendererApi["open"]>(() => createOkResult()),
-        graphRendererClose: vi.fn<GraphRendererApi["close"]>(() => createOkResult(undefined)),
+        graphRendererMount: vi.fn<GraphRendererApi["mount"]>(() => createOkResult()),
+        graphRendererUnmount: vi.fn<GraphRendererApi["unmount"]>(() => createOkResult(undefined)),
+        graphRendererClearScene: vi.fn<GraphRendererApi["clearScene"]>(() =>
+            createOkResult(undefined),
+        ),
         graphRendererCreateNode: vi.fn<GraphRendererApi["createNode"]>(() => createOkResult(node)),
         graphRendererLoadDocument: vi.fn<GraphRendererApi["loadDocument"]>(
             ({ document: nextDocument }) => createOkResult(nextDocument),
@@ -134,20 +136,23 @@ export const createUIEngineUseCaseTestContext = () => {
         graphRendererExportDocument: vi.fn<GraphRendererApi["exportDocument"]>(() =>
             createOkResult(document),
         ),
-        graphRendererIsOpen: vi.fn<GraphRendererApi["query"]["isOpen"]>(() => true),
+        graphRendererIsMounted: vi.fn<GraphRendererApi["query"]["isMounted"]>(() => true),
         graphRendererActiveWorkspaceId: vi.fn<GraphRendererApi["query"]["activeWorkspaceId"]>(
             () => "workspace-1",
         ),
         graphRendererContainer: vi.fn<GraphRendererApi["query"]["container"]>(() => container),
         graphRendererGraph: vi.fn<GraphRendererApi["query"]["graph"]>(() => undefined),
+        graphRendererHasSelection: vi.fn<GraphRendererApi["query"]["hasSelection"]>(() => false),
         graphRendererSelectionCount: vi.fn<GraphRendererApi["query"]["selectionCount"]>(() => 0),
+        graphRendererSelectedCellIds: vi.fn<GraphRendererApi["query"]["selectedCellIds"]>(() => []),
+        graphRendererSelectedNodeIds: vi.fn<GraphRendererApi["query"]["selectedNodeIds"]>(() => []),
+        graphRendererSelectedEdgeIds: vi.fn<GraphRendererApi["query"]["selectedEdgeIds"]>(() => []),
         persistActiveGraphDocument: vi.fn<UIEngineUseCaseInternals["persistActiveGraphDocument"]>(
             () => createOkResult(document),
         ),
         activateWorkspaceScene: vi.fn<UIEngineUseCaseInternals["activateWorkspaceScene"]>(
             (workspaceId) => createOkResult(createTestGraphDocument({ workspaceId })),
         ),
-        syncRendererReady: vi.fn<UIEngineUseCaseInternals["syncRendererReady"]>(),
         issues,
     };
 
@@ -181,22 +186,25 @@ export const createUIEngineUseCaseTestContext = () => {
                 graph: fns.graphRendererGraph,
                 container: fns.graphRendererContainer,
                 activeWorkspaceId: fns.graphRendererActiveWorkspaceId,
-                isOpen: fns.graphRendererIsOpen,
+                isMounted: fns.graphRendererIsMounted,
+                hasSelection: fns.graphRendererHasSelection,
                 selectionCount: fns.graphRendererSelectionCount,
+                selectedCellIds: fns.graphRendererSelectedCellIds,
+                selectedNodeIds: fns.graphRendererSelectedNodeIds,
+                selectedEdgeIds: fns.graphRendererSelectedEdgeIds,
             },
-            open: fns.graphRendererOpen,
-            close: fns.graphRendererClose,
+            mount: fns.graphRendererMount,
+            unmount: fns.graphRendererUnmount,
+            clearScene: fns.graphRendererClearScene,
             createNode: fns.graphRendererCreateNode,
             loadDocument: fns.graphRendererLoadDocument,
             exportDocument: fns.graphRendererExportDocument,
         } as unknown as GraphRendererApi,
-        getContainer: fns.getContainer,
     };
 
     const internals: UIEngineUseCaseInternals = {
         persistActiveGraphDocument: fns.persistActiveGraphDocument,
         activateWorkspaceScene: fns.activateWorkspaceScene,
-        syncRendererReady: fns.syncRendererReady,
     };
 
     return {

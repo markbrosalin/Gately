@@ -13,7 +13,6 @@ describe("createCloseTabUseCase", () => {
             workspace: ctx.deps.workspace,
             activateWorkspaceScene: ctx.internals.activateWorkspaceScene,
             persistActiveGraphDocument: ctx.internals.persistActiveGraphDocument,
-            syncRendererReady: ctx.internals.syncRendererReady,
         });
 
         const result = useCase({ tabId: "tab-1" });
@@ -25,10 +24,10 @@ describe("createCloseTabUseCase", () => {
             conditions: undefined,
         });
         expect(ctx.fns.activateWorkspaceScene).toHaveBeenCalledWith("workspace-2");
-        expect(ctx.fns.graphRendererClose).not.toHaveBeenCalled();
+        expect(ctx.fns.graphRendererClearScene).not.toHaveBeenCalled();
     });
 
-    it("closes the renderer and syncs ready state when no active workspace remains", () => {
+    it("clears the scene when no active workspace remains", () => {
         const ctx = createUIEngineUseCaseTestContext();
         ctx.fns.workspaceActiveTabId.mockReturnValue("tab-1");
         ctx.fns.workspaceActiveWorkspaceId.mockReturnValue(undefined);
@@ -38,14 +37,12 @@ describe("createCloseTabUseCase", () => {
             workspace: ctx.deps.workspace,
             activateWorkspaceScene: ctx.internals.activateWorkspaceScene,
             persistActiveGraphDocument: ctx.internals.persistActiveGraphDocument,
-            syncRendererReady: ctx.internals.syncRendererReady,
         });
 
         const result = useCase({ tabId: "tab-1" });
 
         expect(result.ok).toBe(true);
-        expect(ctx.fns.graphRendererClose).toHaveBeenCalledTimes(1);
-        expect(ctx.fns.syncRendererReady).toHaveBeenCalledTimes(1);
+        expect(ctx.fns.graphRendererClearScene).toHaveBeenCalledTimes(1);
     });
 
     it("does not persist when a non-active tab is closed", () => {
@@ -58,7 +55,6 @@ describe("createCloseTabUseCase", () => {
             workspace: ctx.deps.workspace,
             activateWorkspaceScene: ctx.internals.activateWorkspaceScene,
             persistActiveGraphDocument: ctx.internals.persistActiveGraphDocument,
-            syncRendererReady: ctx.internals.syncRendererReady,
         });
 
         const result = useCase({ tabId: "tab-1" });

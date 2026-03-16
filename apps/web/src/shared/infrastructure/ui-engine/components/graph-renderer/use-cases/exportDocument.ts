@@ -18,7 +18,7 @@ export const createExportDocumentUseCase = ({
 }: Pick<GraphRendererUseCaseDeps, "document" | "query">): GraphRendererExportDocumentUseCase => {
     return () => {
         const activeWorkspaceId = query.activeWorkspaceId();
-        if (!query.isOpen() || !activeWorkspaceId) {
+        if (!query.isMounted() || !activeWorkspaceId) {
             return createErrResult(graphRendererUseCaseIssues.rendererNotOpen([]));
         }
 

@@ -13,7 +13,7 @@ export const createSaveActiveDocumentUseCase = ({
             return createErrResult(uiEngineUseCaseIssues.activeWorkspaceNotFound([]));
         }
 
-        if (!graphRenderer.query.isOpen()) {
+        if (!graphRenderer.query.isMounted()) {
             return createErrResult(uiEngineUseCaseIssues.rendererNotReady([]));
         }
 

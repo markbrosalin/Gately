@@ -10,12 +10,9 @@ export type UIEngineUseCaseDeps = {
     workspace: WorkspaceApi;
     graphDocument: GraphDocumentApi;
     graphRenderer: GraphRendererApi;
-    getContainer: () => HTMLDivElement | undefined;
 };
 
-export type UIEngineUseCasesFactoryDeps = UIEngineUseCaseDeps & {
-    setRendererReady: (isReady: boolean) => void;
-};
+export type UIEngineUseCasesFactoryDeps = UIEngineUseCaseDeps;
 
 export type PersistActiveGraphDocumentResult = Result<GraphDocument | undefined>;
 export type ActivateWorkspaceSceneResult = Result<GraphDocument>;
@@ -23,5 +20,4 @@ export type ActivateWorkspaceSceneResult = Result<GraphDocument>;
 export type UIEngineUseCaseInternals = {
     persistActiveGraphDocument: () => PersistActiveGraphDocumentResult;
     activateWorkspaceScene: (workspaceId: string) => ActivateWorkspaceSceneResult;
-    syncRendererReady: () => void;
 };

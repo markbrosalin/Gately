@@ -33,6 +33,13 @@ export const parseGraphRendererDocumentContentJson = (
 export const createGraphRendererDocumentApi = (
     instance: GraphRendererInstanceService,
 ): GraphRendererDocumentService => {
+    let currentWorkspaceId: string | undefined;
+
+    const activeWorkspaceId = (): string | undefined => currentWorkspaceId;
+    const clearActiveWorkspaceId = (): void => {
+        currentWorkspaceId = undefined;
+    };
+
     const loadDocument = ({ document, contentJson }: GraphRendererDocumentLoadInput): void => {
         const graph = instance.graph();
         if (!graph) {
@@ -47,6 +54,7 @@ export const createGraphRendererDocumentApi = (
 
         graph.zoomTo(document.viewport.zoom);
         graph.translate(document.viewport.tx, document.viewport.ty);
+        currentWorkspaceId = document.workspaceId;
     };
 
     const exportDocument = (workspaceId: string): GraphDocument => {
@@ -71,6 +79,8 @@ export const createGraphRendererDocumentApi = (
     };
 
     return {
+        activeWorkspaceId,
+        clearActiveWorkspaceId,
         loadDocument,
         exportDocument,
     };

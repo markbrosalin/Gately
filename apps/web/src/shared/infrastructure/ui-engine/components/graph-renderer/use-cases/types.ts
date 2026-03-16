@@ -1,18 +1,20 @@
 import type { GraphRendererServices } from "../services";
-import type { GraphRendererCloseUseCase } from "./close";
+import type { GraphRendererClearSceneUseCase } from "./clearScene";
 import type { GraphRendererCreateNodeUseCase } from "./createNode";
 import type { GraphRendererExportDocumentUseCase } from "./exportDocument";
 import type { GraphRendererLoadDocumentUseCase } from "./loadDocument";
-import type { GraphRendererOpenUseCase } from "./open";
+import type { GraphRendererMountUseCase } from "./mount";
 import type { GraphRendererRemoveEdgeUseCase } from "./removeEdge";
 import type { GraphRendererRemoveNodeUseCase } from "./removeNode";
 import type { GraphRendererRemoveSelectionUseCase } from "./removeSelection";
+import type { GraphRendererUnmountUseCase } from "./unmount";
 
 export type GraphRendererUseCaseDeps = GraphRendererServices;
 
 export type GraphRendererUseCases = {
-    open: GraphRendererOpenUseCase;
-    close: GraphRendererCloseUseCase;
+    mount: GraphRendererMountUseCase;
+    unmount: GraphRendererUnmountUseCase;
+    clearScene: GraphRendererClearSceneUseCase;
     createNode: GraphRendererCreateNodeUseCase;
     removeSelection: GraphRendererRemoveSelectionUseCase;
     removeNode: GraphRendererRemoveNodeUseCase;

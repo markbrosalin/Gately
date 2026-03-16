@@ -1,27 +1,27 @@
 import type { Graph } from "@antv/x6";
 import { createOkResult, type Result } from "@engine-model/core/result";
 import type { UseCase } from "@engine-model/core/use-case";
-import type { GraphRendererInstanceOpenInput } from "../services/instance";
+import type { GraphRendererInstanceMountInput } from "../services/instance";
 import type { GraphRendererUseCaseDeps } from "./types";
 
-type GraphRendererOpenResult = Result<Graph>;
+type GraphRendererMountResult = Result<Graph>;
 
-export type GraphRendererOpenUseCase = UseCase<
-    GraphRendererInstanceOpenInput,
-    GraphRendererOpenResult
+export type GraphRendererMountUseCase = UseCase<
+    GraphRendererInstanceMountInput,
+    GraphRendererMountResult
 >;
 
-export const createOpenUseCase = ({
+export const createMountUseCase = ({
     instance,
     layouts,
     selection,
 }: Pick<
     GraphRendererUseCaseDeps,
     "instance" | "layouts" | "selection"
->): GraphRendererOpenUseCase => {
+>): GraphRendererMountUseCase => {
     return (input) => {
         layouts.registerPortLayouts();
-        const graph = instance.open(input);
+        const graph = instance.mount(input);
         selection.install();
         return createOkResult(graph);
     };

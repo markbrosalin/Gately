@@ -28,7 +28,7 @@ describe("createCreateTabUseCase", () => {
 
     it("does not activate the scene when no container is mounted", async () => {
         const ctx = createUIEngineUseCaseTestContext();
-        ctx.fns.getContainer.mockReturnValue(undefined);
+        ctx.fns.graphRendererIsMounted.mockReturnValue(false);
 
         const useCase = createCreateTabUseCase({
             ...ctx.deps,

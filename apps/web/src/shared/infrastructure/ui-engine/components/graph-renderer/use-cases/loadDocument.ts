@@ -25,19 +25,8 @@ export const createLoadDocumentUseCase = ({
     query,
 }: Pick<GraphRendererUseCaseDeps, "document" | "query">): GraphRendererLoadDocumentUseCase => {
     return ({ document: nextDocument }) => {
-        const activeWorkspaceId = query.activeWorkspaceId();
-        if (!query.isOpen() || !activeWorkspaceId) {
+        if (!query.isMounted()) {
             return createErrResult(graphRendererUseCaseIssues.rendererNotOpen([]));
-        }
-
-        if (nextDocument.workspaceId !== activeWorkspaceId) {
-            return createErrResult(
-                graphRendererUseCaseIssues.documentWorkspaceMismatch(
-                    ["document", "workspaceId"],
-                    activeWorkspaceId,
-                    nextDocument.workspaceId,
-                ),
-            );
         }
 
         const parsedContent = parseGraphRendererDocumentContentJson(nextDocument.contentJson);
