@@ -3,20 +3,20 @@ import type { CatalogItemRef } from "@engine-model/catalog";
 import type { Result } from "@engine-model/core/result";
 import type { UseCase } from "@engine-model/core/use-case";
 import type { XYCoords } from "@gately/shared/types";
-import type { UIEngineUseCaseDeps } from "../types";
+import type { UseCaseDeps } from "../types";
 
-export type UIEngineCreateNodeFromCatalogItemUseCaseInput = {
+export type EngineCreateNodeFromCatalogItemUseCaseInput = {
     ref: CatalogItemRef;
     position?: XYCoords;
 };
 
-export type UIEngineCreateNodeFromCatalogItemUseCaseResult = Result<Node>;
-export type UIEngineCreateNodeFromCatalogItemUseCase = UseCase<
-    UIEngineCreateNodeFromCatalogItemUseCaseInput,
-    UIEngineCreateNodeFromCatalogItemUseCaseResult
+export type EngineCreateNodeFromCatalogItemUseCaseResult = Result<Node>;
+export type EngineCreateNodeFromCatalogItemUseCase = UseCase<
+    EngineCreateNodeFromCatalogItemUseCaseInput,
+    EngineCreateNodeFromCatalogItemUseCaseResult
 >;
 
 export type CreateNodeFromCatalogItemUseCaseDeps = Pick<
-    UIEngineUseCaseDeps,
+    UseCaseDeps,
     "catalog" | "graphRenderer" | "workspace"
 >;

@@ -1,12 +1,12 @@
 import { createErrResult, createOkResult } from "@engine-model/core/result";
-import type { CloseTabUseCaseDeps, UIEngineCloseTabUseCase } from "./types";
+import type { CloseTabUseCaseDeps, EngineCloseTabUseCase } from "./types";
 
 export const createCloseTabUseCase = ({
     graphRenderer,
     workspace,
     activateWorkspaceScene,
     persistActiveGraphDocument,
-}: CloseTabUseCaseDeps): UIEngineCloseTabUseCase => {
+}: CloseTabUseCaseDeps): EngineCloseTabUseCase => {
     return ({ tabId, conditions }) => {
         const isClosingActiveTab = workspace.query.activeTabId() === tabId;
         if (isClosingActiveTab) {

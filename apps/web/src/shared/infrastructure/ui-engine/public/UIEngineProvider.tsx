@@ -1,22 +1,17 @@
-import { createContext, onCleanup, ParentComponent, useContext } from "solid-js";
+import { createContext, ParentComponent, useContext } from "solid-js";
 import { createUIEngine } from "./engine";
-import type { UIEnginePublicApi } from "./types";
+import type { EnginePublicApi } from "./types";
 import type { UIEngineExternalContext } from "../model";
 
-const UIEngineContext = createContext<UIEnginePublicApi>();
+const UIEngineContext = createContext<EnginePublicApi>();
 
 export const UIEngineProvider: ParentComponent<{ ctx?: UIEngineExternalContext }> = (props) => {
     const engine = createUIEngine(props.ctx ?? {});
 
-    onCleanup(() => {
-        engine.dispose();
-    });
-
-    const value: UIEnginePublicApi = {
+    const value: EnginePublicApi = {
         mount: engine.mount,
         query: engine.query,
-        useCases: engine.useCases,
-        debug: engine.debug,
+        api: engine.api,
     };
 
     return <UIEngineContext.Provider value={value}>{props.children}</UIEngineContext.Provider>;

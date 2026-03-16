@@ -1,23 +1,32 @@
 import type { GraphDocument } from "@engine-model/graph-document";
 import type { Result } from "@engine-model/core/result";
-import type { CatalogApi } from "../../../components/catalog/types";
-import type { GraphDocumentApi } from "../../../components/graph-document/types";
-import type { GraphRendererApi } from "../../../components/graph-renderer/types";
-import type { WorkspaceApi } from "../../../components/workspace/types";
+import { EngineComponents } from "../components/createComponents";
+import { EngineCreateTabUseCase } from "./createTab";
+import { EngineCloseTabUseCase } from "./closeTab";
+import { EngineCreateNodeFromCatalogItemUseCase } from "./createNodeFromCatalogItem";
+import { EngineOpenWorkspaceUseCase } from "./openWorkspace";
+import { EngineSaveActiveDocumentUseCase } from "./saveActiveDocument";
 
-export type UIEngineUseCaseDeps = {
-    catalog: CatalogApi;
-    workspace: WorkspaceApi;
-    graphDocument: GraphDocumentApi;
-    graphRenderer: GraphRendererApi;
-};
-
-export type UIEngineUseCasesFactoryDeps = UIEngineUseCaseDeps;
+export type UseCaseDeps = EngineComponents;
+export type UseCasesFactoryDeps = EngineComponents;
 
 export type PersistActiveGraphDocumentResult = Result<GraphDocument | undefined>;
 export type ActivateWorkspaceSceneResult = Result<GraphDocument>;
 
-export type UIEngineUseCaseInternals = {
+export type EngineUseCaseInternals = {
     persistActiveGraphDocument: () => PersistActiveGraphDocumentResult;
     activateWorkspaceScene: (workspaceId: string) => ActivateWorkspaceSceneResult;
+};
+
+export type EngineUseCases = {
+    public: EngineUseCasesPublic;
+    internal: EngineUseCaseInternals;
+};
+
+export type EngineUseCasesPublic = {
+    createTab: EngineCreateTabUseCase;
+    openWorkspace: EngineOpenWorkspaceUseCase;
+    closeTab: EngineCloseTabUseCase;
+    createNodeFromCatalogItem: EngineCreateNodeFromCatalogItemUseCase;
+    saveActiveDocument: EngineSaveActiveDocumentUseCase;
 };

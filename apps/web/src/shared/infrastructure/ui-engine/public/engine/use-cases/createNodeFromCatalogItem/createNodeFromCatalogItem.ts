@@ -4,16 +4,16 @@ import { createErrResult, createOkResult, type Result } from "@engine-model/core
 import { uiEngineUseCaseIssues } from "../issues";
 import type {
     CreateNodeFromCatalogItemUseCaseDeps,
-    UIEngineCreateNodeFromCatalogItemUseCase,
-    UIEngineCreateNodeFromCatalogItemUseCaseInput,
+    EngineCreateNodeFromCatalogItemUseCase,
+    EngineCreateNodeFromCatalogItemUseCaseInput,
 } from "./types";
 
 export const createCreateNodeFromCatalogItemUseCase = ({
     catalog,
     graphRenderer,
     workspace,
-}: CreateNodeFromCatalogItemUseCaseDeps): UIEngineCreateNodeFromCatalogItemUseCase => {
-    return ({ ref, position }: UIEngineCreateNodeFromCatalogItemUseCaseInput): Result<Node> => {
+}: CreateNodeFromCatalogItemUseCaseDeps): EngineCreateNodeFromCatalogItemUseCase => {
+    return ({ ref, position }: EngineCreateNodeFromCatalogItemUseCaseInput): Result<Node> => {
         const item = catalog.query.getItem(ref);
         if (!item) {
             return createErrResult(

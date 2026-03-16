@@ -1,2 +1,2 @@
 export { createOpenWorkspaceUseCase } from "./openWorkspace";
-export type { UIEngineOpenWorkspaceUseCase } from "./types";
+export type { EngineOpenWorkspaceUseCase } from "./types";

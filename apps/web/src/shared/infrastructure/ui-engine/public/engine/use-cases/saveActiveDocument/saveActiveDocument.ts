@@ -1,12 +1,12 @@
 import { createErrResult, createOkResult } from "@engine-model/core/result";
 import { uiEngineUseCaseIssues } from "../issues";
-import type { SaveActiveDocumentUseCaseDeps, UIEngineSaveActiveDocumentUseCase } from "./types";
+import type { SaveActiveDocumentUseCaseDeps, EngineSaveActiveDocumentUseCase } from "./types";
 
 export const createSaveActiveDocumentUseCase = ({
     graphRenderer,
     workspace,
     persistActiveGraphDocument,
-}: SaveActiveDocumentUseCaseDeps): UIEngineSaveActiveDocumentUseCase => {
+}: SaveActiveDocumentUseCaseDeps): EngineSaveActiveDocumentUseCase => {
     return () => {
         const activeWorkspaceId = workspace.query.activeWorkspaceId();
         if (!activeWorkspaceId) {

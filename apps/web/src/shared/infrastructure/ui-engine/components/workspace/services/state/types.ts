@@ -1,9 +1,10 @@
 import type { Workspace, WorkspaceTabSession } from "@engine-model";
+import { Accessor } from "solid-js";
 
 export type WorkspaceStateService = {
     orderedTabIds: () => string[];
-    activeTabId: () => string | undefined;
-    activeWorkspaceId: () => string | undefined;
+    activeTabId: Accessor<string | undefined>;
+    activeWorkspaceId: Accessor<string | undefined>;
 
     getWorkspace: (workspaceId: string) => Workspace | undefined;
     getTabSession: (rootWorkspaceId: string) => WorkspaceTabSession | undefined;
@@ -24,5 +25,3 @@ export type WorkspaceStateService = {
     setActiveTab: (tabId?: string) => void;
     setNavigationPath: (rootWorkspaceId: string, navigationPath: string[]) => void;
 };
-
-

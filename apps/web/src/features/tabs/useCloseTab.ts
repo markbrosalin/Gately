@@ -3,7 +3,7 @@ import { useUIEngine } from "@gately/shared/infrastructure";
 export const useCloseTab = () => {
     const uiEngine = useUIEngine();
     const closeTab = (tabId: string, conditions?: { isEditing?: boolean }) =>
-        uiEngine.useCases.closeTab({ tabId, conditions });
+        uiEngine.api.closeTab({ tabId, conditions });
     const canCloseTab = (tabId: string, conditions?: { isEditing?: boolean }) =>
         uiEngine.query.workspace.canCloseTab(tabId, conditions);
 

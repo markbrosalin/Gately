@@ -1,2 +1,2 @@
 export { createSaveActiveDocumentUseCase } from "./saveActiveDocument";
-export type { UIEngineSaveActiveDocumentUseCase } from "./types";
+export type { EngineSaveActiveDocumentUseCase } from "./types";

@@ -1,2 +1,2 @@
 export { createCreateNodeFromCatalogItemUseCase } from "./createNodeFromCatalogItem";
-export type { UIEngineCreateNodeFromCatalogItemUseCase } from "./types";
+export type { EngineCreateNodeFromCatalogItemUseCase } from "./types";

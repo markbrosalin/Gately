@@ -5,10 +5,7 @@ import {
 } from "@kobalte/core/context-menu";
 import { contextMenuStyles as styles } from "@gately/shared/ui/ContextMenu/styles";
 import { Component, ParentComponent, createEffect } from "solid-js";
-import type {
-    AnchorReadySetter,
-    WorkspaceController,
-} from "../lib/types";
+import type { AnchorReadySetter, WorkspaceController } from "../lib/types";
 
 const ContextMenuRoot = ContextMenu as ParentComponent<ContextMenuRootProps & { open: boolean }>;
 
@@ -63,4 +60,3 @@ export const WorkspaceContextMenu: Component<WorkspaceContextMenuProps> = (props
         </ContextMenuRoot>
     );
 };
-

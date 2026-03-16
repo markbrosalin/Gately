@@ -1,15 +1,12 @@
 import { createErrResult, createOkResult } from "@engine-model/core/result";
-import type { UIEngineUseCaseDeps, UIEngineUseCaseInternals } from "../types";
+import type { UseCaseDeps, EngineUseCaseInternals } from "../types";
 
-type CreateActivateWorkspaceSceneUseCaseDeps = Pick<
-    UIEngineUseCaseDeps,
-    "graphDocument" | "graphRenderer"
->;
+type CreateActivateWorkspaceSceneUseCaseDeps = Pick<UseCaseDeps, "graphDocument" | "graphRenderer">;
 
 export const createActivateWorkspaceScene = ({
     graphDocument,
     graphRenderer,
-}: CreateActivateWorkspaceSceneUseCaseDeps): UIEngineUseCaseInternals["activateWorkspaceScene"] => {
+}: CreateActivateWorkspaceSceneUseCaseDeps): EngineUseCaseInternals["activateWorkspaceScene"] => {
     return (workspaceId) => {
         const ensureResult = graphDocument.ensureDocument({ workspaceId });
         if (!ensureResult.ok || !ensureResult.value) {

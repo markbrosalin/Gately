@@ -25,7 +25,7 @@ export const useAddLogicNode = () => {
         if (!uiEngine.query.workspace.activeWorkspaceId()) return;
         if (!uiEngine.query.engine.isReady()) return;
 
-        return uiEngine.useCases.createNodeFromCatalogItem({
+        return uiEngine.api.createNodeFromCatalogItem({
             ref: NODE_REF_BY_HASH[hash],
         });
     };
@@ -46,4 +46,3 @@ export const useAddLogicNode = () => {
         addFalseConstant: () => addLogicElement("FALSE_CONSTANT"),
     };
 };
-

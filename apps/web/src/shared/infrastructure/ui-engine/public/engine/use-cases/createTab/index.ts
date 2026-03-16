@@ -1,2 +1,2 @@
 export { createCreateTabUseCase } from "./createTab";
-export type { UIEngineCreateTabUseCase } from "./types";
+export type { EngineCreateTabUseCase } from "./types";

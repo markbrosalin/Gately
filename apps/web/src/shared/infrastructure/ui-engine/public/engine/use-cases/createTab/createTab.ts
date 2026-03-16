@@ -1,8 +1,8 @@
 import { createErrResult, createOkResult } from "@engine-model/core/result";
 import type {
     CreateTabUseCaseDeps,
-    UIEngineCreateTabUseCase,
-    UIEngineCreateTabUseCaseInput,
+    EngineCreateTabUseCase,
+    EngineCreateTabUseCaseInput,
 } from "./types";
 
 export const createCreateTabUseCase = ({
@@ -11,9 +11,10 @@ export const createCreateTabUseCase = ({
     workspace,
     activateWorkspaceScene,
     persistActiveGraphDocument,
-}: CreateTabUseCaseDeps): UIEngineCreateTabUseCase => {
-    return async (input: UIEngineCreateTabUseCaseInput = {}) => {
+}: CreateTabUseCaseDeps): EngineCreateTabUseCase => {
+    return async (input: EngineCreateTabUseCaseInput = {}) => {
         const persistResult = persistActiveGraphDocument();
+        console.log(persistResult);
         if (!persistResult.ok) {
             return createErrResult(persistResult.issues);
         }

@@ -1,76 +1,38 @@
 import { createActivateWorkspaceScene } from "./helpers/activateWorkspaceScene";
 import { createPersistActiveGraphDocument } from "./helpers/persistActiveGraphDocument";
-import {
-    createCloseTabUseCase,
-    type UIEngineCloseTabUseCase,
-} from "./closeTab";
-import {
-    createCreateNodeFromCatalogItemUseCase,
-    type UIEngineCreateNodeFromCatalogItemUseCase,
-} from "./createNodeFromCatalogItem";
-import {
-    createCreateTabUseCase,
-    type UIEngineCreateTabUseCase,
-} from "./createTab";
-import {
-    createOpenWorkspaceUseCase,
-    type UIEngineOpenWorkspaceUseCase,
-} from "./openWorkspace";
-import {
-    createSaveActiveDocumentUseCase,
-    type UIEngineSaveActiveDocumentUseCase,
-} from "./saveActiveDocument";
-import type { UIEngineUseCaseInternals, UIEngineUseCasesFactoryDeps } from "./types";
+import { createCloseTabUseCase } from "./closeTab";
+import { createCreateNodeFromCatalogItemUseCase } from "./createNodeFromCatalogItem";
+import { createCreateTabUseCase } from "./createTab";
+import { createOpenWorkspaceUseCase } from "./openWorkspace";
+import { createSaveActiveDocumentUseCase } from "./saveActiveDocument";
+import type {
+    EngineUseCasesPublic,
+    EngineUseCaseInternals,
+    UseCasesFactoryDeps,
+    EngineUseCases,
+} from "./types";
 
-export type UIEngineUseCases = {
-    createTab: UIEngineCreateTabUseCase;
-    openWorkspace: UIEngineOpenWorkspaceUseCase;
-    closeTab: UIEngineCloseTabUseCase;
-    createNodeFromCatalogItem: UIEngineCreateNodeFromCatalogItemUseCase;
-    saveActiveDocument: UIEngineSaveActiveDocumentUseCase;
-};
-
-export type BuildUIEngineUseCasesResult = {
-    useCases: UIEngineUseCases;
-    internals: UIEngineUseCaseInternals;
-};
-
-export const buildUIEngineUseCases = (
-    deps: UIEngineUseCasesFactoryDeps,
-): BuildUIEngineUseCasesResult => {
+export const buildEngineUseCases = (deps: UseCasesFactoryDeps): EngineUseCases => {
     const persistActiveGraphDocument = createPersistActiveGraphDocument(deps);
     const activateWorkspaceScene = createActivateWorkspaceScene(deps);
 
-    const useCases: UIEngineUseCases = {
-        createTab: createCreateTabUseCase({
-            ...deps,
-            activateWorkspaceScene,
-            persistActiveGraphDocument,
-        }),
-        openWorkspace: createOpenWorkspaceUseCase({
-            ...deps,
-            activateWorkspaceScene,
-            persistActiveGraphDocument,
-        }),
-        closeTab: createCloseTabUseCase({
-            ...deps,
-            activateWorkspaceScene,
-            persistActiveGraphDocument,
-        }),
-        createNodeFromCatalogItem: createCreateNodeFromCatalogItemUseCase({
-            ...deps,
-        }),
-        saveActiveDocument: createSaveActiveDocumentUseCase({
-            ...deps,
-            persistActiveGraphDocument,
-        }),
+    const internal: EngineUseCaseInternals = {
+        persistActiveGraphDocument,
+        activateWorkspaceScene,
+    };
+
+    const ctx = { ...deps, ...internal };
+
+    const useCases: EngineUseCasesPublic = {
+        createTab: createCreateTabUseCase(ctx),
+        openWorkspace: createOpenWorkspaceUseCase(ctx),
+        closeTab: createCloseTabUseCase(ctx),
+        createNodeFromCatalogItem: createCreateNodeFromCatalogItemUseCase(ctx),
+        saveActiveDocument: createSaveActiveDocumentUseCase(ctx),
     };
 
     return {
-        useCases,
-        internals: {
-            persistActiveGraphDocument,
-            activateWorkspaceScene,
-        },
+        public: useCases,
+        internal,
     };
 };

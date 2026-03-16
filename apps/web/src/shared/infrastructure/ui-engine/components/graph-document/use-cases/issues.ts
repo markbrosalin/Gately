@@ -11,6 +11,10 @@ export const graphDocumentUseCaseIssueDefs = {
         message: ({ formatVersion }: { formatVersion: number }) =>
             `Graph document format version "${formatVersion}" is not supported.`,
     },
+    workspaceIdIsUndefined: {
+        code: "graph-document.use-case.save.workspaceId.is-undefined",
+        message: () => `Couldn't save document because workspaceId is undefined`,
+    },
 } as const;
 
 export const graphDocumentUseCaseIssues = {
@@ -22,6 +26,6 @@ export const graphDocumentUseCaseIssues = {
         createIssue(graphDocumentUseCaseIssueDefs.importFormatVersionInvalid, path, {
             formatVersion,
         }),
+    workspaceIdIsUndefined: () =>
+        createIssue(graphDocumentUseCaseIssueDefs.workspaceIdIsUndefined, []),
 } as const;
-
-

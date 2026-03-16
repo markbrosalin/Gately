@@ -2,12 +2,12 @@ import { createErrResult, createOkResult } from "@engine-model/core/result";
 import type { GraphDocument } from "@engine-model/graph-document";
 import type {
     PersistActiveGraphDocumentResult,
-    UIEngineUseCaseInternals,
-    UIEngineUseCaseDeps,
+    EngineUseCaseInternals,
+    UseCaseDeps,
 } from "../types";
 
 type CreatePersistActiveGraphDocumentUseCaseDeps = Pick<
-    UIEngineUseCaseDeps,
+    UseCaseDeps,
     "graphDocument" | "graphRenderer" | "workspace"
 >;
 
@@ -15,7 +15,7 @@ export const createPersistActiveGraphDocument = ({
     graphDocument,
     graphRenderer,
     workspace,
-}: CreatePersistActiveGraphDocumentUseCaseDeps): UIEngineUseCaseInternals["persistActiveGraphDocument"] => {
+}: CreatePersistActiveGraphDocumentUseCaseDeps): EngineUseCaseInternals["persistActiveGraphDocument"] => {
     return (): PersistActiveGraphDocumentResult => {
         const activeWorkspaceId = workspace.query.activeWorkspaceId();
         if (!graphRenderer.query.isMounted() || !activeWorkspaceId) {

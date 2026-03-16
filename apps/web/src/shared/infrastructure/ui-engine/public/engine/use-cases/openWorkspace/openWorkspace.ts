@@ -1,11 +1,11 @@
 import { createErrResult, createOkResult } from "@engine-model/core/result";
-import type { OpenWorkspaceUseCaseDeps, UIEngineOpenWorkspaceUseCase } from "./types";
+import type { OpenWorkspaceUseCaseDeps, EngineOpenWorkspaceUseCase } from "./types";
 
 export const createOpenWorkspaceUseCase = ({
     workspace,
     activateWorkspaceScene,
     persistActiveGraphDocument,
-}: OpenWorkspaceUseCaseDeps): UIEngineOpenWorkspaceUseCase => {
+}: OpenWorkspaceUseCaseDeps): EngineOpenWorkspaceUseCase => {
     return ({ workspaceId }) => {
         const persistResult = persistActiveGraphDocument();
         if (!persistResult.ok) {

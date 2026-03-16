@@ -1,10 +1,11 @@
 import type { Workspace, WorkspaceTabCloseConditions, WorkspaceTabSession } from "@engine-model";
+import { Accessor } from "solid-js";
 
 export type WorkspaceQueryTab = Pick<Workspace, "id" | "title">;
 
 export type WorkspaceQueryService = {
-    activeTabId: () => string | undefined;
-    activeWorkspaceId: () => string | undefined;
+    activeTabId: Accessor<string | undefined>;
+    activeWorkspaceId: Accessor<string | undefined>;
 
     orderedTabs: () => WorkspaceQueryTab[];
 
@@ -25,5 +26,3 @@ export type WorkspaceQueryService = {
     getActiveWorkspace: () => Workspace | undefined;
     getActiveTabSession: () => WorkspaceTabSession | undefined;
 };
-
-

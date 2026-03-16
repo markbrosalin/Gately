@@ -2,7 +2,6 @@ import { useUIEngine } from "@gately/shared/infrastructure";
 import { useLogicEngine } from "@gately/shared/infrastructure/LogicEngine";
 import { Component, Show } from "solid-js";
 import { useWorkspaceController } from "../lib";
-import { WorkspaceContextMenu } from "./WorkspaceContextMenu";
 import { WorkspaceToolbar } from "./WorkspaceToolbar";
 
 export const InnerWorkspace: Component = () => {
@@ -18,12 +17,12 @@ export const InnerWorkspace: Component = () => {
         <div class="w-full h-full relative">
             <WorkspaceToolbar simulation={controller.simulation} />
             <Show when={uiEngine.query.workspace.activeTabId()} fallback={<p>Create a new tab</p>}>
-                <div ref={uiEngine.mount.setContainer} class="w-full h-full"></div>
-                <WorkspaceContextMenu
+                <div ref={uiEngine.mount} class="w-full h-full"></div>
+                {/* <WorkspaceContextMenu
                     contextMenu={controller.contextMenu}
-                    getSelectionCount={controller.getSelectionCount}
-                    removeSelected={controller.removeSelected}
-                />
+                    // getSelectionCount={controller.getSelectionCount}
+                    // removeSelected={controller.removeSelected}
+                /> */}
             </Show>
         </div>
     );
@@ -32,4 +31,3 @@ export const InnerWorkspace: Component = () => {
 export const Workspace: Component = () => {
     return <InnerWorkspace />;
 };
-

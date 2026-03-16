@@ -1,5 +1,12 @@
-import { createOkResult, type GraphDocument, type Result, type UseCase } from "@engine-model";
+import {
+    createErrResult,
+    createOkResult,
+    type GraphDocument,
+    type Result,
+    type UseCase,
+} from "@engine-model";
 import type { GraphDocumentUseCaseDeps } from "./types";
+import { graphDocumentUseCaseIssues } from "./issues";
 
 type GraphDocumentSaveDocumentInput = Pick<
     GraphDocument,
@@ -25,6 +32,10 @@ export const createSaveDocumentUseCase = ({
     return ({ workspaceId, contentJson, viewport, extensions }) => {
         const existingDocument = query.getDocument(workspaceId);
 
+        if (!workspaceId) {
+            return createErrResult(graphDocumentUseCaseIssues.workspaceIdIsUndefined());
+        }
+
         const document = existingDocument
             ? {
                   ...existingDocument,
@@ -41,8 +52,6 @@ export const createSaveDocumentUseCase = ({
 
         state.upsertDocument(document);
 
-        return createOkResult(state.getDocument(workspaceId) ?? document);
+        return createOkResult(document);
     };
 };
-
-
