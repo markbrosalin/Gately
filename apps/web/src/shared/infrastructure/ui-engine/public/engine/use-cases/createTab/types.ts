@@ -10,8 +10,5 @@ export type EngineCreateTabUseCase = AsyncUseCase<
     EngineCreateTabUseCaseResult
 >;
 
-export type CreateTabUseCaseDeps = Pick<
-    UseCaseDeps,
-    "graphDocument" | "graphRenderer" | "workspace"
-> &
-    Pick<EngineUseCaseInternals, "activateWorkspaceScene" | "persistActiveGraphDocument">;
+export type CreateTabUseCaseDeps = Pick<UseCaseDeps, "graphDocument" | "workspace"> &
+    Pick<EngineUseCaseInternals, "persistActiveGraphDocument">;

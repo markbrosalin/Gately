@@ -14,8 +14,6 @@ describe("createGraphRendererQueryService", () => {
         const instance: GraphRendererInstanceService = {
             container: () => ({}) as HTMLDivElement,
             graph: () => graph as never,
-            onGraphMount: vi.fn(),
-            onGraphUnmount: vi.fn(),
             mount: vi.fn() as never,
             unmount: vi.fn(),
         };

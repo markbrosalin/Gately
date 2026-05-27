@@ -7,6 +7,7 @@ import {
     GRAPH_DOCUMENT_FORMAT_VERSION,
     type GraphDocument,
 } from "@engine-model/graph-document";
+import { createSignal } from "solid-js";
 import type { GraphRendererInstanceService } from "../instance";
 import type { GraphRendererDocumentLoadInput, GraphRendererDocumentService } from "./types";
 
@@ -33,11 +34,9 @@ export const parseGraphRendererDocumentContentJson = (
 export const createGraphRendererDocumentApi = (
     instance: GraphRendererInstanceService,
 ): GraphRendererDocumentService => {
-    let currentWorkspaceId: string | undefined;
-
-    const activeWorkspaceId = (): string | undefined => currentWorkspaceId;
+    const [activeWorkspaceId, setActiveWorkspaceId] = createSignal<string | undefined>(undefined);
     const clearActiveWorkspaceId = (): void => {
-        currentWorkspaceId = undefined;
+        setActiveWorkspaceId(undefined);
     };
 
     const loadDocument = ({ document, contentJson }: GraphRendererDocumentLoadInput): void => {
@@ -54,7 +53,7 @@ export const createGraphRendererDocumentApi = (
 
         graph.zoomTo(document.viewport.zoom);
         graph.translate(document.viewport.tx, document.viewport.ty);
-        currentWorkspaceId = document.workspaceId;
+        setActiveWorkspaceId(document.workspaceId);
     };
 
     const exportDocument = (workspaceId: string): GraphDocument => {

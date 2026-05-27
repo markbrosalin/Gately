@@ -8,7 +8,6 @@ import type { GraphRendererMountUseCase } from "./use-cases/mount";
 import type { GraphRendererRemoveEdgeUseCase } from "./use-cases/removeEdge";
 import type { GraphRendererRemoveNodeUseCase } from "./use-cases/removeNode";
 import type { GraphRendererRemoveSelectionUseCase } from "./use-cases/removeSelection";
-import type { GraphRendererInstanceLifecycleApi } from "./services/instance";
 import type { GraphRendererUnmountUseCase } from "./use-cases/unmount";
 
 export type GraphRendererExternal = {};
@@ -17,7 +16,6 @@ export type GraphRendererDeps = ComponentDeps<GraphRendererExternal>;
 
 export type GraphRendererApi = {
     query: GraphRendererQueryService;
-    lifecycle: GraphRendererInstanceLifecycleApi;
     mount: GraphRendererMountUseCase;
     unmount: GraphRendererUnmountUseCase;
     clearScene: GraphRendererClearSceneUseCase;

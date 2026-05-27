@@ -153,11 +153,6 @@ describe("createGraphRenderer", () => {
             getSharedService: shared.getService,
         });
         const container = {} as HTMLDivElement;
-        const onGraphMount = vi.fn();
-        const onGraphUnmount = vi.fn();
-
-        renderer.lifecycle.onGraphMount(onGraphMount);
-        renderer.lifecycle.onGraphUnmount(onGraphUnmount);
 
         const mountResult = renderer.mount({
             container,
@@ -170,20 +165,12 @@ describe("createGraphRenderer", () => {
         expect(renderer.query.hasSelection()).toBe(false);
         expect(renderer.query.selectionCount()).toBe(0);
         expect(graphInstances[0]?.use).toHaveBeenCalledTimes(1);
-        expect(onGraphMount).toHaveBeenCalledWith({
-            graph: graphInstances[0] as never,
-            container,
-        });
 
         const unmountResult = renderer.unmount();
 
         expect(unmountResult.ok).toBe(true);
         expect(renderer.query.isMounted()).toBe(false);
         expect(renderer.query.activeWorkspaceId()).toBeUndefined();
-        expect(onGraphUnmount).toHaveBeenCalledWith({
-            graph: graphInstances[0] as never,
-            container,
-        });
     });
 
     it("creates a node from a catalog item through the public component API", () => {

@@ -21,11 +21,6 @@ describe("createGraphRendererSelectionService", () => {
         const instance: GraphRendererInstanceService = {
             container: () => ({}) as HTMLDivElement,
             graph: () => graph as never,
-            onGraphMount: vi.fn(),
-            onGraphUnmount: vi.fn((listener) => {
-                void listener;
-                return vi.fn();
-            }),
             mount: vi.fn() as never,
             unmount: vi.fn(),
         };

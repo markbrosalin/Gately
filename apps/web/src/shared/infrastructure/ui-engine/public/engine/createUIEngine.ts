@@ -3,6 +3,7 @@ import type { UIEngineContext, UIEngineExternalContext } from "../../model/core"
 import { buildSharedServices } from "../../shared-services";
 import type { EnginePublicApi } from "../types";
 import { buildEngineMount } from "./mount/buildEngineMount";
+import { buildEnginePlugins, installEnginePlugins } from "./plugins";
 import { buildQueryApi } from "./query/createUIEngineQuery";
 import { buildEngineUseCases } from "./use-cases";
 import { buildComponents } from "./components/createComponents";
@@ -19,6 +20,12 @@ export const createUIEngine = (externalCtx: UIEngineExternalContext = {}): Engin
     const components = buildComponents(engineCtx);
     const query = buildQueryApi(components);
     const useCases = buildEngineUseCases(components);
+    const plugins = buildEnginePlugins();
+
+    installEnginePlugins(plugins, {
+        components,
+        useCases: useCases.public,
+    });
 
     const mount = buildEngineMount({ components, useCases });
 

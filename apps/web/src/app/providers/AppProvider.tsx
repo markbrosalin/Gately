@@ -17,7 +17,6 @@ const UIEngineRuntimeProvider: ParentComponent = (props) => {
             ctx={{
                 logicEngine,
                 hooks: {
-                    onLifecycle: (event) => console.log("[UIEngine lifecycle]", event),
                     onError: (event) => console.error("[UIEngine error]", event),
                 },
             }}
@@ -49,4 +48,3 @@ export const useApp = () => {
     if (!ctx) throw new Error("useApp must be used within AppProvider");
     return ctx;
 };
-

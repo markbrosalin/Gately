@@ -28,6 +28,8 @@ export const createGraphRendererSelectionApi = (
             return;
         }
 
+        disposeSelection?.();
+
         const selection = new Selection({
             eventTypes: ["leftMouseDown"],
             multipleSelectionModifiers: ["shift", "ctrl", "meta"],
@@ -57,14 +59,6 @@ export const createGraphRendererSelectionApi = (
             disposeSelection = undefined;
         };
     };
-
-    instance.onGraphUnmount(({ graph }) => {
-        if (installedGraph !== graph) {
-            return;
-        }
-
-        disposeSelection?.();
-    });
 
     return {
         install,

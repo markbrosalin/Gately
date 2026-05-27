@@ -11,8 +11,12 @@ export const App: Component = () => {
 
     return (
         <AppProvider>
-            <TabBar />
-            <Workspace />
+            <div class="h-full min-h-0 flex flex-col">
+                <TabBar />
+                <div class="flex-1 min-h-0">
+                    <Workspace />
+                </div>
+            </div>
         </AppProvider>
     );
 };

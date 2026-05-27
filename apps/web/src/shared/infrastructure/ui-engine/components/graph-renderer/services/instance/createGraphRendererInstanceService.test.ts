@@ -72,32 +72,4 @@ describe("createGraphRendererInstanceService", () => {
 
         expect(graphInstances[0]?.dispose).toHaveBeenCalledTimes(1);
     });
-
-    it("notifies graph lifecycle listeners on mount and unmount", () => {
-        const service = createGraphRendererInstanceService(createContext(), createConnecting());
-        const onGraphMount = vi.fn();
-        const onGraphUnmount = vi.fn();
-        const unsubscribeMount = service.onGraphMount(onGraphMount);
-        const unsubscribeUnmount = service.onGraphUnmount(onGraphUnmount);
-        const container = {} as HTMLDivElement;
-
-        const graph = service.mount({
-            container,
-        });
-
-        expect(onGraphMount).toHaveBeenCalledWith({
-            graph,
-            container,
-        });
-
-        service.unmount();
-
-        expect(onGraphUnmount).toHaveBeenCalledWith({
-            graph,
-            container,
-        });
-
-        unsubscribeMount();
-        unsubscribeUnmount();
-    });
 });
