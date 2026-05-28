@@ -259,8 +259,7 @@ export const useArduinoHardwareController = (
         if (message.type === "pin.read.change") {
             const assignment = assignments().find(
                 (item) =>
-                    item.assignmentId === message.assignmentId ||
-                    item.hardwarePin === message.pin,
+                    item.assignmentId === message.assignmentId || item.hardwarePin === message.pin,
             );
             if (!assignment) return;
 
@@ -302,11 +301,7 @@ export const useArduinoHardwareController = (
         setBoardStatus("unavailable");
     };
 
-    const assign = (
-        pin: number,
-        direction: HardwareDirection,
-        virtualPortKey: string,
-    ): void => {
+    const assign = (pin: number, direction: HardwareDirection, virtualPortKey: string): void => {
         const tabId = deps.getActiveTabId();
         const scopeId = deps.getActiveScopeId();
         const virtualPort = virtualPorts().find((port) => port.key === virtualPortKey);
@@ -400,7 +395,7 @@ export const useArduinoHardwareController = (
         const graph = deps.uiEngine.debug.graph();
         if (!graph) return;
 
-        const bumpGraphVersion = (): void => setGraphVersion((version) => version + 1);
+        const bumpGraphVersion = () => setGraphVersion((version) => version + 1);
         const onNodeRemoved = (payload: NodeRemovedPayload): void => {
             bumpGraphVersion();
 
