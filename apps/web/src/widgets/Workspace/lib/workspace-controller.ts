@@ -1,4 +1,5 @@
 import { createEffect, createSignal, onCleanup } from "solid-js";
+import { useArduinoHardwareController } from "@gately/features/arduino-hardware";
 import { attachWorkspaceBridge } from "./bridge";
 import { attachWorkspaceGraphInteractions } from "./graph-interactions";
 import { useWorkspaceContextMenu } from "./context-menu";
@@ -8,11 +9,23 @@ import type { WorkspaceController, WorkspaceControllerDeps } from "./types";
 export const useWorkspaceController = (deps: WorkspaceControllerDeps): WorkspaceController => {
     const [selectionVersion, setSelectionVersion] = createSignal(0);
     const contextMenu = useWorkspaceContextMenu();
+    const signalEventHandlers = new Set<WorkspaceController["hardware"]["handleSignalEvents"]>();
     const simulation = createWorkspaceSimulation({
         logicEngine: deps.logicEngine,
         uiEngine: deps.uiEngine,
         getActiveTabId: deps.getActiveTabId,
+        onSignalEvents: (events) => {
+            signalEventHandlers.forEach((handler) => handler(events));
+        },
     });
+    const hardware = useArduinoHardwareController({
+        logicEngine: deps.logicEngine,
+        uiEngine: deps.uiEngine,
+        getActiveTabId: deps.getActiveTabId,
+        getActiveScopeId: deps.uiEngine.state.activeScopeId,
+        requestSimulationNow: simulation.requestNow,
+    });
+    signalEventHandlers.add(hardware.handleSignalEvents);
 
     const getSelectionCount = () => {
         selectionVersion();
@@ -57,12 +70,15 @@ export const useWorkspaceController = (deps: WorkspaceControllerDeps): Workspace
         onCleanup(dispose);
     });
 
+    onCleanup(() => signalEventHandlers.delete(hardware.handleSignalEvents));
     onCleanup(simulation.dispose);
+    onCleanup(hardware.dispose);
 
     return {
         contextMenu,
         getSelectionCount,
         removeSelected,
         simulation,
+        hardware,
     };
 };

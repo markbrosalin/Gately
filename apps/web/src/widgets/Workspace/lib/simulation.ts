@@ -9,6 +9,7 @@ type WorkspaceSimulationOptions = {
     logicEngine: CinabonoClient;
     uiEngine: WorkspaceUIEngine;
     getActiveTabId: () => string | undefined;
+    onSignalEvents?: (events: ApiSimulateTab_Result["tickEvents"]) => void;
 };
 
 const HALF_SECOND_MS = 500;
@@ -31,6 +32,7 @@ export const createWorkspaceSimulation = (
         if (!hasEvents) return false;
 
         opts.uiEngine.commands.applySignalEvents(events);
+        opts.onSignalEvents?.(events);
         return hasEvents;
     };
 

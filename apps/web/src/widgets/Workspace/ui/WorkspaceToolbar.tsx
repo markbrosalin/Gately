@@ -1,3 +1,4 @@
+import { ArduinoHardwarePanel } from "@gately/features/arduino-hardware";
 import { useAddLogicNode } from "@gately/features/nodes/useAddBaseLogic";
 import { useUIEngine } from "@gately/shared/infrastructure";
 import type { WorkspaceSimulationMode } from "@gately/shared/types";
@@ -10,7 +11,7 @@ const SIMULATION_MODE_OPTIONS: Array<{ value: WorkspaceSimulationMode; label: st
     { value: "0.5sec", label: "0.5 sec" },
 ];
 
-type WorkspaceToolbarProps = Pick<WorkspaceController, "simulation">;
+type WorkspaceToolbarProps = Pick<WorkspaceController, "hardware" | "simulation">;
 
 export const WorkspaceToolbar: Component<WorkspaceToolbarProps> = (props) => {
     const uiEngine = useUIEngine();
@@ -67,6 +68,7 @@ export const WorkspaceToolbar: Component<WorkspaceToolbarProps> = (props) => {
                 <span class="text-xs text-gray-10">
                     {props.simulation.isBusy ? "running..." : "idle"}
                 </span>
+                <ArduinoHardwarePanel hardware={props.hardware} />
             </div>
 
             <div class="flex gap-2">

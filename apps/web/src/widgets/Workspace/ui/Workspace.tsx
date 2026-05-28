@@ -16,7 +16,7 @@ export const InnerWorkspace: Component = () => {
 
     return (
         <div class="w-full h-full relative">
-            <WorkspaceToolbar simulation={controller.simulation} />
+            <WorkspaceToolbar hardware={controller.hardware} simulation={controller.simulation} />
             <Show when={uiEngine.state.activeTabId()} fallback={<p>Create a new tab</p>}>
                 <div ref={uiEngine.mount.setContainer} class="w-full h-full"></div>
                 <WorkspaceContextMenu

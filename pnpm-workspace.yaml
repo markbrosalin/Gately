@@ -6,4 +6,5 @@ ignoredBuiltDependencies:
   - '@tailwindcss/oxide'
 
 onlyBuiltDependencies:
+  - '@serialport/bindings'
   - esbuild
