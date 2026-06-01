@@ -45,7 +45,7 @@ Gately supports four signal states:
 
 Simulation can run instantly or step by step with a delay. The logic engine runs in the background through a Web Worker, so circuit computation does not block the browser UI, even with cyclic connections such as triggers or oscillated NOR.
 
-### Try the Arduino bridge
+### [Try the Arduino bridge](http://localhost:3000/#en/arduino-integration)
 
 ![Gately Arduino](docs/images/arduino.gif)
 
