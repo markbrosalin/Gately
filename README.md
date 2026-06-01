@@ -1,163 +1,96 @@
 # Gately
 
-Gately — веб-приложение для проектирования и симуляции логических схем.
+**Browser-based digital logic simulation with an experimental Arduino I/O bridge.**
 
-**EN:** Browser-based logic circuit editor and simulator with a visual UI engine and a custom logic core.
+[Live Demo](https://cinabono-engine-web.vercel.app/) · [Documentation](https://gately-web-documentation.vercel.app)
 
-[Что Это](#about) · [Что Уже Есть](#features) · [Демо-Сценарии](#scenarios) · [Архитектура](#architecture) · [Roadmap](#roadmap)
+![Gately preview](docs/images/preview.gif)
 
-<a id="about"></a>
-## Что Такое Gately
+## Overview
 
-Gately — это браузерная среда, в которой можно собирать логические схемы из готовых элементов, соединять их визуально, запускать симуляцию и сразу видеть результат.
+**Gately is an experimental web-based logic simulator for learning and testing digital circuits before building them on a physical breadboard.** It lets you build circuits visually in the browser, run them through a custom logic engine, and inspect signal behavior in real time.
 
-Главная идея проекта — сократить разрыв между абстрактной цифровой логикой, визуальным экспериментом и наблюдаемым поведением схемы. Проект задуман не просто как редактор вентилей, а как понятный мост между теорией, схемой на экране и тем, как эта схема работает.
+_A key part of the project is Arduino integration_: an Arduino UNO can act as a physical input/output bridge through a local Node.js agent.
 
-Сейчас Gately правильнее воспринимать как сильный MVP с уже рабочим браузерным сценарием и понятным вектором развития в сторону более полноценной платформы.
+## What Works Today
 
-## Зачем Нужен Проект
+### Build and edit circuits
 
-При изучении цифровой логики часто возникает одна и та же проблема: теория объясняет правила, схема показывает структуру, а реальное поведение остается недостаточно наглядным.
+![Gately elements](docs/images/types_of_elements.gif)
 
-Gately нужен, чтобы сделать этот переход короче и понятнее:
+The current element library is split into three groups:
 
-- собрать схему визуально;
-- быстро проверить идею через симуляцию;
-- увидеть результат в понятной форме;
-- лучше почувствовать связь между устройством схемы и ее поведением.
+- basic logic gates (`Buffer`, `AND`, `OR`, `NOT`, `NAND`, `NOR`, `XOR`, `XNOR`)
+- signal generators (`Toggle`, `True Constant`, `False Constant`)
+- output/display elements (`Lamp`, `7-segment display`)
 
-Поэтому проект полезен не только как учебный симулятор, но и как техническая основа для более широкой среды работы со схемами.
+Circuits are built by placing elements, connecting ports, and editing wires directly on the canvas.
 
-<a id="features"></a>
-## Что Уже Есть Сейчас
+![Gately connecting and editing](docs/images/connecting_and_editing.gif)
 
-На текущем этапе Gately уже можно использовать как браузерный редактор и симулятор простых логических схем.
+### Read signal states
 
-В проекте уже есть:
+![Gately signal states](docs/images/gately-signal-states.png)
 
-- визуальный редактор схем;
-- базовые логические элементы: `BUFFER`, `AND`, `OR`, `NOT`, `NAND`, `NOR`, `XOR`, `XNOR`;
-- генераторы сигнала: `TOGGLE`, `TRUE_CONSTANT`, `FALSE_CONSTANT`;
-- отображатели: `LAMP`, `7_SEG_DISPLAY`;
-- отдельный логический движок для вычисления и симуляции;
-- связь между UI и логическим ядром через `Web Worker`;
-- модульная архитектура с заделом под плагинное расширение.
+Gately supports four signal states:
 
-Это уже позволяет показывать проект как:
+- `True / 1` - green.
+- `False / 0` - gray.
+- `Z / Hi-Z` - blue, used for disconnected inputs.
+- `X / error` - pink, used when an output value is unknown or invalid.
 
-- наглядную среду для изучения цифровой логики;
-- демонстрационный инструмент для небольших схем;
-- инженерный проект с разделением визуального и вычислительного слоев.
+### Run the simulation
 
-<a id="scenarios"></a>
-## Демо-Сценарии
+![Gately simulation controls](docs/images/simulation.gif)
 
-Текущая версия проекта лучше всего раскрывается на простых, но понятных сценариях:
+Simulation can run instantly or step by step with a delay. The logic engine runs in the background through a Web Worker, so circuit computation does not block the browser UI, even with cyclic connections such as triggers or oscillated NOR.
 
-- базовые логические элементы и их комбинации;
-- генераторы сигнала и отображатели;
-- полусумматор и сумматор;
-- `SUM` / `CARRY` через лампы;
-- `7-seg` дисплей с переключаемыми входами.
+### Try the Arduino bridge
 
-Более сложные сценарии вроде триггеров тоже возможны, но как публичное первое демо проект сейчас сильнее смотрится именно на базовых и хорошо читаемых примерах.
+![Gately Arduino](docs/images/arduino.gif)
 
-## Для Кого Это
+The Arduino integration is an early MVP. It is rough and experimental, but tests show the core idea works: physical pin changes can drive virtual circuit signals, and selected virtual signals can be written back to Arduino pins.
 
-Gately может быть полезен в нескольких типовых сценариях:
+## Architecture & Project Layout
 
-- студентам и тем, кто изучает цифровую логику самостоятельно;
-- преподавателям, которым нужен наглядный инструмент для показа схем;
-- разработчикам и инженерам, которым интересна архитектура браузерного редактора и симулятора;
-- всем, кому нужен понятный визуальный слой поверх логического ядра.
+Gately is a pnpm/Turborepo monorepo with two applications and a set of shared packages:
 
-<a id="architecture"></a>
-## Архитектура
+- `apps/web` is the browser app, built with SolidJS, TypeScript, and Vite. It contains the user interface and the visual editor.
+- The visual editor inside `apps/web` is built on top of AntV X6. It handles the graph canvas, nodes, ports, wires, and visual signal states.
+- The logic computation happens on the client, but it is separated from the UI through a Web Worker. The main engine API lives in `packages/engine`, the worker bridge lives in `packages/engine-worker`, and supporting model/simulation code is split across packages such as `packages/schema` and `packages/simulation`.
+- `apps/arduino-agent` is a local Node.js app. It talks to the web app through WebSocket and talks to Arduino UNO through Johnny-Five and FirmataStandard protocol.
 
-Клиентская часть проекта разделена на два ядра.
+## Run Locally
 
-- `UI Engine` — визуальный движок поверх `SolidJS signals` и `AntV X6`, который отвечает за SVG-редактор, отображение схемы и взаимодействие пользователя с графом.
-- `Logic Engine` — логический движок `Cinabono`, написанный с нуля и отвечающий за модель схемы, вычисление состояний и симуляцию.
-
-Связь между ними происходит через `Web Worker`.
-
-Оба движка строятся на компонентной архитектуре. Во внутренней структуре UI-слоя уже выделяются документ схемы, каталог элементов, рендер графа и слой симуляции, но этот уровень все еще развивается, поэтому в README важнее сама идея разделения на визуальное и логическое ядро.
-
-Оба ядра также проектируются так, чтобы в будущем допускать интеграцию плагинов. Эта часть еще сырая, но архитектурное направление уже заложено.
-
-Небольшая техническая оговорка: внутри репозитория часть пакетов пока использует историческое имя `cinabono` / `@cnbn/*`. По сути это и есть логическое ядро, на котором строится Gately.
-
-## Текущий Статус
-
-Проект находится в активной разработке. Честнее всего воспринимать его как рабочий MVP, а не как завершенную платформу.
-
-Что уже выглядит уверенно:
-
-- сама идея проекта как визуального моста для цифровой логики;
-- рабочий браузерный сценарий сборки и симуляции схем;
-- разделение на UI-движок и логическое ядро;
-- архитектурный задел под дальнейший рост.
-
-Что пока остается в развитии:
-
-- стабилизация внутренних API и некоторых архитектурных слоев;
-- расширение библиотеки элементов;
-- развитие редакторских возможностей;
-- переход от MVP к платформенному сценарию.
-
-## Быстрый Старт
-
-Для локального запуска веб-клиента:
+For the web app, use a modern Node.js version supported by Vite. The project was tested with Node.js `24.11.1`.
 
 ```bash
+git clone https://github.com/markbrosalin/Gately.git
+cd Gately
 pnpm install
 pnpm --filter web dev
 ```
 
-Дополнительно:
+Arduino is optional. The agent was tested with Node.js `18.20.8`, because Johnny-Five has not kept pace with newer Node.js releases. Upload `StandardFirmata` to your Arduino UNO, connect the board, set `ARDUINO_PORT` if auto-detection is not enough, and start the local agent:
 
 ```bash
-pnpm --filter web test
-pnpm --filter web build
+pnpm --filter arduino-agent dev
 ```
 
-## Цели Проекта
+The default agent URL is `ws://localhost:8787`. Full setup guides live in the [documentation](https://gately-web-documentation.vercel.app).
 
-Если коротко, у проекта несколько основных целей:
+## Current Limitations
 
-- сделать цифровую логику более наглядной и понятной;
-- сократить дистанцию между теорией и практикой;
-- дать удобную браузерную среду для экспериментов со схемами;
-- построить основу, которая сможет вырасти из симулятора в платформу.
+- No project persistence.
+- No import/export workflow.
+- No copy/paste workflow.
+- No tab renaming.
+- No editable element names or properties.
+- Arduino integration is experimental.
+- Not intended for production hardware control.
 
-<a id="roadmap"></a>
-## Roadmap
+## Documentation & License
 
-Ближайшие направления развития проекта:
+Read the full guides in the [Gately web-documentation](https://gately-web-documentation.vercel.app).
 
-- расширение библиотеки логических элементов;
-- улучшение инструментов симуляции и визуального анализа;
-- развитие пользовательских схем и переиспользуемых модулей;
-- более богатые редакторские объекты: кастомные схемы, картинки, текстовые поля, группы;
-- обмен пользовательскими схемами;
-- дальнейшее развитие плагинной архитектуры;
-- движение в сторону полноценной платформы.
-
-## Структура Репозитория
-
-Репозиторий организован как монорепа:
-
-```text
-apps/web              браузерный клиент Gately
-packages/engine       ядро логического движка
-packages/engine-worker
-packages/schema
-packages/simulation
-```
-
-Если смотреть код в первый раз, самый короткий маршрут такой:
-
-1. `apps/web`
-2. `apps/web/src/shared/infrastructure/ui-engine`
-3. `packages/engine`
-4. `packages/schema` и `packages/simulation`
+Gately is released under the [MIT License](LICENSE).
